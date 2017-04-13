@@ -12,3 +12,7 @@ void PlayerShip::Move(InputType dir){
 }
 void PlayerShip::Update(){
 }
+
+void PlayerShip::Shoot(){
+
+}

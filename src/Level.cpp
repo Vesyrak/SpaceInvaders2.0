@@ -25,4 +25,9 @@ void Level::CheckCollisions(){
         }
     }
 }
+void Level::Visualise(){
+	for(Entity* n:entities){
+		n->Visualise();
+	}
+}
 

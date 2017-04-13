@@ -9,6 +9,7 @@ class Level{
         ~Level();
         void AddEntity(Entity* entity);
         void CheckCollisions();
+        void Visualise();
     private:
         QuadTree* qTree;
         std::vector<Entity*> entities;

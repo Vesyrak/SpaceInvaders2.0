@@ -12,6 +12,7 @@ class PlayerShip: public Entity {
         virtual ~PlayerShip();
         void Move(InputType dir);
         void Update();
+        void Shoot();
 };
 #endif
 

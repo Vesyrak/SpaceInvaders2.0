@@ -7,6 +7,7 @@
 #undef CreateWindow //Holy shit windows
 #include "QuadTree.h"
 #include "Basher.h"
+#include "Hivemind.h"
 
 
 Game::Game(){
@@ -24,7 +25,6 @@ bool Game::Initialize(AbstractFactory* factory){
 }
 int Game::Execute(){
     level=new Level();
-    level->AddEntity(factory->createBomber(40,40,1));
     running=true;
 
     Run();
@@ -36,11 +36,9 @@ void Game::Run(){
     ship =factory->createPlayerShip(40,40, 1);
     background=factory->createBackground();
     level->AddEntity(ship);
-    for(int i=0; i<15; i++)
-    {
-    	Basher* enemy=factory->createBasher(80,80,1);
-    	level->AddEntity(enemy);
-    }
+    Hivemind* hivemind=new Hivemind(1);
+    hivemind->Generate(factory,level);
+    int count=0;
     for(int i=0; i<1000; i++)
     {
         std::vector<InputType> input=inputHandler->getInput();
@@ -48,16 +46,23 @@ void Game::Run(){
             cout<<n;
             ship->Move(n);
         }
+        if(count==10)
+        {
+        	count=0;
+            hivemind->Update();
+        }
+        else count++;
         Sleep(20);
         level->CheckCollisions();
         Render();
     }
+    delete hivemind;
 
 }
 void Game::Render(){
     window->PrepareRender();
     background->Visualise();
-    ship->Visualise();
+    level->Visualise();
    // window->Visualise();
 
     window->PresentRender();
