@@ -7,10 +7,10 @@ SDLContext::SDLContext(SDLWindow* window){
 void SDLContext::Draw(SDL_Texture* texture, BoundingBox* bounds){
     SDL_Rect DestR;
 
-    DestR.x = window->screen_width / window->logical_width  * bounds->getX();
-    DestR.y = window->screen_height / window->logical_height * bounds->getY() ;
-    DestR.w = 32;
-    DestR.h = 32;
+    DestR.x = window->screen_width / (double)window->logical_width  * bounds->getX();
+    DestR.y = window->screen_height / (double)window->logical_height * bounds->getY() ;
+    DestR.w = window->screen_width / (double)window->logical_width  * bounds->getWidth();
+    DestR.h = window->screen_height / (double)window->logical_width * bounds->getHeight() ;
     SDL_RenderCopy(window->renderer, texture, NULL ,&DestR);
 }
 

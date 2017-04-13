@@ -7,6 +7,7 @@
 #include "Boss.h"
 #include "Window.h"
 #include "Input.h"
+#include "Background.h"
 class AbstractFactory{
     public:
         virtual PlayerShip* createPlayerShip(int x, int y, int movementSpeed)=0;
@@ -16,6 +17,7 @@ class AbstractFactory{
         virtual Boss* createBoss(int x, int y, int movementSpeed)=0;
         virtual Window* createWindow(int screen_width, int screen_height)=0;
         virtual Input* createInputHandler()=0;
+        virtual Background* createBackground()=0;
 };
 #endif
 

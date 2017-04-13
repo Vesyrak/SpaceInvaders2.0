@@ -34,6 +34,7 @@ int Game::Execute(){
 
 void Game::Run(){
     ship =factory->createPlayerShip(40,40, 1);
+    background=factory->createBackground();
     level->AddEntity(ship);
     for(int i=0; i<15; i++)
     {
@@ -55,7 +56,10 @@ void Game::Run(){
 }
 void Game::Render(){
     window->PrepareRender();
+    background->Visualise();
     ship->Visualise();
+   // window->Visualise();
+
     window->PresentRender();
 }
 void Game::Stop(){

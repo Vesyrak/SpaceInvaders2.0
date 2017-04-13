@@ -2,8 +2,10 @@
 #include "SDLWindow.h"
 
 SDLWindow::SDLWindow():Window(){
+
 }
-SDLWindow::SDLWindow(int screen_width, int screen_height):Window(screen_width,screen_height){
+SDLWindow::SDLWindow( int screen_width, int screen_height):Window(screen_width,screen_height){
+
 }
 SDLWindow::~SDLWindow(){
 
@@ -40,29 +42,24 @@ int SDLWindow::CreateWindow(){
                 PrepareRender();
                 int imgFlags=IMG_INIT_PNG;
                 if(!(IMG_Init(imgFlags) & imgFlags)){
-                    std::cout<<"SDL_Image could not initialize! Errror: "<< IMG_GetError()<<std::endl;
+                    std::cout<<"SDL_Image could not initialize! Error: "<< IMG_GetError()<<std::endl;
                     return 1;
                 }
             }
 
         }
     }
-    SDL_RenderSetLogicalSize(renderer, 800, 600);
+    SDL_RenderSetLogicalSize(renderer, screen_width, screen_height);
     return 0;
 }
-void SDLWindow::Draw(SDL_Surface* surface){
-    //SDL_BlitSurface(surface, NULL, Surface_Display, NULL);
-    //SDL_UpdateWindowSurface(window);
-    SDL_RenderClear(renderer);
 
-}
 void SDLWindow::PresentRender(){
     SDL_RenderPresent(renderer);
 }
 
 void SDLWindow::PrepareRender(){
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+
 }
 

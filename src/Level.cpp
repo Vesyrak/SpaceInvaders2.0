@@ -13,7 +13,7 @@ void Level::AddEntity(Entity* entity){
 void Level::CheckCollisions(){
     qTree->Clean();
     for (int i = 0; i < entities.size(); i++) {
-        std::cout<<"Inserting: "<< qTree->Insert(entities[i])<<std::endl;
+    //    std::cout<<"Inserting: "<< qTree->Insert(entities[i])<<std::endl;
     }
     std::vector<Entity*> returnObjects;
     for (int i = 0; i < entities.size(); i++) {

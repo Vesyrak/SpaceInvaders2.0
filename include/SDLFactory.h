@@ -9,6 +9,7 @@
 #include "SDLWindow.h"
 #include "SDLInput.h"
 #include "SDLContext.h"
+#include "SDLBackground.h"
 class SDLFactory : public AbstractFactory{
     private:
         SDLContext* context;
@@ -20,6 +21,7 @@ class SDLFactory : public AbstractFactory{
         Boss* createBoss(int x, int y, int movementSpeed);
         Window* createWindow(int screen_width, int screen_height);
         Input* createInputHandler();
+        Background* createBackground();
 };
 #endif
 

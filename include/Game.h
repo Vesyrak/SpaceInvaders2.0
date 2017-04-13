@@ -18,6 +18,7 @@ class Game{
         bool running;
         PlayerShip* ship;
         Window* window;
+        Background* background;
         Input* inputHandler;
         Level* level;
 };

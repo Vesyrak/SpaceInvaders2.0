@@ -18,11 +18,14 @@ Boss* SDLFactory::createBoss(int x, int y, int movementSpeed){
     return new SDLBoss(context, x, y,movementSpeed);
 }
 Window* SDLFactory::createWindow(int screen_width, int screen_height){
-    SDLWindow* window= new SDLWindow(screen_width, screen_height);
+    SDLWindow* window= new SDLWindow( screen_width, screen_height);
     this->context=new SDLContext(window);
     return window;
 }
 Input* SDLFactory::createInputHandler(){
     return new SDLInput();
+}
+Background* SDLFactory::createBackground(){
+    return new SDLBackground(context);
 }
 
