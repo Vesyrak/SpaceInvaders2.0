@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Game.h"
-
+#include "SDLAudioEngine.h"
 //SLeep
 #include <Windows.h>
 #undef CreateWindow //Holy shit windows
@@ -39,6 +39,7 @@ void Game::Run(){
     hivemind->Generate(factory,level);
     int count=0;
     overlay=factory->createOverlay();
+    SDLAudioEngine* engine=new SDLAudioEngine();
     for(int i=0; i<1000; i++)
     {
         std::vector<InputType> input=inputHandler->getInput();
