@@ -21,6 +21,7 @@ class Game{
         Background* background;
         Input* inputHandler;
         Level* level;
+        Overlay* overlay;
 };
 #endif
 

@@ -11,4 +11,3 @@ SDLPlayerShip::~SDLPlayerShip(){
 void SDLPlayerShip::Visualise(){
     context->Draw(image, bounds);
 }
-

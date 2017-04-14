@@ -8,6 +8,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "Background.h"
+#include "Overlay.h"
 class AbstractFactory{
     public:
         virtual PlayerShip* createPlayerShip(int x, int y, int movementSpeed)=0;
@@ -18,6 +19,7 @@ class AbstractFactory{
         virtual Window* createWindow(int screen_width, int screen_height)=0;
         virtual Input* createInputHandler()=0;
         virtual Background* createBackground()=0;
+        virtual Overlay* createOverlay()=0;
 };
 #endif
 

@@ -9,7 +9,6 @@
 #include "Basher.h"
 #include "Hivemind.h"
 
-
 Game::Game(){
     running=false;
 }
@@ -39,6 +38,7 @@ void Game::Run(){
     Hivemind* hivemind=new Hivemind(1);
     hivemind->Generate(factory,level);
     int count=0;
+    overlay=factory->createOverlay();
     for(int i=0; i<1000; i++)
     {
         std::vector<InputType> input=inputHandler->getInput();
@@ -64,7 +64,7 @@ void Game::Render(){
     background->Visualise();
     level->Visualise();
    // window->Visualise();
-
+    overlay->Visualise();
     window->PresentRender();
 }
 void Game::Stop(){

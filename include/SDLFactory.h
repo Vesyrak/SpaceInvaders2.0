@@ -10,6 +10,7 @@
 #include "SDLInput.h"
 #include "SDLContext.h"
 #include "SDLBackground.h"
+#include "SDLOverlay.h"
 class SDLFactory : public AbstractFactory{
     private:
         SDLContext* context;
@@ -22,6 +23,7 @@ class SDLFactory : public AbstractFactory{
         Window* createWindow(int screen_width, int screen_height);
         Input* createInputHandler();
         Background* createBackground();
+        Overlay* createOverlay();
 };
 #endif
 

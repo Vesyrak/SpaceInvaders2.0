@@ -28,4 +28,6 @@ Input* SDLFactory::createInputHandler(){
 Background* SDLFactory::createBackground(){
     return new SDLBackground(context);
 }
-
+Overlay* SDLFactory::createOverlay(){
+    return new SDLOverlay(context);
+}

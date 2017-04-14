@@ -2,6 +2,7 @@
 #include "SDLContext.h"
 SDLContext::SDLContext(SDLWindow* window){
     this->window=window;
+
 }
 
 void SDLContext::Draw(SDL_Texture* texture, BoundingBox* bounds){
@@ -44,5 +45,9 @@ SDL_Texture* SDLContext::loadTexture( std::string path )
         //TODO error
     }
     return newTexture;
+}
+
+SDL_Texture* SDLContext::GenerateText(SDL_Surface* message){
+	return SDL_CreateTextureFromSurface(window->renderer, message);
 }
 
