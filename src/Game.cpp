@@ -54,7 +54,7 @@ void Game::Run(){
         }
         else count++;
         Sleep(20);
-        level->CheckCollisions();
+        level->Update();
         Render();
     }
     delete hivemind;

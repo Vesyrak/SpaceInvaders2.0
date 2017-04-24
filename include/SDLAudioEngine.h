@@ -7,6 +7,8 @@ class SDLAudioEngine: public AudioEngine{
 public:
 	SDLAudioEngine();
 	~SDLAudioEngine();
+    void PlaySound(EntityType sound);
+    void PlayBackground();
 private:
 
 };

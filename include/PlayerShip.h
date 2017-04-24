@@ -13,6 +13,9 @@ class PlayerShip: public Entity {
         void Move(InputType dir);
         void Update();
         void Shoot();
+    private:
+        int lives;
+        int hp;
 };
 #endif
 

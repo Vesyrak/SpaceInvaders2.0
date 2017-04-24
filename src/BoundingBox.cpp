@@ -25,3 +25,9 @@ void BoundingBox::setX(double value){
 void BoundingBox::setY(double value){
     y=value;
 }
+bool BoundingBox::collidesWith(BoundingBox* bounds){
+    if(bounds->x>=x&&bounds->x<=x+width || bounds->x+bounds->width>=x&&bounds->x+bounds->width<=x+width)
+        if(bounds->y>=y&&bounds->y<=y+height || bounds->y+bounds->height>=y&&bounds->y+bounds->height<=y+height)
+            return true;
+    return false;
+}

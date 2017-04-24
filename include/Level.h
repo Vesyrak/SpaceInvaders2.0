@@ -7,13 +7,17 @@ class Level{
     public:
         Level();
         ~Level();
-        void AddEntity(Entity* entity);
-        void CheckCollisions();
+        void AddEnemy(Entity* entity);
+        void AddPlayerShip(Entity* entity);
+        void Update();
         void Visualise();
     private:
-        QuadTree* qTree;
-        std::vector<Entity*> entities;
-        void CheckBounds();
+        std::vector<Entity*> enemyBullets;
+        std::vector<Entity*> playerShipBullets;
+        std::vector<Entity*> enemies;
+        std::vector<Entity*> playerShip;
+        //void CheckBounds();
+        void CheckCollisions(std::vector<Entity*> bullets, std::vector<Entity*> entities);
 
 };
 #endif

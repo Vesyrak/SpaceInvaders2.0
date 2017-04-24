@@ -5,6 +5,9 @@ class Blaster: public Entity{
     public:
         Blaster(int x, int y, int movementSpeed);
         ~Blaster();
+        void Attack();
         void Update();
+    private:
+        int hp;
 };
 #endif

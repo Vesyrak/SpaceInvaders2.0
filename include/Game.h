@@ -15,6 +15,7 @@ class Game{
         AbstractFactory* factory;
         void Run();
         void Render();
+        void DetectCollisions(std::vector<Entity> l1, std::vector<Entity> l2);
         bool running;
         PlayerShip* ship;
         Window* window;
