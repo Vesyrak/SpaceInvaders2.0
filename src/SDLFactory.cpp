@@ -1,8 +1,8 @@
 #include "SDLFactory.h"
 using namespace std;
 
-PlayerShip* SDLFactory::createPlayerShip(int x, int y, int movementSpeed){
-    return new SDLPlayerShip(context, x,  y,  movementSpeed);
+PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*> bulletVector,Input* input, int x, int y, int movementSpeed){
+    return new SDLPlayerShip(bulletVector, input, context, x,  y,  movementSpeed);
 }
 Basher* SDLFactory::createBasher(int x, int y, int movementSpeed){
     return new SDLBasher(context, x,y,movementSpeed);

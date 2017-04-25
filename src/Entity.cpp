@@ -24,5 +24,5 @@ void Entity::Move(InputType dir){
         default:
             return;
     }
-    std::cout<<movementSpeed<<","<<bounds->getX()<<":"<<bounds->getY()<<std::endl;
+   // std::cout<<movementSpeed<<","<<bounds->getX()<<":"<<bounds->getY()<<std::endl;
 }

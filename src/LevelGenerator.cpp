@@ -19,7 +19,6 @@ Level* LevelGenerator::Generate(AbstractFactory* factory,int difficulty){
     for(int i=0; i<enemyType[2]; i++){
 //        enemies.push_back(factory->createBomber());
     }
-    return new Level();
-
+    return NULL;
 }
 

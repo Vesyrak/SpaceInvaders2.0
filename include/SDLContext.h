@@ -14,7 +14,5 @@ class SDLContext{
         ~SDLContext();
     private:
         SDLWindow* window;
-
-
 };
 #endif

@@ -11,7 +11,7 @@
 #include "Overlay.h"
 class AbstractFactory{
     public:
-        virtual PlayerShip* createPlayerShip(int x, int y, int movementSpeed)=0;
+        virtual PlayerShip* createPlayerShip(std::vector<Entity*> bulletVector, Input* input, int x, int y, int movementSpeed)=0;
         virtual Basher* createBasher(int x, int y, int movementSpeed)=0;
         virtual Blaster* createBlaster(int x, int y, int movementSpeed)=0;
         virtual Bomber* createBomber(int x, int y, int movementSpeed)=0;

@@ -43,3 +43,5 @@ void SDLAudioEngine::PlaySound(EntityType sound){
             break;
     }
 }
+void SDLAudioEngine::PlayBackground(){
+}

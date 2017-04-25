@@ -23,7 +23,7 @@ bool Game::Initialize(AbstractFactory* factory){
     return true;
 }
 int Game::Execute(){
-    level=new Level();
+    level=new Level(factory, window,inputHandler);
     running=true;
 
     Run();
@@ -32,32 +32,14 @@ int Game::Execute(){
 }
 
 void Game::Run(){
-    ship =factory->createPlayerShip(40,40, 1);
-    background=factory->createBackground();
-    level->AddEntity(ship);
-    Hivemind* hivemind=new Hivemind(1);
-    hivemind->Generate(factory,level);
     int count=0;
-    overlay=factory->createOverlay();
-    SDLAudioEngine* engine=new SDLAudioEngine();
     for(int i=0; i<1000; i++)
     {
-        std::vector<InputType> input=inputHandler->getInput();
-        for(InputType n:input){
-            cout<<n;
-            ship->Move(n);
-        }
-        if(count==10)
-        {
-        	count=0;
-            hivemind->Update();
-        }
-        else count++;
         Sleep(20);
         level->Update();
-        Render();
+        level->Visualise();
     }
-    delete hivemind;
+    //delete hivemind;
 
 }
 void Game::Render(){
