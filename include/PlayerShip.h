@@ -5,11 +5,11 @@
 #include "Window.h"
 #include "Input.h"
 using namespace std;
-
+class AbstractFactory;
 class PlayerShip: public Entity {
 
     public:
-        PlayerShip(std::vector<Entity*> bulletVector,Input* input, int x, int y, int movementSpeed);
+        PlayerShip(AbstractFactory* factory,std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed);
         virtual ~PlayerShip();
         void Move(InputType dir);
         void Update();
@@ -18,7 +18,8 @@ class PlayerShip: public Entity {
         int lives;
         int hp;
         Input* inputHandler;
-        std::vector<Entity*> bulletVector;
+        std::vector<Entity*>* bulletVector;
+        AbstractFactory* factory;
 };
 #endif
 

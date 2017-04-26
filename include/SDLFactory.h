@@ -11,11 +11,12 @@
 #include "SDLContext.h"
 #include "SDLBackground.h"
 #include "SDLOverlay.h"
+#include "SDLLaser.h"
 class SDLFactory : public AbstractFactory{
     private:
         SDLContext* context;
     public:
-        PlayerShip* createPlayerShip(std::vector<Entity*> bulletVector,Input* input, int x, int y, int movementSpeed);
+        PlayerShip* createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed);
         Basher* createBasher(int x, int y, int movementSpeed);
         Blaster* createBlaster(int x, int y, int movementSpeed);
         Bomber* createBomber(int x, int y, int movementSpeed);
@@ -24,6 +25,7 @@ class SDLFactory : public AbstractFactory{
         Input* createInputHandler();
         Background* createBackground();
         Overlay* createOverlay();
+        Projectile* createLaser( int x, int y, int movementSpeed, InputType direction, int damage);
 };
 #endif
 

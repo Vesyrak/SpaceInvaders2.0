@@ -1,7 +1,7 @@
 #include "Level.h"
 #include <iostream>
 Level::Level(AbstractFactory* factory, Window* window, Input* input){
-	playerShip.push_back(factory->createPlayerShip(playerShipBullets,input,40,40, 1));
+	playerShip.push_back(factory->createPlayerShip( &playerShipBullets,input,40,40, 1));
 	hivemind=new Hivemind(1);
 	hivemind->Generate(factory,enemies);
 	background=factory->createBackground();
@@ -22,6 +22,12 @@ void Level::Update(){
 	        n->Update();
 	}
     hivemind->Update();
+    for(Entity* n:enemyBullets){
+        n->Update();
+    }
+    for(Entity* n:playerShipBullets){
+        n->Update();
+    }
     CheckCollisions(enemyBullets, playerShip);
     CheckCollisions(playerShipBullets, enemies);
 }

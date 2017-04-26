@@ -3,7 +3,7 @@
 #include "Entity.h"
 class Projectile: public Entity{
     public:
-        Projectile(int x, int y, int movementSpeed, InputType direction, int damage);
+        Projectile(double x, double y, int movementSpeed, InputType direction, int damage);
         ~Projectile();
         void Update();
     private:

@@ -1,11 +1,13 @@
 #include "PlayerShip.h"
+#include "AbstractFactory.h"
 #include <iostream>
-PlayerShip::PlayerShip(std::vector<Entity*> bulletVector,Input* input, int x, int y, int movementSpeed) :Entity(x, y, movementSpeed) {
+PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed) :Entity(x, y, movementSpeed) {
 	bounds = new BoundingBox(x, y, 8, 8);
 	inputHandler = input;
 	hp = 100;
 	lives=3;
 	this->bulletVector=bulletVector;
+	this->factory=factory;
 }
 PlayerShip::~PlayerShip() {
 }
@@ -23,5 +25,6 @@ void PlayerShip::Update() {
 }
 
 void PlayerShip::Shoot() {
-	cout<<"Pew"<<endl;
+	bulletVector->push_back(factory->createLaser(bounds->getX(), bounds->getY(), 1, Up, 2));
+
 }

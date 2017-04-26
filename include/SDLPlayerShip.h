@@ -9,7 +9,7 @@ class SDLPlayerShip: public PlayerShip {
         SDLContext* context;
 
     public:
-        SDLPlayerShip(std::vector<Entity*> bulletVector,Input* input, SDLContext* context, int x, int y, int movementSpeed);
+        SDLPlayerShip(AbstractFactory* factory,std::vector<Entity*>* bulletVector,Input* input, SDLContext* context, int x, int y, int movementSpeed);
         ~SDLPlayerShip();
         void Visualise() override;
 };

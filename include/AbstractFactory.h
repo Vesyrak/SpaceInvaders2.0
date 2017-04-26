@@ -9,9 +9,10 @@
 #include "Input.h"
 #include "Background.h"
 #include "Overlay.h"
+#include "Projectile.h"
 class AbstractFactory{
     public:
-        virtual PlayerShip* createPlayerShip(std::vector<Entity*> bulletVector, Input* input, int x, int y, int movementSpeed)=0;
+        virtual PlayerShip* createPlayerShip( std::vector<Entity*>* bulletVector, Input* input, int x, int y, int movementSpeed)=0;
         virtual Basher* createBasher(int x, int y, int movementSpeed)=0;
         virtual Blaster* createBlaster(int x, int y, int movementSpeed)=0;
         virtual Bomber* createBomber(int x, int y, int movementSpeed)=0;
@@ -20,6 +21,7 @@ class AbstractFactory{
         virtual Input* createInputHandler()=0;
         virtual Background* createBackground()=0;
         virtual Overlay* createOverlay()=0;
+        virtual Projectile* createLaser(int x, int y, int movementSpeed, InputType direction, int damage)=0;//todo projectile shit
 };
 #endif
 

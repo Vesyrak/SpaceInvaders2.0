@@ -3,6 +3,7 @@
 using namespace std;
 Entity::Entity(int x, int y, int movementSpeed){
     this->movementSpeed=movementSpeed;
+
 }
 Entity::~Entity(){
     delete bounds;

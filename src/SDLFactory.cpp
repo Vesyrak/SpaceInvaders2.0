@@ -1,8 +1,8 @@
 #include "SDLFactory.h"
 using namespace std;
 
-PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*> bulletVector,Input* input, int x, int y, int movementSpeed){
-    return new SDLPlayerShip(bulletVector, input, context, x,  y,  movementSpeed);
+PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed){
+    return new SDLPlayerShip(this, bulletVector, input, context, x,  y,  movementSpeed);
 }
 Basher* SDLFactory::createBasher(int x, int y, int movementSpeed){
     return new SDLBasher(context, x,y,movementSpeed);
@@ -30,4 +30,7 @@ Background* SDLFactory::createBackground(){
 }
 Overlay* SDLFactory::createOverlay(){
     return new SDLOverlay(context);
+}
+Projectile* SDLFactory::createLaser(int x, int y, int movementSpeed, InputType direction, int damage){
+	return new SDLLaser(context, x ,y, movementSpeed, direction, damage);
 }

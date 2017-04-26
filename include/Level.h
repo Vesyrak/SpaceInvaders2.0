@@ -22,6 +22,7 @@ class Level{
         Overlay* overlay;
         Window* window;
         Hivemind* hivemind;
+        AbstractFactory* factory;
         //void CheckBounds();
         void CheckCollisions(std::vector<Entity*> bullets, std::vector<Entity*> entities);
 
