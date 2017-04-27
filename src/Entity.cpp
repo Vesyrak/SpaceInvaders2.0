@@ -3,10 +3,13 @@
 using namespace std;
 Entity::Entity(int x, int y, int movementSpeed){
     this->movementSpeed=movementSpeed;
-
+  	hp=1;
 }
 Entity::~Entity(){
     delete bounds;
+}
+int Entity::getHP(){
+	return hp;
 }
 void Entity::Move(InputType dir){
     switch(dir){
@@ -27,3 +30,7 @@ void Entity::Move(InputType dir){
     }
    // std::cout<<movementSpeed<<","<<bounds->getX()<<":"<<bounds->getY()<<std::endl;
 }
+void Entity::Damage(int damage){
+	hp-=damage;
+}
+

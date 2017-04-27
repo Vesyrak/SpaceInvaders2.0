@@ -8,12 +8,15 @@ class Entity{
         int x;
         int y;
         int movementSpeed;
+        int hp;
     public:
         Entity(int x, int y, int movementSpeed);
         virtual ~Entity();
         virtual void Move(InputType dir);
         virtual void Visualise()=0;
         virtual void Update()=0;
+        int getHP();
+        void Damage(int damage);
         BoundingBox* bounds;
 };
 #endif

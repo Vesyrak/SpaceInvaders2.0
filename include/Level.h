@@ -10,14 +10,13 @@ class Level{
         Level(AbstractFactory* factory, Window* window, Input* input);
         ~Level();
         void AddEnemy(Entity* entity);
-        void AddPlayerShip(Entity* entity);
         void Update();
         void Visualise();
     private:
         std::vector<Entity*> enemyBullets;
         std::vector<Entity*> playerShipBullets;
         std::vector<Entity*> enemies;
-        std::vector<Entity*> playerShip;
+        Entity* playerShip;
         Background* background;
         Overlay* overlay;
         Window* window;
@@ -25,6 +24,7 @@ class Level{
         AbstractFactory* factory;
         //void CheckBounds();
         void CheckCollisions(std::vector<Entity*> bullets, std::vector<Entity*> entities);
+        void CheckCollisions(std::vector<Entity*> bullets, Entity* entity);
 
 };
 #endif

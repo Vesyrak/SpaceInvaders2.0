@@ -5,6 +5,5 @@ class Background: public Entity{
     public:
         Background();
         ~Background();
-        void Update();
 };
 #endif

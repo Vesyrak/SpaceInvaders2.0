@@ -6,7 +6,7 @@ class Hivemind{
     public:
 		Hivemind(int difficulty);
         ~Hivemind();
-        void Generate(AbstractFactory* factory, std::vector<Entity*> enemies);
+        void Generate(AbstractFactory* factory, std::vector<Entity*>* enemies);
         void Update();
     private:
         int level;

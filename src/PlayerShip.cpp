@@ -4,7 +4,6 @@
 PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed) :Entity(x, y, movementSpeed) {
 	bounds = new BoundingBox(x, y, 8, 8);
 	inputHandler = input;
-	hp = 100;
 	lives=3;
 	this->bulletVector=bulletVector;
 	this->factory=factory;

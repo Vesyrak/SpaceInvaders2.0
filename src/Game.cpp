@@ -32,7 +32,6 @@ int Game::Execute(){
 }
 
 void Game::Run(){
-    int count=0;
     for(int i=0; i<1000; i++)
     {
         Sleep(20);

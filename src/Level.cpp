@@ -1,74 +1,103 @@
 #include "Level.h"
 #include <iostream>
-Level::Level(AbstractFactory* factory, Window* window, Input* input){
-	playerShip.push_back(factory->createPlayerShip( &playerShipBullets,input,40,40, 1));
-	hivemind=new Hivemind(1);
-	hivemind->Generate(factory,enemies);
-	background=factory->createBackground();
-	overlay=factory->createOverlay();
-	this->window=window;
-	this->factory=factory;
+Level::Level(AbstractFactory* factory, Window* window, Input* input) {
+	playerShip = factory->createPlayerShip(&playerShipBullets, input, 40, 100, 1);
+	hivemind = new Hivemind(1);
+	hivemind->Generate(factory, &enemies);
+	background = factory->createBackground();
+	overlay = factory->createOverlay();
+	this->window = window;
+	this->factory = factory;
 }
-Level::~Level(){
-}
-void Level::AddEnemy(Entity* entity){
-    enemies.push_back(entity);
-}
-void Level::AddPlayerShip(Entity* entity){
-	playerShip.push_back(entity);
-}
-void Level::Update(){
-	for(Entity* n:playerShip){
-	        n->Update();
+Level::~Level() {
+	std::vector<Entity*>::iterator j = enemies.begin();
+	while (j != enemies.end()) {
+		enemies.erase(j++);
 	}
-    hivemind->Update();
-    for(Entity* n:enemyBullets){
-        n->Update();
-    }
-    for(Entity* n:playerShipBullets){
-        n->Update();
-    }
-    CheckCollisions(enemyBullets, playerShip);
-    CheckCollisions(playerShipBullets, enemies);
+	j = enemyBullets.begin();
+	while (j != enemyBullets.end()) {
+		enemyBullets.erase(j++);
+	}
+	j = playerShipBullets.begin();
+	while (j != playerShipBullets.end()) {
+		playerShipBullets.erase(j++);
+	}
+
+	delete playerShip;
+	delete hivemind;
 }
-void Level::CheckCollisions(std::vector<Entity*> bullets, std::vector<Entity*> entities){
-    std::vector<Entity*>::iterator i = entities.begin();
-    while (i != entities.end())
-    {
-        bool hit=false;
-        std::vector<Entity*>::iterator j= bullets.begin();
-        while(j!=bullets.end())
-        {
-            if((*i)->bounds->collidesWith((*j)->bounds))
-            {
-                entities.erase(i++);
-                bullets.erase(j++);
-                hit=true;
-                break;
-            }
-            else ++j;
-        }
-        if(!hit)
-            ++i;
-    }
+
+void Level::AddEnemy(Entity* entity) {
+	enemies.push_back(entity);
+}
+
+void Level::Update() {
+	background->Update();
+	playerShip->Update();
+	hivemind->Update();
+	for (Entity* n : enemyBullets) {
+		n->Update();
+	}
+	for (Entity* n : playerShipBullets) {
+		n->Update();
+	}
+	CheckCollisions(enemyBullets, playerShip);
+	CheckCollisions(playerShipBullets, enemies);
+	std::vector<Entity*>::iterator j = enemies.begin();
+	while (j != enemies.end()) {
+		if ((*j)->getHP() <= 0)
+			enemies.erase(j++);
+		else
+			j++;
+	}
+}
+void Level::CheckCollisions(std::vector<Entity*> bullets,
+		std::vector<Entity*> entities) {
+	std::vector<Entity*>::iterator i = entities.begin();
+	while (i != entities.end()) {
+		bool hit = false;
+		std::vector<Entity*>::iterator j = bullets.begin();
+		while (j != bullets.end()) {
+			if ((*i)->bounds->collidesWith((*j)->bounds)) {
+				(*i)->Damage((*j)->getHP());
+				bullets.erase(j++);
+				hit = true;
+				break;
+			} else
+				++j;
+		}
+		if (!hit)
+			++i;
+	}
 
 }
-void Level::Visualise(){
+void Level::CheckCollisions(std::vector<Entity*> bullets, Entity* entity) {
+	std::vector<Entity*>::iterator j = bullets.begin();
+	while (j != bullets.end()) {
+		if (entity->bounds->collidesWith((*j)->bounds)) {
+			entity->Damage((*j)->getHP());
+			bullets.erase(j++);
+			break;
+		} else
+			++j;
+	}
+
+}
+void Level::Visualise() {
 	window->PrepareRender();
 	background->Visualise();
-    for(Entity* n:enemies){
-        n->Visualise();
-    }
-    for(Entity* n:playerShip){
-        n->Visualise();
-    }
-    for(Entity* n:enemyBullets){
-        n->Visualise();
-    }
-    for(Entity* n:playerShipBullets){
-        n->Visualise();
-    }
-    overlay->Visualise();
-    window->PresentRender();
+	for (Entity* n : enemies) {
+		n->Visualise();
+	}
+	playerShip->Visualise();
+
+	for (Entity* n : enemyBullets) {
+		n->Visualise();
+	}
+	for (Entity* n : playerShipBullets) {
+		n->Visualise();
+	}
+	overlay->Visualise();
+	window->PresentRender();
 }
 

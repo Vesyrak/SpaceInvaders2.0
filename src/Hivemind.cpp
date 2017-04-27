@@ -9,7 +9,7 @@ Hivemind::Hivemind(int difficulty){
 Hivemind::~Hivemind(){
 	delete enemyGrid;
 }
-void Hivemind::Generate(AbstractFactory* factory,  std::vector<Entity*> enemies){
+void Hivemind::Generate(AbstractFactory* factory,  std::vector<Entity*>* enemies){
 
 	int y=0;
 	for (int j=0;j<rows;j++)
@@ -19,21 +19,21 @@ void Hivemind::Generate(AbstractFactory* factory,  std::vector<Entity*> enemies)
 			for(int i=0; i<columns; i++){
 				Entity* enemy=factory->createBasher(x,y, 2);
 				enemyGrid[j*columns+i]=enemy;
-				enemies.push_back(enemy);
+				enemies->push_back(enemy);
 				x+=15;
 			}
 		else if(j<4)
 			for(int i=0; i<columns; i++){
 				Entity* enemy=factory->createBlaster(x,y, 2);
 				enemyGrid[j*columns+i]=enemy;
-				enemies.push_back(enemy);
+				enemies->push_back(enemy);
 				x+=15;
 			}
 		else
 			for(int i=0; i<columns; i++){
 				Entity* enemy=factory->createBomber(x,y, 2);
 				enemyGrid[j*columns+i]=enemy;
-				enemies.push_back(enemy);
+				enemies->push_back(enemy);
 				x+=15;
 			}
 		y+=15;

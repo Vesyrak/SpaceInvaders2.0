@@ -16,7 +16,6 @@ class PlayerShip: public Entity {
         void Shoot();
     private:
         int lives;
-        int hp;
         Input* inputHandler;
         std::vector<Entity*>* bulletVector;
         AbstractFactory* factory;
