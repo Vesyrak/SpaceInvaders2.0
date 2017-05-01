@@ -15,6 +15,8 @@ class BoundingBox{
         double getY();
         void setX(double value);
         void setY(double value);
+        void setWidth(double value);
+        void setHeight(double value);
         bool collidesWith(BoundingBox* bounds);
 };
 #endif

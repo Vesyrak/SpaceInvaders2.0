@@ -13,7 +13,7 @@ class Hivemind{
         int difficulty;
         const int rows=6;
         const int columns=10;
-        Entity **enemyGrid;
         bool right;
+        std::vector<std::vector<Entity*>> enemyContainer;
 };
 #endif

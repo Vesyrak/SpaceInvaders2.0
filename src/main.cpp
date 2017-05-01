@@ -8,6 +8,7 @@ int main( int argc, char* argv[] )
     game->Initialize(factory);
     game->Execute();
     delete game;
+    delete factory;
     return 0;
 }
 

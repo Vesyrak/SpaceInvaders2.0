@@ -28,9 +28,11 @@ Input* SDLFactory::createInputHandler(){
 Background* SDLFactory::createBackground(){
     return new SDLBackground(context);
 }
-Overlay* SDLFactory::createOverlay(){
-    return new SDLOverlay(context);
-}
+
 Projectile* SDLFactory::createLaser(int x, int y, int movementSpeed, InputType direction, int damage){
 	return new SDLLaser(context, x ,y, movementSpeed, direction, damage);
 }
+Menu* SDLFactory::createMenu(Window* window){
+	return new SDLMenu(context,this,window);
+}
+

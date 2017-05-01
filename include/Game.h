@@ -8,7 +8,7 @@ class Game{
     public:
         Game();
         bool Initialize(AbstractFactory* factory);
-        int Execute();
+        void Execute();
         void Stop();
         ~Game();
     private:
@@ -22,7 +22,7 @@ class Game{
         Background* background;
         Input* inputHandler;
         Level* level;
-        Overlay* overlay;
+
 };
 #endif
 

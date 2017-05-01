@@ -8,12 +8,19 @@
 #include "QuadTree.h"
 #include "Basher.h"
 #include "Hivemind.h"
-
+#include "SDLButton.h"
+#include "SDLFactory.h"
 Game::Game(){
     running=false;
 }
 
 Game::~Game(){
+	if(factory)
+		delete factory;
+	if(window)
+		delete window;
+	if(inputHandler)
+		delete inputHandler;
 }
 bool Game::Initialize(AbstractFactory* factory){
     this->factory=factory;
@@ -22,16 +29,28 @@ bool Game::Initialize(AbstractFactory* factory){
     inputHandler=factory->createInputHandler();
     return true;
 }
-int Game::Execute(){
-    level=new Level(factory, window,inputHandler);
+void Game::Execute(){
+	Menu* menu=factory->createMenu(window);
+	int selection=menu->Run();
+	delete menu;
+	switch(selection){
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		return;
+	}
+	level=new Level(factory, window,inputHandler);
+
     running=true;
 
     Run();
     Stop();
-    return 0;
 }
 
 void Game::Run(){
+
     for(int i=0; i<1000; i++)
     {
         Sleep(20);
@@ -46,7 +65,7 @@ void Game::Render(){
     background->Visualise();
     level->Visualise();
    // window->Visualise();
-    overlay->Visualise();
+
     window->PresentRender();
 }
 void Game::Stop(){

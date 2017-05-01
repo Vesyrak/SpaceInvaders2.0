@@ -4,15 +4,18 @@
 #include "SDLWindow.h"
 #include "BoundingBox.h"
 #include <iostream>
-class SDLContext{
-    public:
-        SDL_Texture* loadTexture(std::string path);
-        SDL_Texture* GenerateText(SDL_Surface* message);
-        void Draw(SDL_Texture* texture,BoundingBox* bounds);
+class SDLContext {
+public:
+	SDL_Texture* loadTexture(std::string path);
+	void Draw(SDL_Texture* texture, BoundingBox* bounds);
+	SDL_Texture* GenerateText(std::string text, BoundingBox* bounds);
+	void InitializeFont();
+	SDLContext(SDLWindow* window);
+	~SDLContext();
+	void LogicalToActualCoords(BoundingBox* bounds);
+private:
+	SDLWindow* window;
+	TTF_Font* font;
 
-        SDLContext(SDLWindow* window);
-        ~SDLContext();
-    private:
-        SDLWindow* window;
 };
 #endif

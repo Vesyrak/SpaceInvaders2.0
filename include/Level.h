@@ -18,13 +18,12 @@ class Level{
         std::vector<Entity*> enemies;
         Entity* playerShip;
         Background* background;
-        Overlay* overlay;
         Window* window;
         Hivemind* hivemind;
         AbstractFactory* factory;
         //void CheckBounds();
-        void CheckCollisions(std::vector<Entity*> bullets, std::vector<Entity*> entities);
-        void CheckCollisions(std::vector<Entity*> bullets, Entity* entity);
+        void CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities);
+        void CheckCollisions(std::vector<Entity*>* bullets, Entity* entity);
 
 };
 #endif
