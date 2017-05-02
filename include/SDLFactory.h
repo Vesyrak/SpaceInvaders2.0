@@ -13,6 +13,7 @@
 #include "SDLText.h"
 #include "SDLLaser.h"
 #include "SDLMenu.h"
+#include "SDLTimer.h"
 class SDLFactory : public AbstractFactory{
     private:
     public:
@@ -28,6 +29,7 @@ class SDLFactory : public AbstractFactory{
         Background* createBackground();
         Projectile* createLaser( int x, int y, int movementSpeed, InputType direction, int damage);
         Menu* createMenu(Window* window);
+        Timer* createTimer();
 };
 #endif
 

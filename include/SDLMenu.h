@@ -15,6 +15,9 @@ private:
 	Window* window;
 	int returnValue;
 	Background* background;
+	Timer* frameTimer;
+	Timer* capTimer;
+	int countedFrames;
 };
 #endif
 

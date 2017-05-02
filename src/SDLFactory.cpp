@@ -35,4 +35,6 @@ Projectile* SDLFactory::createLaser(int x, int y, int movementSpeed, InputType d
 Menu* SDLFactory::createMenu(Window* window){
 	return new SDLMenu(context,this,window);
 }
-
+Timer* SDLFactory::createTimer(){
+	return new SDLTimer();
+}
