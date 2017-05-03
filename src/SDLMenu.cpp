@@ -18,6 +18,8 @@ SDLMenu::~SDLMenu() {
 		delete(*j);
 		buttons.erase(j++);
 	}
+	delete frameTimer;
+	delete capTimer;
 }
 int SDLMenu::Run() {
 	while(returnValue==0){

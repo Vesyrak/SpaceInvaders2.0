@@ -3,6 +3,7 @@
 #include <string>
 #include "Entity.h"
 #include "Window.h"
+#include "Timer.h"
 #include "Input.h"
 using namespace std;
 class AbstractFactory;
@@ -19,6 +20,7 @@ class PlayerShip: public Entity {
         Input* inputHandler;
         std::vector<Entity*>* bulletVector;
         AbstractFactory* factory;
+        Timer* shootingTimer;
 };
 #endif
 

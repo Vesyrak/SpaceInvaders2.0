@@ -1,4 +1,5 @@
 #include "BoundingBox.h"
+#include <algorithm>
 BoundingBox::BoundingBox(double x, double y, double width, double height){
     this->x=x;
     this->y=y;
@@ -32,8 +33,7 @@ void BoundingBox::setHeight(double value){
     height=value;
 }
 bool BoundingBox::collidesWith(BoundingBox* bounds){
-    if(bounds->x>=x&&bounds->x<=x+width || bounds->x+bounds->width>=x&&bounds->x+bounds->width<=x+width)
-        if(bounds->y>=y&&bounds->y<=y+height || bounds->y+bounds->height>=y&&bounds->y+bounds->height<=y+height)
+	if( (std::max(x, bounds->getX() ) < std::min(x+width, bounds->getX()+bounds->getWidth() )) &&( std::max(y, bounds->getY()) < std::min(y+height, bounds->getY()+bounds->getHeight()) ))
             return true;
     return false;
 }

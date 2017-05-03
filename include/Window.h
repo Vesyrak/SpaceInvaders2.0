@@ -1,5 +1,6 @@
 #ifndef WINDOW_H
 #define WINDOW_H
+#include "BoundingBox.h"
 class Window{
     public:
         const int logical_width=200;
@@ -12,5 +13,10 @@ class Window{
         virtual int CreateWindow()=0;
         virtual void PrepareRender()=0;
         virtual void PresentRender()=0;
+        BoundingBox* topBounds;
+        BoundingBox* bottomBounds;
+        BoundingBox* leftBounds;
+        BoundingBox* rightBounds;
+
 };
 #endif

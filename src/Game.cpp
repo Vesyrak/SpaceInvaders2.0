@@ -3,11 +3,7 @@
 #include "Game.h"
 #include "SDLAudioEngine.h"
 //SLeep
-#include <Windows.h>
-#undef CreateWindow //Holy shit windows
-#include "QuadTree.h"
 #include "Basher.h"
-#include "Hivemind.h"
 #include "SDLButton.h"
 #include "SDLFactory.h"
 Game::Game(){
@@ -15,8 +11,6 @@ Game::Game(){
 }
 
 Game::~Game(){
-	if(factory)
-		delete factory;
 	if(window)
 		delete window;
 	if(inputHandler)
@@ -51,11 +45,10 @@ void Game::Execute(){
 
 void Game::Run(){
 
-    for(int i=0; i<1000; i++)
+    while(true)
     {
-        Sleep(20);
-        level->Update();
-        level->Visualise();
+
+        level->Run();
     }
     //delete hivemind;
 

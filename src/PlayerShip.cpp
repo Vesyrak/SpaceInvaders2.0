@@ -7,8 +7,12 @@ PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVec
 	lives=3;
 	this->bulletVector=bulletVector;
 	this->factory=factory;
+	shootingTimer=factory->createTimer();
+	shootingTimer->start();
 }
 PlayerShip::~PlayerShip() {
+	delete bounds;
+	delete shootingTimer;
 }
 void PlayerShip::Move(InputType dir) {
 
@@ -24,6 +28,8 @@ void PlayerShip::Update() {
 }
 
 void PlayerShip::Shoot() {
-	bulletVector->push_back(factory->createLaser(bounds->getX(), bounds->getY(), 1, Up, 2));
-
+	if(shootingTimer->getTicks()>500){
+		shootingTimer->start();
+		bulletVector->push_back(factory->createLaser(bounds->getX(), bounds->getY(), 1, Up, 2));
+	}
 }
