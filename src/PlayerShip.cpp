@@ -33,3 +33,6 @@ void PlayerShip::Shoot() {
 		bulletVector->push_back(factory->createLaser(bounds->getX(), bounds->getY(), 1, Up, 2));
 	}
 }
+int PlayerShip::getLives(){
+	return lives;
+}

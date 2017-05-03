@@ -11,6 +11,7 @@
 #include "Projectile.h"
 #include "Menu.h"
 #include "Timer.h"
+#include "Text.h"
 class AbstractFactory{
     public:
         virtual PlayerShip* createPlayerShip( std::vector<Entity*>* bulletVector, Input* input, int x, int y, int movementSpeed)=0;
@@ -24,6 +25,7 @@ class AbstractFactory{
         virtual Projectile* createLaser(int x, int y, int movementSpeed, InputType direction, int damage)=0;//todo projectile shit
         virtual Menu* createMenu(Window* window)=0;
         virtual Timer* createTimer()=0;
+        virtual Text* createText(std::string message, int x, int y)=0;
 };
 #endif
 

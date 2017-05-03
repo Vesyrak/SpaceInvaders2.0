@@ -14,6 +14,7 @@
 #include "SDLLaser.h"
 #include "SDLMenu.h"
 #include "SDLTimer.h"
+#include "SDLText.h"
 class SDLFactory : public AbstractFactory{
     private:
     public:
@@ -30,6 +31,7 @@ class SDLFactory : public AbstractFactory{
         Projectile* createLaser( int x, int y, int movementSpeed, InputType direction, int damage);
         Menu* createMenu(Window* window);
         Timer* createTimer();
+        Text* createText(std::string message, int x, int y);
 };
 #endif
 

@@ -1,8 +1,11 @@
+//Gotta love Windows
+#define __USE_MINGW_ANSI_STDIO 0
 #include "Level.h"
 #include <iostream>
-Level::Level(AbstractFactory* factory, Window* window, Input* input) {
-	playerShip = factory->createPlayerShip(&playerShipBullets, input, 180, 180,
-			1);
+Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives) {
+	this->score=scoreHistory=score;
+	playerShip = factory->createPlayerShip(&playerShipBullets, input, 180, 180,1);
+	lifeHistory=lives;
 	frameTimer = factory->createTimer();
 	capTimer = factory->createTimer();
 	background = factory->createBackground();
@@ -12,6 +15,7 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input) {
 	countedFrames = 0;
 	movementCounter = 0;
 	difficulty=1;
+	right=true;
 	int y = 0;
 	for (int j = 0; j < rows; j++) {
 		int x = 0;
@@ -35,6 +39,8 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input) {
 			}
 		y += 15;
 	}
+	scoreText=factory->createText(std::to_string(score), 5,5);
+	livesText=factory->createText(std::to_string(lives), 160,5);
 }
 Level::~Level() {
 	std::vector<Entity*>::iterator j = enemies.begin();
@@ -57,7 +63,7 @@ Level::~Level() {
 	delete frameTimer;
 	delete capTimer;
 }
-int Level::Run() {
+void Level::Run() {
 	while (true) {
 		capTimer->start();
 		float avgFPS = countedFrames / (frameTimer->getTicks() / 1000.f);
@@ -71,7 +77,6 @@ int Level::Run() {
 			frameTimer->delay(1000 / 60 - frameTicks);
 		}
 	}
-	return 1;
 }
 void Level::AddEnemy(Entity* entity) {
 	enemies.push_back(entity);
@@ -102,11 +107,23 @@ void Level::Update() {
 		}
 		else j++;
 	}
+
+	if(score!=scoreHistory){
+		scoreHistory=score;
+		scoreText->Update(std::to_string(score));
+	}
+	if(playerShip->getLives()!=lifeHistory)
+	{
+		lifeHistory=playerShip->getLives();
+		livesText->Update(std::to_string(lifeHistory));
+	}
+
 	j = enemies.begin();
 	while (j < enemies.end()) {
 		if ((*j)->getHP() <= 0) {
 			delete (*j);
 			enemies.erase(j++);
+			score+=100;
 		} else
 			j++;
 	}
@@ -160,6 +177,8 @@ void Level::Visualise() {
 	for (Entity* n : playerShipBullets) {
 		n->Visualise();
 	}
+	scoreText->Visualise();
+	livesText->Visualise();
 	window->PresentRender();
 }
 
@@ -204,4 +223,10 @@ void Level::MoveEnemies() {
 		}
 	} else
 		movementCounter++;
+}
+int Level::getScore(){
+	return score;
+}
+int Level::getRemainingLives(){
+	return playerShip->getLives();
 }

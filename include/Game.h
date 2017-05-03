@@ -17,11 +17,11 @@ class Game{
         void Render();
         void DetectCollisions(std::vector<Entity> l1, std::vector<Entity> l2);
         bool running;
-        PlayerShip* ship;
         Window* window;
         Background* background;
         Input* inputHandler;
         Level* level;
+        int score;
 
 };
 #endif

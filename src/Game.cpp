@@ -8,6 +8,7 @@
 #include "SDLFactory.h"
 Game::Game(){
     running=false;
+    score=0;
 }
 
 Game::~Game(){
@@ -35,7 +36,6 @@ void Game::Execute(){
 	case 3:
 		return;
 	}
-	level=new Level(factory, window,inputHandler);
 
     running=true;
 
@@ -44,13 +44,14 @@ void Game::Execute(){
 }
 
 void Game::Run(){
-
-    while(true)
-    {
-
-        level->Run();
-    }
-    //delete hivemind;
+	level=new Level(factory, window,inputHandler, score, 3);
+	level->Run();
+	int lives=level->getRemainingLives();
+	if(lives<=0){
+		return;//todo
+	}
+	score=level->getScore();
+	delete level;
 
 }
 void Game::Render(){
@@ -62,7 +63,6 @@ void Game::Render(){
     window->PresentRender();
 }
 void Game::Stop(){
-    delete ship;
     delete window;
     cout << "Finished";
 }

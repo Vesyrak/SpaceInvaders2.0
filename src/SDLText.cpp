@@ -1,6 +1,6 @@
 #include "SDLText.h"
 
-SDLText::SDLText(SDLContext* context, std::string message, int x, int y){
+SDLText::SDLText(SDLContext* context, std::string message, int x, int y):Text(message, x,y){
 	this->context=context;
 	this->texture=this->context->GenerateText(message, bounds);
 }

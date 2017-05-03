@@ -15,6 +15,7 @@ class PlayerShip: public Entity {
         void Move(InputType dir);
         void Update();
         void Shoot();
+        int getLives();
     private:
         int lives;
         Input* inputHandler;

@@ -1,22 +1,26 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 #include "Entity.h"
+#include "PlayerShip.h"
 #include <list>
 #include "AbstractFactory.h"
 class Level{
     public:
-        Level(AbstractFactory* factory, Window* window, Input* input);
+        Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives);
         ~Level();
         void AddEnemy(Entity* entity);
-        int Run();
+        void Run();
         void Update();
         void Visualise();
+        int getScore();
+        int getRemainingLives();
+
     private:
         void MoveEnemies();
         std::vector<Entity*> enemyBullets;
         std::vector<Entity*> playerShipBullets;
         std::vector<Entity*> enemies;
-        Entity* playerShip;
+        PlayerShip* playerShip;
         Background* background;
         Window* window;
         AbstractFactory* factory;
@@ -28,7 +32,11 @@ class Level{
     	int columns=10;
     	int difficulty;
         bool right;
-
+        int score;
+        int scoreHistory;
+        int lifeHistory;
+        Text* scoreText;
+        Text* livesText;
         //void CheckBounds();
         void CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities);
         void CheckCollisions(std::vector<Entity*>* bullets, Entity* entity);

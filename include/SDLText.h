@@ -1,7 +1,8 @@
 #ifndef SDLTEXT_H
 #define SDLTEXT_H
 #include "SDLContext.h"
-class SDLText{
+#include "Text.h"
+class SDLText: public Text {
 public:
 	SDLText(SDLContext* context, std::string message, int x, int y);
 	~SDLText();
@@ -10,6 +11,5 @@ public:
 private:
 	SDLContext* context;
 	SDL_Texture* texture;
-	BoundingBox* bounds;
 };
 #endif

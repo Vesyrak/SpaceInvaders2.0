@@ -18,8 +18,6 @@ SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds) {
 
 	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, text.c_str(),
 			White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-	bounds->setX(bounds->getX()+4);
-	bounds->setY(bounds->getY()+4);
 
 	bounds->setWidth(surfaceMessage->w/2 );
 	bounds->setHeight(surfaceMessage->h/2);

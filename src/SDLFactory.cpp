@@ -38,3 +38,6 @@ Menu* SDLFactory::createMenu(Window* window){
 Timer* SDLFactory::createTimer(){
 	return new SDLTimer();
 }
+Text* SDLFactory::createText(std::string message, int x, int y){
+	return new SDLText(context, message, x, y);
+}
