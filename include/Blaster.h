@@ -1,13 +1,15 @@
 #ifndef BLASTER_H
 #define BLASTER_H
 #include "Entity.h"
+class AbstractFactory;
 class Blaster: public Entity{
     public:
-        Blaster(int x, int y, int movementSpeed);
+        Blaster(AbstractFactory* factory, std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed);
         ~Blaster();
         void Attack();
         void Update();
     private:
-        int hp;
+        AbstractFactory* factory;
+        std::vector<Entity*>* bulletVector;
 };
 #endif

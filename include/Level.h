@@ -26,6 +26,7 @@ class Level{
         AbstractFactory* factory;
     	Timer* frameTimer;
     	Timer* capTimer;
+    	Healthbar* healthbar;
     	int countedFrames;
     	int movementCounter;
     	int rows=6;

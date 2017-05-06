@@ -21,19 +21,19 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 		int x = 0;
 		if (j < 2)
 			for (int i = 0; i < columns; i++) {
-				Entity* enemy = factory->createBasher(x, y, 2);
+				Entity* enemy = factory->createBomber(&enemyBullets,x, y, 2);
 				enemies.push_back(enemy);
 				x += 15;
 			}
 		else if (j < 4)
 			for (int i = 0; i < columns; i++) {
-				Entity* enemy = factory->createBlaster(x, y, 2);
+				Entity* enemy = factory->createBlaster(&enemyBullets,x, y, 2);
 				enemies.push_back(enemy);
 				x += 15;
 			}
 		else
-			for (int i = 0; i < columns; i++) {
-				Entity* enemy = factory->createBomber(x, y, 2);
+			for (int i = 0; i <columns; i++) {
+				Entity* enemy = factory->createBasher(&enemyBullets,x, y, 2);
 				enemies.push_back(enemy);
 				x += 15;
 			}
@@ -41,6 +41,7 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 	}
 	scoreText=factory->createText(std::to_string(score), 5,5);
 	livesText=factory->createText(std::to_string(lives), 160,5);
+	healthbar=factory->createHealthbar(playerShip, 50, 5);
 }
 Level::~Level() {
 	std::vector<Entity*>::iterator j = enemies.begin();
@@ -62,9 +63,10 @@ Level::~Level() {
 	delete playerShip;
 	delete frameTimer;
 	delete capTimer;
+	delete healthbar;
 }
 void Level::Run() {
-	while (true) {
+	while (playerShip->getLives()>0  && enemies.size()>0) {
 		capTimer->start();
 		float avgFPS = countedFrames / (frameTimer->getTicks() / 1000.f);
 		if (avgFPS > 2000000) {
@@ -86,6 +88,9 @@ void Level::Update() {
 	background->Update();
 	playerShip->Update();
 	MoveEnemies();
+	for (Entity* n : enemies) {
+			n->Update();
+	}
 	for (Entity* n : enemyBullets) {
 		n->Update();
 	}
@@ -93,6 +98,8 @@ void Level::Update() {
 		n->Update();
 	}
 	CheckCollisions(&enemyBullets, playerShip);
+	if(playerShip->getHP()<=0 && playerShip->getLives()>0)
+		playerShip->Revive();
 	CheckCollisions(&playerShipBullets, &enemies);
 	if(playerShip->bounds->collidesWith(window->rightBounds))
 		playerShip->bounds->setX(window->rightBounds->getX()-playerShip->bounds->getWidth());
@@ -107,7 +114,7 @@ void Level::Update() {
 		}
 		else j++;
 	}
-
+	healthbar->Update();
 	if(score!=scoreHistory){
 		scoreHistory=score;
 		scoreText->Update(std::to_string(score));
@@ -179,6 +186,7 @@ void Level::Visualise() {
 	}
 	scoreText->Visualise();
 	livesText->Visualise();
+	healthbar->Visualise();
 	window->PresentRender();
 }
 

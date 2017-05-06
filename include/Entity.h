@@ -5,8 +5,6 @@
 #include "BoundingBox.h"
 class Entity{
     protected:
-        int x;
-        int y;
         int movementSpeed;
         int hp;
     public:
@@ -16,7 +14,7 @@ class Entity{
         virtual void Visualise()=0;
         virtual void Update()=0;
         int getHP();
-        void Damage(int damage);
+        virtual void Damage(int damage);
         BoundingBox* bounds;
 };
 #endif

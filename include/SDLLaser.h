@@ -1,8 +1,8 @@
 #ifndef SDLLASER_H
 #define SDLLASER_H
-#include "Projectile.h"
+#include "Laser.h"
 #include "SDLContext.h"
-class SDLLaser: public Projectile{
+class SDLLaser: public Laser{
     public:
         SDLLaser(SDLContext* context, double x, double y, int movementSpeed, InputType direction, int damage);
         ~SDLLaser();

@@ -4,14 +4,14 @@ using namespace std;
 PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed){
     return new SDLPlayerShip(this, bulletVector, input, context, x,  y,  movementSpeed);
 }
-Basher* SDLFactory::createBasher(int x, int y, int movementSpeed){
-    return new SDLBasher(context, x,y,movementSpeed);
+Basher* SDLFactory::createBasher(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed){
+    return new SDLBasher(this, bulletVector,context, x,y,movementSpeed);
 }
-Blaster* SDLFactory::createBlaster(int x, int y, int movementSpeed){
-    return new SDLBlaster(context, x,y, movementSpeed);
+Blaster* SDLFactory::createBlaster(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed){
+    return new SDLBlaster(this, bulletVector,context, x,y, movementSpeed);
 }
-Bomber* SDLFactory::createBomber(int x, int y, int movementSpeed){
-    return new SDLBomber(context, x,y,movementSpeed);
+Bomber* SDLFactory::createBomber(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed){
+    return new SDLBomber(this, bulletVector,context, x,y,movementSpeed);
 }
 
 Boss* SDLFactory::createBoss(int x, int y, int movementSpeed){
@@ -29,7 +29,7 @@ Background* SDLFactory::createBackground(){
     return new SDLBackground(context);
 }
 
-Projectile* SDLFactory::createLaser(int x, int y, int movementSpeed, InputType direction, int damage){
+Laser* SDLFactory::createLaser(int x, int y, int movementSpeed, InputType direction, int damage){
 	return new SDLLaser(context, x ,y, movementSpeed, direction, damage);
 }
 Menu* SDLFactory::createMenu(Window* window){
@@ -41,3 +41,10 @@ Timer* SDLFactory::createTimer(){
 Text* SDLFactory::createText(std::string message, int x, int y){
 	return new SDLText(context, message, x, y);
 }
+LaserBomb* SDLFactory::createLaserBomb( int x, int y, int movementSpeed, InputType direction, int damage){
+	return new SDLLaserBomb(context, x, y, movementSpeed, direction, damage);
+}
+Healthbar* SDLFactory::createHealthbar(Entity* observed, int x, int y){
+	return new SDLHealthbar(context, observed, x,y);
+}
+

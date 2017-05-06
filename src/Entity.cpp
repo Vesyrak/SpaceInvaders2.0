@@ -31,6 +31,8 @@ void Entity::Move(InputType dir){
    // std::cout<<movementSpeed<<","<<bounds->getX()<<":"<<bounds->getY()<<std::endl;
 }
 void Entity::Damage(int damage){
-	hp-=damage;
+	cout<<hp<<","<<damage<<endl;
+	hp=hp-damage;
+	cout<<hp<<","<<damage<<endl;
 }
 

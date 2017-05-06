@@ -87,10 +87,10 @@ long Timer::getTicks()
 
     return time;
 }
-bool Timer::isStarted()
+bool Timer::isRunning()
 {
     //Timer is running and paused or unpaused
-    return mStarted;
+    return mStarted && !mPaused;
 }
 
 bool Timer::isPaused()

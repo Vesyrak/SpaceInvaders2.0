@@ -1,7 +1,7 @@
 #include "SDLLaser.h"
-SDLLaser::SDLLaser(SDLContext* context, double x, double y, int movementSpeed, InputType direction, int damage):Projectile(x, y, movementSpeed, direction, damage){
+SDLLaser::SDLLaser(SDLContext* context, double x, double y, int movementSpeed, InputType direction, int damage):Laser(x, y, movementSpeed, direction, damage){
     this->context=context;
-    image=context->loadTexture("graphics/laserb.png");
+    image=context->loadTexture("graphics/lasergreen.png");
 }
 SDLLaser::~SDLLaser(){
     SDL_DestroyTexture(image);

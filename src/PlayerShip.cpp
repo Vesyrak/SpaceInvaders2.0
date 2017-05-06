@@ -9,6 +9,8 @@ PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVec
 	this->factory=factory;
 	shootingTimer=factory->createTimer();
 	shootingTimer->start();
+	this->hp=100;
+	invincible=factory->createTimer();
 }
 PlayerShip::~PlayerShip() {
 	delete bounds;
@@ -25,14 +27,27 @@ void PlayerShip::Update() {
 		if(dir==InputType::Up)
 			Shoot();
 	}
+	if(invincible->isRunning()&& invincible->getTicks()>4000)
+		invincible->stop();
 }
 
 void PlayerShip::Shoot() {
 	if(shootingTimer->getTicks()>500){
 		shootingTimer->start();
-		bulletVector->push_back(factory->createLaser(bounds->getX(), bounds->getY(), 1, Up, 2));
+		bulletVector->push_back(factory->createLaser(bounds->getX()+bounds->getWidth()/2, bounds->getY(), 2, Up, 20));
 	}
 }
 int PlayerShip::getLives(){
 	return lives;
+}
+void PlayerShip::Revive(){
+	hp=100;
+	bounds->setX(100);
+	lives--;
+	invincible->start();
+}
+void PlayerShip::Damage(int damage){
+	if(!invincible->isRunning()){
+		Entity::Damage(damage);
+	}
 }

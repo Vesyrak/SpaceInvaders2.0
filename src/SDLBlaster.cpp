@@ -1,5 +1,5 @@
 #include "SDLBlaster.h"
-SDLBlaster::SDLBlaster(SDLContext* context, int x, int y, int movementSpeed):Blaster(x, y, movementSpeed){
+SDLBlaster::SDLBlaster(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int movementSpeed):Blaster(factory, bulletVector,x, y, movementSpeed){
     this->context=context;
     image=context->loadTexture("graphics/blaster.png");
 }

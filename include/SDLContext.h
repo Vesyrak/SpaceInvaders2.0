@@ -9,6 +9,7 @@ public:
 	SDL_Texture* loadTexture(std::string path);
 	void Draw(SDL_Texture* texture, BoundingBox* bounds);
 	SDL_Texture* GenerateText(std::string text, BoundingBox* bounds);
+	void DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled);
 	void InitializeFont();
 	SDLContext(SDLWindow* window);
 	~SDLContext();

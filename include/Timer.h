@@ -14,7 +14,7 @@ public:
     long getTicks();
 
     //Checks the status of the timer
-    bool isStarted();
+    bool isRunning();
     bool isPaused();
 
 protected:

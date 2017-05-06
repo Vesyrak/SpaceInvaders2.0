@@ -7,7 +7,7 @@ class SDLBasher: public Basher{
         SDL_Texture* image;
         SDLContext* context;
     public:
-        SDLBasher(SDLContext* context, int x, int y, int movementSpeed);
+        SDLBasher(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int movementSpeed);
         ~SDLBasher();
         void Visualise() override;
 };

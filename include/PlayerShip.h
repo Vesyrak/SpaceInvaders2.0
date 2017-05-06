@@ -16,12 +16,15 @@ class PlayerShip: public Entity {
         void Update();
         void Shoot();
         int getLives();
-    private:
+        void Revive();
+        void Damage(int damage) override;
+    protected:
         int lives;
         Input* inputHandler;
         std::vector<Entity*>* bulletVector;
         AbstractFactory* factory;
         Timer* shootingTimer;
+        Timer* invincible;
 };
 #endif
 

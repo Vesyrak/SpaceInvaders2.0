@@ -1,13 +1,34 @@
 #include "SDLBomber.h"
-SDLBomber::SDLBomber(SDLContext* context, int x, int y, int movementSpeed):Bomber(x, y, movementSpeed){
-    this->context=context;
-    image=context->loadTexture("graphics/bomber.png");
+SDLBomber::SDLBomber(AbstractFactory* factory,
+		std::vector<Entity*>* bulletVector, SDLContext* context, int x, int y,
+		int movementSpeed) :
+		Bomber(factory, bulletVector, x, y, movementSpeed) {
+	this->context = context;
+	image = context->loadTexture("graphics/bomber.png");
+	chargeImage = context->loadTexture("graphics/bomberlaser.png");
+	chargeBounds = new BoundingBox(x, y, 4, 4);
 }
-SDLBomber::~SDLBomber(){
-    SDL_DestroyTexture(image);
+SDLBomber::~SDLBomber() {
+	SDL_DestroyTexture(image);
+	SDL_DestroyTexture(chargeImage);
+	delete chargeBounds;
 }
 
-void SDLBomber::Visualise(){
-    context->Draw(image, bounds);
+void SDLBomber::Visualise() {
+	context->Draw(image, bounds);
+	if (charging) {
+		if ((timer->getTicks() / 150) % 2 == 1) {
+			chargeBounds->setX(bounds->getX() + bounds->getWidth() / 2 - 2);
+			chargeBounds->setWidth(4);
+			chargeBounds->setHeight(4);
+			chargeBounds->setY(bounds->getY());
+		} else {
+			chargeBounds->setX(bounds->getX() + bounds->getWidth() / 2 - 1);
+			chargeBounds->setWidth(2);
+			chargeBounds->setHeight(2);
+			chargeBounds->setY(bounds->getY()+1);
+		}
+		context->Draw(chargeImage, chargeBounds);
+	}
 }
 

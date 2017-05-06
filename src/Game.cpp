@@ -52,14 +52,12 @@ void Game::Run(){
 	}
 	score=level->getScore();
 	delete level;
-
+	Run();
 }
 void Game::Render(){
     window->PrepareRender();
     background->Visualise();
     level->Visualise();
-   // window->Visualise();
-
     window->PresentRender();
 }
 void Game::Stop(){
