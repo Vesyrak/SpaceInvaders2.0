@@ -20,6 +20,18 @@ SDLButton::~SDLButton(){
 	}
 	delete text;
 }
+int SDLButton::Update(){
+	SDL_Event e;
+		//Handle events on queue
+		while (SDL_PollEvent(&e) != 0) {
+			//User requests quit
+			if (e.type == SDL_QUIT) {
+			}
+			return handleEvent(&e);
+
+		}
+		return 0;
+}
 void SDLButton::setPosition(int x, int y) {
 
 }

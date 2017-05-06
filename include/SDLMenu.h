@@ -3,21 +3,15 @@
 #include "Menu.h"
 #include "SDLButton.h"
 #include "AbstractFactory.h"
-class SDLMenu : public Menu {
+class SDLMenu : public Screen {
 public:
 	SDLMenu(SDLContext* context, AbstractFactory* factory, Window* window);
 	~SDLMenu();
-	int Run() override;
-private:
+protected:
 	std::vector<SDLButton*> buttons;
-	void Visualise();
-	void Update();
-	Window* window;
-	int returnValue;
+	void Visualise() override;
+	void Update()override;
 	Background* background;
-	Timer* frameTimer;
-	Timer* capTimer;
-	int countedFrames;
 };
 #endif
 

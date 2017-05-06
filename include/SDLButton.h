@@ -29,6 +29,7 @@ class SDLButton
         int handleEvent( SDL_Event* e );
         //Shows button sprite
         void Visualise();
+        int Update();
 
     private:
         //Top left position

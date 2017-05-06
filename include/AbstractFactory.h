@@ -1,3 +1,4 @@
+
 #ifndef ABSTRACTFACTORY_H
 #define ABSTRACTFACTORY_H
 #include "PlayerShip.h"
@@ -14,6 +15,7 @@
 #include "Text.h"
 #include "Healthbar.h"
 #include "LaserBomb.h"
+#include "Screen.h"
 class AbstractFactory{
     public:
         virtual PlayerShip* createPlayerShip( std::vector<Entity*>* bulletVector, Input* input, int x, int y, int movementSpeed)=0;
@@ -25,11 +27,12 @@ class AbstractFactory{
         virtual Input* createInputHandler()=0;
         virtual Background* createBackground()=0;
         virtual Laser* createLaser(int x, int y, int movementSpeed, InputType direction, int damage)=0;
-        virtual Menu* createMenu(Window* window)=0;
+        virtual Screen* createMenu(Window* window)=0;
         virtual Timer* createTimer()=0;
         virtual Text* createText(std::string message, int x, int y)=0;
         virtual LaserBomb* createLaserBomb(int x, int y, int movementSpeed, InputType direction, int damage)=0;
         virtual Healthbar* createHealthbar(Entity* observed, int x, int y)=0;
+        virtual Screen* createGameOverScreen(int score, Window* window)=0;
 };
 #endif
 

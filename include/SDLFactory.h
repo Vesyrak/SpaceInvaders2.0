@@ -17,6 +17,7 @@
 #include "SDLText.h"
 #include "SDLLaserBomb.h"
 #include "SDLHealthbar.h"
+#include "SDLGameOverScreen.h"
 class SDLFactory : public AbstractFactory{
     private:
     public:
@@ -31,11 +32,12 @@ class SDLFactory : public AbstractFactory{
         Input* createInputHandler();
         Background* createBackground();
         Laser* createLaser( int x, int y, int movementSpeed, InputType direction, int damage);
-        Menu* createMenu(Window* window);
+        Screen* createMenu(Window* window);
         Timer* createTimer();
         Text* createText(std::string message, int x, int y);
         LaserBomb* createLaserBomb( int x, int y, int movementSpeed, InputType direction, int damage);
         Healthbar* createHealthbar(Entity* observed, int x, int y);
+        Screen* createGameOverScreen(int score, Window* window);
 
 };
 #endif

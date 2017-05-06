@@ -32,7 +32,7 @@ Background* SDLFactory::createBackground(){
 Laser* SDLFactory::createLaser(int x, int y, int movementSpeed, InputType direction, int damage){
 	return new SDLLaser(context, x ,y, movementSpeed, direction, damage);
 }
-Menu* SDLFactory::createMenu(Window* window){
+Screen* SDLFactory::createMenu(Window* window){
 	return new SDLMenu(context,this,window);
 }
 Timer* SDLFactory::createTimer(){
@@ -47,4 +47,8 @@ LaserBomb* SDLFactory::createLaserBomb( int x, int y, int movementSpeed, InputTy
 Healthbar* SDLFactory::createHealthbar(Entity* observed, int x, int y){
 	return new SDLHealthbar(context, observed, x,y);
 }
+Screen* SDLFactory::createGameOverScreen(int score, Window* window){
+	return new SDLGameOverScreen(score, context,this, window);
+}
+
 

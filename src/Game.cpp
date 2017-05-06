@@ -25,7 +25,7 @@ bool Game::Initialize(AbstractFactory* factory){
     return true;
 }
 void Game::Execute(){
-	Menu* menu=factory->createMenu(window);
+	Screen* menu=factory->createMenu(window);
 	int selection=menu->Run();
 	delete menu;
 	switch(selection){
@@ -48,6 +48,8 @@ void Game::Run(){
 	level->Run();
 	int lives=level->getRemainingLives();
 	if(lives<=0){
+		Screen* screen=factory->createGameOverScreen(level->getScore(), window);
+		screen->Run();
 		return;//todo
 	}
 	score=level->getScore();
