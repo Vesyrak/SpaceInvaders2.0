@@ -1,6 +1,8 @@
 #include "SDLFactory.h"
 using namespace std;
-
+SDLFactory::~SDLFactory(){
+	delete context;
+}
 PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed){
     return new SDLPlayerShip(this, bulletVector, input, context, x,  y,  movementSpeed);
 }

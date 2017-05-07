@@ -7,7 +7,7 @@ class AbstractFactory;
 class Healthbar{
 public:
 	Healthbar(AbstractFactory* factory, Entity* observed, int x, int y);
-	~Healthbar();
+	virtual ~Healthbar();
 	virtual void Visualise()=0;
 	virtual void Update()=0;
 protected:

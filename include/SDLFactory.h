@@ -21,8 +21,8 @@
 class SDLFactory : public AbstractFactory{
     private:
     public:
-    SDLContext* context;
-
+		~SDLFactory();
+    	SDLContext* context;
         PlayerShip* createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed);
         Basher* createBasher(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
         Blaster* createBlaster(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);

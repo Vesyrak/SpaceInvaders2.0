@@ -4,7 +4,7 @@
 class Menu {
 public:
 	Menu(Window* window);
-	~Menu();
+	virtual ~Menu();
 	virtual int Run()=0;
 protected:
 	Window* window;

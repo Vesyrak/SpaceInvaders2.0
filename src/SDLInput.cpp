@@ -2,6 +2,9 @@
 #include "SDLInput.h"
 SDLInput::SDLInput(){
 }
+SDLInput::~SDLInput(){
+
+}
 std::vector<InputType> SDLInput::getInput(){
 	std::vector<InputType> input;
 	SDL_PollEvent(&event);

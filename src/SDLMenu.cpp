@@ -8,11 +8,7 @@ SDLMenu::SDLMenu(SDLContext* context, AbstractFactory* factory, Window* window) 
 }
 SDLMenu::~SDLMenu() {
 	delete background;
-	std::vector<SDLButton*>::iterator j = buttons.begin();
-	while (j != buttons.end()) {
-		delete(*j);
-		buttons.erase(j++);
-	}
+	buttons.clear();
 }
 
 void SDLMenu::Update() {

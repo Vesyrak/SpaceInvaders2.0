@@ -18,6 +18,7 @@
 #include "Screen.h"
 class AbstractFactory{
     public:
+		virtual ~AbstractFactory(){}
         virtual PlayerShip* createPlayerShip( std::vector<Entity*>* bulletVector, Input* input, int x, int y, int movementSpeed)=0;
         virtual Basher* createBasher(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed)=0;
         virtual Blaster* createBlaster(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed)=0;

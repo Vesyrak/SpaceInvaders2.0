@@ -2,34 +2,32 @@
 #include <iostream>
 #include "Game.h"
 
-Game::Game(){
-    running=false;
-    score=0;
-    factory=NULL;
-    window=NULL;
-    level=NULL;
-    inputHandler=NULL;
-    difficulty=10;
+Game::Game() {
+	running = false;
+	score = 0;
+	factory = NULL;
+	window = NULL;
+	level = NULL;
+	inputHandler = NULL;
+	difficulty = 10;
 }
 
-Game::~Game(){
-	if(window)
-		delete window;
-	if(inputHandler)
-		delete inputHandler;
+Game::~Game() {
+	delete window;
+	delete inputHandler;
 }
-bool Game::Initialize(AbstractFactory* factory){
-    this->factory=factory;
-    window=factory->createWindow(1400, 900);
-    window->CreateWindow();
-    inputHandler=factory->createInputHandler();
-    return true;
+bool Game::Initialize(AbstractFactory* factory) {
+	this->factory = factory;
+	window = factory->createWindow(1400, 900);
+	window->CreateWindow();
+	inputHandler = factory->createInputHandler();
+	return true;
 }
-void Game::Execute(){
-	Screen* menu=factory->createMenu(window);
-	int selection=menu->Run();
+void Game::Execute() {
+	Screen* menu = factory->createMenu(window);
+	int selection = menu->Run();
 	delete menu;
-	switch(selection){
+	switch (selection) {
 	case 1:
 		break;
 	case 2:
@@ -38,32 +36,33 @@ void Game::Execute(){
 		return;
 	}
 
-    running=true;
+	running = true;
 
-    Run();
-    Stop();
+	Run();
+	Stop();
 }
 
-void Game::Run(){
-	level=new Level(factory, window,inputHandler, score,3, difficulty);
+void Game::Run() {
+	level = new Level(factory, window, inputHandler, score, 3, difficulty);
 	level->Run();
-	int lives=level->getRemainingLives();
-	if(lives<=0){
-		Screen* screen=factory->createGameOverScreen(level->getScore(), window);
+	int lives = level->getRemainingLives();
+	if (lives <= 0) {
+		Screen* screen = factory->createGameOverScreen(level->getScore(),
+				window);
 		screen->Run();
-		return;//todo
+		return; //todo
 	}
-	score=level->getScore();
+	score = level->getScore();
 	delete level;
 	Run();
 }
-void Game::Render(){
-    window->PrepareRender();
-    level->Visualise();
-    window->PresentRender();
+void Game::Render() {
+	window->PrepareRender();
+	level->Visualise();
+	window->PresentRender();
 }
-void Game::Stop(){
-    delete window;
-    cout << "Finished";
+void Game::Stop() {
+	delete window;
+	cout << "Finished";
 }
 

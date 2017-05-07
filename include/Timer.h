@@ -3,7 +3,7 @@
 class Timer{
 public:
 	Timer();
-	~Timer();
+	virtual ~Timer();
 	void start();
 	void stop();
 	void pause();

@@ -1,5 +1,4 @@
 #include "Entity.h"
-#include <iostream>
 using namespace std;
 Entity::Entity(int x, int y,int width, int height, int movementSpeed){
     this->movementSpeed=movementSpeed;
@@ -29,11 +28,8 @@ void Entity::Move(InputType dir){
         default:
             return;
     }
-   // std::cout<<movementSpeed<<","<<bounds->getX()<<":"<<bounds->getY()<<std::endl;
 }
 void Entity::Damage(int damage){
-	cout<<hp<<","<<damage<<endl;
 	hp=hp-damage;
-	cout<<hp<<","<<damage<<endl;
 }
 

@@ -7,6 +7,7 @@ class SDLInput: public Input{
     public:
         SDLInput();
         std::vector<InputType> getInput();
+        ~SDLInput();
 
 };
 #endif

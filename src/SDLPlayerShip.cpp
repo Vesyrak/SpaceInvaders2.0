@@ -12,7 +12,7 @@ SDLPlayerShip::~SDLPlayerShip() {
 }
 
 void SDLPlayerShip::Visualise() {
-	if (!invincible->isRunning()||(invincible->isRunning()&&(invincible->getTicks() / 250) % 2 == 1))
+	if (!invincible->isRunning()||(invincible->getTicks() / 250) % 2 == 1)
 			context->Draw(image, bounds);
 
 }

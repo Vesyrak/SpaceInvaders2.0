@@ -2,32 +2,27 @@
 #include "SDLContext.h"
 SDLContext::SDLContext(SDLWindow* window) {
 	this->window = window;
-	font = NULL;
 }
-void SDLContext::InitializeFont() {
-	font = TTF_OpenFont("graphics/bitbold.ttf", defaultFontSize);
-	if (font == NULL) {
-		std::cout << "Failed to load lazy font! SDL_ttf Error:"
-				<< TTF_GetError() << std::endl;
-	}
+SDLContext::~SDLContext() {
+
 }
-SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds, int size) {
-	if (this->font == NULL)
-		InitializeFont();
-	TTF_Font* font=this->font;
-	if(size!=defaultFontSize)
-		font=TTF_OpenFont("graphics/bitbold.ttf", size);
+
+SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds,
+		int size) {
+
+	TTF_Font* font = TTF_OpenFont("graphics/bitbold.ttf", size);
 
 	SDL_Color White = { 255, 255, 255 }; // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
 
 	SDL_Surface* surfaceMessage = TTF_RenderUTF8_Solid(font, text.c_str(),
 			White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
-	bounds->setWidth(surfaceMessage->w/2  );
-	bounds->setHeight(surfaceMessage->h/2 );
+	bounds->setWidth(surfaceMessage->w / 2);
+	bounds->setHeight(surfaceMessage->h / 2);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(window->renderer,
 			surfaceMessage);
 	SDL_FreeSurface(surfaceMessage);
+	TTF_CloseFont(font);
 	return texture;
 }
 
@@ -45,7 +40,8 @@ void SDLContext::Draw(SDL_Texture* texture, BoundingBox* bounds) {
 	SDL_RenderCopy(window->renderer, texture, NULL, &DestR);
 }
 void SDLContext::DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled) {
-	SDL_SetRenderDrawColor(window->renderer, color->r, color->g, color->b, color->a);
+	SDL_SetRenderDrawColor(window->renderer, color->r, color->g, color->b,
+			color->a);
 	//SDL_RenderClear(window->renderer );
 	SDL_Rect DestR;
 
@@ -57,9 +53,10 @@ void SDLContext::DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled) {
 			* bounds->getWidth();
 	DestR.h = window->screen_height / (double) window->logical_width
 			* bounds->getHeight();
-	if(filled)
+	if (filled)
 		SDL_RenderFillRect(window->renderer, &DestR);
-	else SDL_RenderDrawRect(window->renderer, &DestR);
+	else
+		SDL_RenderDrawRect(window->renderer, &DestR);
 }
 SDL_Texture* SDLContext::loadTexture(std::string path) {
 

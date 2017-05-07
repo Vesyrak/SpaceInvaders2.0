@@ -10,14 +10,12 @@ public:
 	void Draw(SDL_Texture* texture, BoundingBox* bounds);
 	SDL_Texture* GenerateText(std::string text, BoundingBox* bounds,int size);
 	void DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled);
-	void InitializeFont();
 	SDLContext(SDLWindow* window);
 	~SDLContext();
 	void LogicalToActualCoords(BoundingBox* bounds);
 	const int defaultFontSize=14;
 private:
 	SDLWindow* window;
-	TTF_Font* font;
 
 };
 #endif

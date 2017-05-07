@@ -6,7 +6,7 @@ class AbstractFactory;
 class Screen {
 public:
 	Screen(AbstractFactory* factory, Window* window);
-	~Screen();
+	virtual ~Screen();
 	virtual int Run();
 protected:
 	virtual void Update()=0;
