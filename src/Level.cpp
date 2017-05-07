@@ -1,9 +1,8 @@
-
 //Gotta love Windows
 #define __USE_MINGW_ANSI_STDIO 0
 #include "Level.h"
 #include <iostream>
-Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives) {
+Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives, int difficulty) {
 	this->score=scoreHistory=score;
 	playerShip = factory->createPlayerShip(&playerShipBullets, input, 180, 180,1);
 	lifeHistory=lives;
@@ -15,34 +14,34 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 	frameTimer->start();
 	countedFrames = 0;
 	movementCounter = 0;
-	difficulty=1;
+	this->difficulty=difficulty;
 	right=true;
-	int y = 0;
+	int y = 15;
 	for (int j = 0; j < rows; j++) {
 		int x = 0;
 		if (j < 2)
 			for (int i = 0; i < columns; i++) {
-				Entity* enemy = factory->createBomber(&enemyBullets,x, y, 2);
+				Entity* enemy = factory->createBomber(&enemyBullets,x, y, difficulty);
 				enemies.push_back(enemy);
 				x += 15;
 			}
 		else if (j < 4)
 			for (int i = 0; i < columns; i++) {
-				Entity* enemy = factory->createBlaster(&enemyBullets,x, y, 2);
+				Entity* enemy = factory->createBlaster(&enemyBullets,x, y, difficulty);
 				enemies.push_back(enemy);
 				x += 15;
 			}
 		else
 			for (int i = 0; i <columns; i++) {
-				Entity* enemy = factory->createBasher(&enemyBullets,x, y, 2);
+				Entity* enemy = factory->createBasher(&enemyBullets,x, y, difficulty);
 				enemies.push_back(enemy);
 				x += 15;
 			}
 		y += 15;
 	}
-	scoreText=factory->createText(std::to_string(score), 5,5);
-	livesText=factory->createText(std::to_string(lives), 160,5);
-	healthbar=factory->createHealthbar(playerShip, 50, 5);
+	scoreText=factory->createText("Score: "+std::to_string(score), 5,185, 16);
+	livesText=factory->createText("Lives: "+std::to_string(lives), 150,5, 16);
+	healthbar=factory->createHealthbar(playerShip, 5, 5);
 }
 Level::~Level() {
 	std::vector<Entity*>::iterator j = enemies.begin();
@@ -118,12 +117,12 @@ void Level::Update() {
 	healthbar->Update();
 	if(score!=scoreHistory){
 		scoreHistory=score;
-		scoreText->Update(std::to_string(score));
+		scoreText->Update("Score: "+std::to_string(score));
 	}
 	if(playerShip->getLives()!=lifeHistory)
 	{
 		lifeHistory=playerShip->getLives();
-		livesText->Update(std::to_string(lifeHistory));
+		livesText->Update("Lives: "+std::to_string(lifeHistory));
 	}
 
 	j = enemies.begin();
@@ -131,7 +130,7 @@ void Level::Update() {
 		if ((*j)->getHP() <= 0) {
 			delete (*j);
 			enemies.erase(j++);
-			score+=100;
+			score+=50+50*difficulty;;
 		} else
 			j++;
 	}
@@ -192,7 +191,7 @@ void Level::Visualise() {
 }
 
 void Level::MoveEnemies() {
-	if (movementCounter == (10 - difficulty)) {
+	if (movementCounter == (10 - difficulty/4)) {
 		movementCounter = 0;
 		if (right) {
 			for (Entity* e : enemies) {

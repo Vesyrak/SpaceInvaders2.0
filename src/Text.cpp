@@ -1,9 +1,11 @@
 #include "Text.h"
 
-Text::Text( std::string message, int x, int y){
+Text::Text( std::string message, int x, int y, int size){
 	this->message=message;
 	bounds=new BoundingBox(x,y,message.size()*4, 10);
+	this->size=size;
 }
+
 Text::~Text(){
 }
 void Text::Update(std::string message){

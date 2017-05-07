@@ -5,23 +5,26 @@ SDLContext::SDLContext(SDLWindow* window) {
 	font = NULL;
 }
 void SDLContext::InitializeFont() {
-	font = NULL;
-	font = TTF_OpenFont("graphics/bit.ttf", 24);
+	font = TTF_OpenFont("graphics/bitbold.ttf", defaultFontSize);
 	if (font == NULL) {
 		std::cout << "Failed to load lazy font! SDL_ttf Error:"
 				<< TTF_GetError() << std::endl;
 	}
 }
-SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds) {
-	if (font == NULL)
+SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds, int size) {
+	if (this->font == NULL)
 		InitializeFont();
+	TTF_Font* font=this->font;
+	if(size!=defaultFontSize)
+		font=TTF_OpenFont("graphics/bitbold.ttf", size);
+
 	SDL_Color White = { 255, 255, 255 }; // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
 
-	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, text.c_str(),
+	SDL_Surface* surfaceMessage = TTF_RenderUTF8_Solid(font, text.c_str(),
 			White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
-	bounds->setWidth(surfaceMessage->w / 2);
-	bounds->setHeight(surfaceMessage->h / 2);
+	bounds->setWidth(surfaceMessage->w/2  );
+	bounds->setHeight(surfaceMessage->h/2 );
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(window->renderer,
 			surfaceMessage);
 	SDL_FreeSurface(surfaceMessage);

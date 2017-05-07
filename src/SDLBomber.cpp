@@ -1,8 +1,8 @@
 #include "SDLBomber.h"
 SDLBomber::SDLBomber(AbstractFactory* factory,
 		std::vector<Entity*>* bulletVector, SDLContext* context, int x, int y,
-		int movementSpeed) :
-		Bomber(factory, bulletVector, x, y, movementSpeed) {
+		int difficulty) :
+		Bomber(factory, bulletVector, x, y, difficulty) {
 	this->context = context;
 	image = context->loadTexture("graphics/bomber.png");
 	chargeImage = context->loadTexture("graphics/bomberlaser.png");

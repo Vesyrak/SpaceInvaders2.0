@@ -9,7 +9,7 @@ class SDLBomber: public Bomber{
         SDL_Texture* chargeImage;
         BoundingBox* chargeBounds;
     public:
-        SDLBomber(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int movementSpeed);
+        SDLBomber(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int difficulty);
         ~SDLBomber();
         void Visualise() override;
 };

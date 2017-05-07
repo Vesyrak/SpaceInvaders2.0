@@ -1,14 +1,15 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Game.h"
-#include "SDLAudioEngine.h"
-//SLeep
-#include "Basher.h"
-#include "SDLButton.h"
-#include "SDLFactory.h"
+
 Game::Game(){
     running=false;
     score=0;
+    factory=NULL;
+    window=NULL;
+    level=NULL;
+    inputHandler=NULL;
+    difficulty=10;
 }
 
 Game::~Game(){
@@ -44,7 +45,7 @@ void Game::Execute(){
 }
 
 void Game::Run(){
-	level=new Level(factory, window,inputHandler, score, 3);
+	level=new Level(factory, window,inputHandler, score,3, difficulty);
 	level->Run();
 	int lives=level->getRemainingLives();
 	if(lives<=0){
@@ -58,7 +59,6 @@ void Game::Run(){
 }
 void Game::Render(){
     window->PrepareRender();
-    background->Visualise();
     level->Visualise();
     window->PresentRender();
 }

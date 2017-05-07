@@ -3,15 +3,17 @@
 #include "SDLWindow.h"
 
 SDLWindow::SDLWindow():Window(){
-
+	window=NULL;
+	renderer=NULL;
 }
 SDLWindow::SDLWindow( int screen_width, int screen_height):Window(screen_width,screen_height){
-
+	window=NULL;
+	renderer=NULL;
 }
 SDLWindow::~SDLWindow(){
 
-	//SDL_FreeSurface(Surface_Display);
 	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
 	IMG_Quit();
 	SDL_Quit();
 	TTF_Quit();

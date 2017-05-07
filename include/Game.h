@@ -18,10 +18,10 @@ class Game{
         void DetectCollisions(std::vector<Entity> l1, std::vector<Entity> l2);
         bool running;
         Window* window;
-        Background* background;
         Input* inputHandler;
         Level* level;
         int score;
+        int difficulty;
 
 };
 #endif

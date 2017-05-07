@@ -8,8 +8,6 @@ class SDLLaserBomb: public LaserBomb{
         ~SDLLaserBomb();
         void Visualise() override;
     private:
-        InputType direction;
-        int damage;
         SDL_Texture* image;
         SDLContext* context;
 };

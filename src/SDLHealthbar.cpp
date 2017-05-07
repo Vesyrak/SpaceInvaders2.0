@@ -1,5 +1,5 @@
 #include "SDLHealthbar.h"
-SDLHealthbar::SDLHealthbar(SDLContext* context,Entity* observed, int x, int y):Healthbar(observed, x, y){
+SDLHealthbar::SDLHealthbar(AbstractFactory* factory,SDLContext* context,Entity* observed, int x, int y):Healthbar(factory, observed, x, y){
 this->context=context;
 this->prevhp=this->starthp=observed->getHP();
 backColor={255,255,255,255};
@@ -19,7 +19,7 @@ void SDLHealthbar::Update(){
 	}
 }
 void SDLHealthbar::Visualise(){
-
+	hpText->Visualise();
 	context->DrawRect(&backColor, backBounds,false);
 	context->DrawRect(&frontColor, foreBounds, true);
 }

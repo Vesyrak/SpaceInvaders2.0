@@ -7,7 +7,7 @@ class SDLBlaster: public Blaster{
         SDL_Texture* image;
         SDLContext* context;
     public:
-        SDLBlaster(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int movementSpeed);
+        SDLBlaster(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int difficulty);
         ~SDLBlaster();
         void Visualise() override;
 };

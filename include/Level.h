@@ -6,7 +6,7 @@
 #include "AbstractFactory.h"
 class Level{
     public:
-        Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives);
+        Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives, int difficulty);
         ~Level();
         void AddEnemy(Entity* entity);
         void Run();

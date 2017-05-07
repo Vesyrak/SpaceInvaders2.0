@@ -8,7 +8,7 @@ class Entity{
         int movementSpeed;
         int hp;
     public:
-        Entity(int x, int y, int movementSpeed);
+        Entity(int x, int y, int width, int height,int movementSpeed);
         virtual ~Entity();
         virtual void Move(InputType dir);
         virtual void Visualise()=0;

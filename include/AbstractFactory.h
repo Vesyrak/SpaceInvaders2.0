@@ -30,6 +30,7 @@ class AbstractFactory{
         virtual Screen* createMenu(Window* window)=0;
         virtual Timer* createTimer()=0;
         virtual Text* createText(std::string message, int x, int y)=0;
+        virtual Text* createText(std::string message, int x, int y, int size)=0;
         virtual LaserBomb* createLaserBomb(int x, int y, int movementSpeed, InputType direction, int damage)=0;
         virtual Healthbar* createHealthbar(Entity* observed, int x, int y)=0;
         virtual Screen* createGameOverScreen(int score, Window* window)=0;

@@ -5,7 +5,7 @@
 class AbstractFactory;
 class Bomber: public Entity{
     public:
-        Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed);
+        Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
         ~Bomber();
         void Attack();
         void Update();
@@ -15,5 +15,6 @@ class Bomber: public Entity{
     protected:
         bool charging;
         Timer* timer;
+        int difficulty;
 };
 #endif

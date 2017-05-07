@@ -1,9 +1,10 @@
 #include "Healthbar.h"
-Healthbar::Healthbar(Entity* observed, int x, int y){
+#include "AbstractFactory.h"
+Healthbar::Healthbar(AbstractFactory* factory, Entity* observed, int x, int y){
 	this->observed=observed;
-	backBounds=new BoundingBox(x,y, 40, 10);
+	hpText=factory->createText("HP: ",x, y, 16 );
+	backBounds=new BoundingBox(x+hpText->bounds->getWidth(),y, 40, 10);
 	foreBounds=new BoundingBox(backBounds->getX()+1,backBounds->getY()+1,backBounds->getWidth()-2,backBounds->getHeight()-2);
-
 }
 Healthbar::~Healthbar(){
 	delete backBounds;

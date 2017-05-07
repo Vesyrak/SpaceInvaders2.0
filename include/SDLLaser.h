@@ -8,8 +8,6 @@ class SDLLaser: public Laser{
         ~SDLLaser();
         void Visualise() override;
     private:
-        InputType direction;
-        int damage;
         SDL_Texture* image;
         SDLContext* context;
 };

@@ -39,13 +39,16 @@ Timer* SDLFactory::createTimer(){
 	return new SDLTimer();
 }
 Text* SDLFactory::createText(std::string message, int x, int y){
-	return new SDLText(context, message, x, y);
+	return new SDLText( context, message, x, y);
+}
+Text* SDLFactory::createText(std::string message, int x, int y, int size){
+	return new SDLText( context, message, x, y, size);
 }
 LaserBomb* SDLFactory::createLaserBomb( int x, int y, int movementSpeed, InputType direction, int damage){
 	return new SDLLaserBomb(context, x, y, movementSpeed, direction, damage);
 }
 Healthbar* SDLFactory::createHealthbar(Entity* observed, int x, int y){
-	return new SDLHealthbar(context, observed, x,y);
+	return new SDLHealthbar(this, context, observed, x,y);
 }
 Screen* SDLFactory::createGameOverScreen(int score, Window* window){
 	return new SDLGameOverScreen(score, context,this, window);

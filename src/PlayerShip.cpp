@@ -1,8 +1,7 @@
 #include "PlayerShip.h"
 #include "AbstractFactory.h"
 #include <iostream>
-PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed) :Entity(x, y, movementSpeed) {
-	bounds = new BoundingBox(x, y, 8, 8);
+PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed) :Entity(x, y,8,8, movementSpeed) {
 	inputHandler = input;
 	lives=3;
 	this->bulletVector=bulletVector;

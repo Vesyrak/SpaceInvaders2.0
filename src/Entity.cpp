@@ -1,9 +1,10 @@
 #include "Entity.h"
 #include <iostream>
 using namespace std;
-Entity::Entity(int x, int y, int movementSpeed){
+Entity::Entity(int x, int y,int width, int height, int movementSpeed){
     this->movementSpeed=movementSpeed;
   	hp=1;
+  	bounds=new BoundingBox(x,y, width, height);
 }
 Entity::~Entity(){
     delete bounds;

@@ -1,8 +1,8 @@
 #include "SDLMenu.h"
 SDLMenu::SDLMenu(SDLContext* context, AbstractFactory* factory, Window* window) :Screen(factory, window) {
-	buttons.push_back(new SDLButton(context,"Start", 0,10));
-	buttons.push_back(new SDLButton(context,"Settings", 0,40));
-	buttons.push_back(new SDLButton(context,"Stop", 0,70));
+	buttons.push_back(new SDLButton(factory,context,"Start", 70,60));
+	buttons.push_back(new SDLButton(factory,context,"Settings", 70,90));
+	buttons.push_back(new SDLButton(factory,context,"Stop", 70,120));
 	background = factory->createBackground();
 
 }
@@ -23,7 +23,7 @@ void SDLMenu::Update() {
 		//User requests quit
 		if (e.type == SDL_QUIT) {
 		}
-		for (int i=0; i<buttons.size(); i++) {
+		for (unsigned int i=0; i<buttons.size(); i++) {
 			if(buttons[i]->handleEvent(&e)){
 				returnValue=i+1;
 			}

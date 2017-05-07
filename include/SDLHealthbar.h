@@ -4,7 +4,7 @@
 #include "SDLContext.h"
 class SDLHealthbar: public Healthbar{
 public:
-	SDLHealthbar(SDLContext* context, Entity* observed, int x, int y);
+	SDLHealthbar(AbstractFactory* factory,SDLContext* context, Entity* observed, int x, int y);
 	~SDLHealthbar();
 	 void Visualise() override;
 	 void Update() override;
