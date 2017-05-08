@@ -2,67 +2,74 @@
 #include <iostream>
 #include "Game.h"
 
-Game::Game() {
-	running = false;
+Game::Game(AbstractFactory* factory) {
 	score = 0;
-	factory = NULL;
-	window = NULL;
-	level = NULL;
-	inputHandler = NULL;
+	lives=3;
 	difficulty = 10;
+	this->factory = factory;
+	window = factory->createWindow(800, 600);
+	window->CreateWindow();
+	inputHandler = factory->createInputHandler();
+	state=Menu;
 }
 
 Game::~Game() {
 	delete window;
 	delete inputHandler;
 }
-bool Game::Initialize(AbstractFactory* factory) {
-	this->factory = factory;
-	window = factory->createWindow(800, 600);
-	window->CreateWindow();
-	inputHandler = factory->createInputHandler();
-	return true;
-}
-void Game::Execute() {
-	Screen* menu = factory->createMenu(window);
-	int selection = menu->Run();
-	delete menu;
-	switch (selection) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		return;
-	}
-
-	running = true;
-
-	Run();
-	Stop();
-}
 
 void Game::Run() {
-	level = new Level(factory, window, inputHandler, score, 3, difficulty);
-	level->Run();
-	int lives = level->getRemainingLives();
-	if (lives <= 0) {
-		Screen* screen = factory->createGameOverScreen(level->getScore(),
-				window);
-		screen->Run();
-		return; //todo
+	while(state!=Quit){
+		switch(state){
+			case Menu:
+			{
+				Screen* menu = factory->createMenu(window);
+				switch(menu->Run()){
+					case 1:
+						state=Running;
+						break;
+					case 2:
+						state=Quit;//TODO
+						break;
+					case 3:
+						state=Quit;
+						break;
+				}
+				delete menu;
+				break;
+			}
+			case Running:
+			{
+				Level* level = new Level(factory, window, inputHandler, score, lives, difficulty);
+				switch(level->Run()){
+					case 1:
+						score=level->getScore();
+						state=GameOver;
+						break;
+					case 2:
+						lives=level->getRemainingLives();
+						score=level->getScore();
+						difficulty++;
+						state=Running;
+						break;
+				}
+				delete level;
+				break;
+			}
+			case GameOver:
+			{
+				Screen* screen=factory->createGameOverScreen(score, window);
+				switch(screen->Run()){
+					case 1:
+						state=Menu;
+						break;
+					case 2:
+						state=Quit;
+						break;
+				}
+				delete screen;
+				break;
+			}
+		}
 	}
-	score = level->getScore();
-	delete level;
-	Run();
 }
-void Game::Render() {
-	window->PrepareRender();
-	level->Visualise();
-	window->PresentRender();
-}
-void Game::Stop() {
-	delete window;
-	cout << "Finished";
-}
-

@@ -12,9 +12,7 @@ SDLText::~SDLText(){
 	SDL_DestroyTexture(texture);
 }
 void SDLText::Update(std::string message){
-	if(texture!=NULL){
-		SDL_DestroyTexture( texture);
-	}
+	SDL_DestroyTexture( texture);
 	this->texture=this->context->GenerateText(message, bounds, size);
 
 }

@@ -2,17 +2,12 @@
 #define __USE_MINGW_ANSI_STDIO 0
 #include "Level.h"
 #include <iostream>
-Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives, int difficulty) {
+Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives, int difficulty): Screen(factory, window) {
 	this->score=scoreHistory=score;
 	playerShip = factory->createPlayerShip(&playerShipBullets, input, 180, 180,1);
 	lifeHistory=lives;
-	frameTimer = factory->createTimer();
-	capTimer = factory->createTimer();
 	background = factory->createBackground();
-	this->window = window;
 	this->factory = factory;
-	frameTimer->start();
-	countedFrames = 0;
 	movementCounter = 0;
 	this->difficulty=difficulty;
 	audioEngine=factory->getAudioEngine();
@@ -51,27 +46,10 @@ Level::~Level() {
 	enemyBullets.clear();
 	playerShipBullets.clear();
 	delete playerShip;
-	delete frameTimer;
-	delete capTimer;
 	delete healthbar;
 	delete difficultyText;
 	delete scoreText;
 	delete livesText;
-}
-void Level::Run() {
-	while (playerShip->getLives()>0  && enemies.size()>0) {
-		capTimer->start();
-		float avgFPS = countedFrames / (frameTimer->getTicks() / 1000.f);
-		if (avgFPS > 2000000) {
-			avgFPS = 0;
-		}
-		Update();
-		Visualise();
-		int frameTicks = capTimer->getTicks();
-		if (frameTicks < 1000 / 60) {
-			frameTimer->delay(1000 / 60 - frameTicks);
-		}
-	}
 }
 
 void Level::Update() {
@@ -88,10 +66,12 @@ void Level::Update() {
 		n->Update();
 	}
 	CheckCollisions(&enemyBullets, playerShip);
-	if(playerShip->getHP()<=0 && playerShip->getLives()>0)
+	if(playerShip->getHP()<=0 )
 	{
-		playerShip->Revive();
 		audioEngine->PlaySound(Death);
+		if(playerShip->getLives()<0)
+			returnValue=1;
+		else playerShip->Revive();
 	}
 	CheckCollisions(&playerShipBullets, &enemies);
 	if(playerShip->bounds->collidesWith(window->rightBounds))
@@ -128,6 +108,8 @@ void Level::Update() {
 		} else
 			j++;
 	}
+	if(enemies.size()==0)
+		returnValue=2;
 }
 void Level::CheckCollisions(std::vector<Entity*>* bullets,
 		std::vector<Entity*>* entities) {
