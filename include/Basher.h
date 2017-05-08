@@ -1,6 +1,7 @@
 #ifndef BASHER_H
 #define BASHER_H
 #include "Entity.h"
+#include "AudioEngine.h"
 class AbstractFactory;
 class Basher: public Entity{
     public:
@@ -8,6 +9,8 @@ class Basher: public Entity{
         ~Basher();
         void Attack();
         void Update();
-
+        void Damage(int damage);
+    private:
+        AudioEngine* audioEngine;
 };
 #endif

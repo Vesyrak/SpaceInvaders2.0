@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Timer.h"
 #include "Input.h"
+#include "AudioEngine.h"
 using namespace std;
 class AbstractFactory;
 class PlayerShip: public Entity {
@@ -25,6 +26,7 @@ class PlayerShip: public Entity {
         AbstractFactory* factory;
         Timer* shootingTimer;
         Timer* invincible;
+        AudioEngine* audioEngine;
 };
 #endif
 

@@ -15,6 +15,8 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 	countedFrames = 0;
 	movementCounter = 0;
 	this->difficulty=difficulty;
+	audioEngine=factory->getAudioEngine();
+	audioEngine->PlayBackground();
 	right=true;
 	int y = 15;
 	for (int j = 0; j < rows; j++) {
@@ -42,28 +44,19 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 	scoreText=factory->createText("Score: "+std::to_string(score), 5,185, 16);
 	livesText=factory->createText("Lives: "+std::to_string(lives), 150,5, 16);
 	healthbar=factory->createHealthbar(playerShip, 5, 5);
+	difficultyText=factory->createText("Difficulty: "+std::to_string(difficulty), 120, 185,16);
 }
 Level::~Level() {
-	std::vector<Entity*>::iterator j = enemies.begin();
-	while (j != enemies.end()) {
-		delete (*j);
-		enemies.erase(j++);
-	}
-	j = enemyBullets.begin();
-	while (j != enemyBullets.end()) {
-		delete (*j);
-		enemyBullets.erase(j++);
-	}
-	j = playerShipBullets.begin();
-	while (j != playerShipBullets.end()) {
-		delete (*j);
-		playerShipBullets.erase(j++);
-	}
-
+	enemies.clear();
+	enemyBullets.clear();
+	playerShipBullets.clear();
 	delete playerShip;
 	delete frameTimer;
 	delete capTimer;
 	delete healthbar;
+	delete difficultyText;
+	delete scoreText;
+	delete livesText;
 }
 void Level::Run() {
 	while (playerShip->getLives()>0  && enemies.size()>0) {
@@ -79,9 +72,6 @@ void Level::Run() {
 			frameTimer->delay(1000 / 60 - frameTicks);
 		}
 	}
-}
-void Level::AddEnemy(Entity* entity) {
-	enemies.push_back(entity);
 }
 
 void Level::Update() {
@@ -99,7 +89,10 @@ void Level::Update() {
 	}
 	CheckCollisions(&enemyBullets, playerShip);
 	if(playerShip->getHP()<=0 && playerShip->getLives()>0)
+	{
 		playerShip->Revive();
+		audioEngine->PlaySound(Death);
+	}
 	CheckCollisions(&playerShipBullets, &enemies);
 	if(playerShip->bounds->collidesWith(window->rightBounds))
 		playerShip->bounds->setX(window->rightBounds->getX()-playerShip->bounds->getWidth());
@@ -129,6 +122,7 @@ void Level::Update() {
 	while (j < enemies.end()) {
 		if ((*j)->getHP() <= 0) {
 			delete (*j);
+			audioEngine->PlaySound(Death);
 			enemies.erase(j++);
 			score+=50+50*difficulty;;
 		} else
@@ -187,6 +181,7 @@ void Level::Visualise() {
 	scoreText->Visualise();
 	livesText->Visualise();
 	healthbar->Visualise();
+	difficultyText->Visualise();
 	window->PresentRender();
 }
 
@@ -217,7 +212,6 @@ void Level::MoveEnemies() {
 					for (Entity* enemy : enemies) {
 						enemy->Move(Down);
 						enemy->Move(Down);
-
 					}
 					return;
 				}

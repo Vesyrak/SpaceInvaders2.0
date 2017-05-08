@@ -12,36 +12,30 @@ SDLAudioEngine::SDLAudioEngine(){
         printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
         return;
     }
-    Mix_Chunk* music= Mix_LoadWAV( "audio/test.wav" );
-    if( music == NULL )
-    {
-        printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
-    }
-    Mix_PlayChannel( -1, music, 0 );
-
+    backgroundSound= Mix_LoadMUS( "audio/test.wav" );
+    shootSound=Mix_LoadWAV("audio/test.wav");
+    damagedSound=Mix_LoadWAV("audio/wilhelm.wav");
+    deathSound=Mix_LoadWAV("audio/wilhelm.wav");
 }
 
 SDLAudioEngine::~SDLAudioEngine(){
+	Mix_FreeMusic(backgroundSound);
     Mix_Quit();
 }
 
-void SDLAudioEngine::PlaySound(EntityType sound){
+void SDLAudioEngine::PlaySound(SoundType sound){
     switch(sound){
-        case BasherAttack:
-            break;
-        case BlasterAttack:
-            break;
-        case BomberAttack:
-            break;
-        case BossAttack:
-            break;
-        case PlayerShipAttack:
+        case Shoot:
+            //Mix_PlayChannel( -1, shootSound, 0 );
             break;
         case Damaged:
+            //Mix_PlayChannel( -1, damagedSound, 0 );
             break;
         case Death:
+            Mix_PlayChannel( -1, deathSound, 0 );
             break;
     }
 }
 void SDLAudioEngine::PlayBackground(){
+    Mix_PlayMusic( backgroundSound, -1 );
 }

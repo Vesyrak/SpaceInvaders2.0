@@ -7,12 +7,14 @@ Bomber::Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector,int 
     charging=false;
     this->timer=factory->createTimer();
     this->difficulty=difficulty;
+    this->audioEngine=factory->getAudioEngine();
 }
 Bomber::~Bomber(){
 }
 void Bomber::Update(){
 	if(charging && timer->getTicks()>2000)
 	{
+		audioEngine->PlaySound(Shoot);
 		bulletVector->push_back(factory->createLaserBomb(bounds->getX()+bounds->getWidth()/2-2, bounds->getY(), 1, Down, 15+4*difficulty));
 		charging=false;
 	}
@@ -21,5 +23,9 @@ void Bomber::Update(){
 		charging=true;
 		timer->start();
 	}
+}
+void Bomber::Damage(int damage){
+	audioEngine->PlaySound(Damaged);
+	Entity::Damage(damage);
 }
 

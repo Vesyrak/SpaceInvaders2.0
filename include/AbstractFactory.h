@@ -16,6 +16,7 @@
 #include "Healthbar.h"
 #include "LaserBomb.h"
 #include "Screen.h"
+#include "AudioEngine.h"
 class AbstractFactory{
     public:
 		virtual ~AbstractFactory(){}
@@ -35,6 +36,7 @@ class AbstractFactory{
         virtual LaserBomb* createLaserBomb(int x, int y, int movementSpeed, InputType direction, int damage)=0;
         virtual Healthbar* createHealthbar(Entity* observed, int x, int y)=0;
         virtual Screen* createGameOverScreen(int score, Window* window)=0;
+        virtual AudioEngine* getAudioEngine()=0;
 };
 #endif
 

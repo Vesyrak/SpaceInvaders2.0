@@ -18,7 +18,7 @@ Game::~Game() {
 }
 bool Game::Initialize(AbstractFactory* factory) {
 	this->factory = factory;
-	window = factory->createWindow(1400, 900);
+	window = factory->createWindow(800, 600);
 	window->CreateWindow();
 	inputHandler = factory->createInputHandler();
 	return true;

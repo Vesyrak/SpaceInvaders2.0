@@ -2,6 +2,7 @@
 #define BOMBER_H
 #include "Entity.h"
 #include "Timer.h"
+#include "AudioEngine.h"
 class AbstractFactory;
 class Bomber: public Entity{
     public:
@@ -9,6 +10,7 @@ class Bomber: public Entity{
         ~Bomber();
         void Attack();
         void Update();
+        void Damage(int damage);
     private:
         AbstractFactory* factory;
         std::vector<Entity*>* bulletVector;
@@ -16,5 +18,6 @@ class Bomber: public Entity{
         bool charging;
         Timer* timer;
         int difficulty;
+        AudioEngine* audioEngine;
 };
 #endif

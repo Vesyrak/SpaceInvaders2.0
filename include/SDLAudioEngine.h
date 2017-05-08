@@ -7,9 +7,13 @@ class SDLAudioEngine: public AudioEngine{
 public:
 	SDLAudioEngine();
 	~SDLAudioEngine();
-    void PlaySound(EntityType sound) override;
+    void PlaySound(SoundType sound) override;
     void PlayBackground();
 private:
+    Mix_Music* backgroundSound;
+    Mix_Chunk* shootSound;
+    Mix_Chunk* damagedSound;
+    Mix_Chunk* deathSound;
 
 };
 #endif

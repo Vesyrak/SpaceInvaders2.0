@@ -1,5 +1,9 @@
 #include "SDLFactory.h"
 using namespace std;
+SDLFactory::SDLFactory(){
+	audioEngine=NULL;
+	context=NULL;
+}
 SDLFactory::~SDLFactory(){
 	delete context;
 }
@@ -55,5 +59,10 @@ Healthbar* SDLFactory::createHealthbar(Entity* observed, int x, int y){
 Screen* SDLFactory::createGameOverScreen(int score, Window* window){
 	return new SDLGameOverScreen(score, context,this, window);
 }
-
+AudioEngine* SDLFactory::getAudioEngine(){
+	if(audioEngine==NULL){
+		audioEngine= new SDLAudioEngine();
+	}
+	return audioEngine;
+}
 

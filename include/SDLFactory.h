@@ -18,9 +18,11 @@
 #include "SDLLaserBomb.h"
 #include "SDLHealthbar.h"
 #include "SDLGameOverScreen.h"
+#include "SDLAudioEngine.h"
 class SDLFactory : public AbstractFactory{
     private:
     public:
+		SDLFactory();
 		~SDLFactory();
     	SDLContext* context;
         PlayerShip* createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed);
@@ -39,7 +41,9 @@ class SDLFactory : public AbstractFactory{
         LaserBomb* createLaserBomb( int x, int y, int movementSpeed, InputType direction, int damage);
         Healthbar* createHealthbar(Entity* observed, int x, int y);
         Screen* createGameOverScreen(int score, Window* window);
-
+        AudioEngine* getAudioEngine();
+    private:
+        AudioEngine* audioEngine;
 };
 #endif
 
