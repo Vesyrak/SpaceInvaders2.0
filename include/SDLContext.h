@@ -4,9 +4,10 @@
 #include "SDLWindow.h"
 #include "BoundingBox.h"
 #include <iostream>
+#include <map>
 class SDLContext {
 public:
-	SDL_Texture* loadTexture(std::string path);
+	SDL_Texture* getTexture(std::string path);
 	void Draw(SDL_Texture* texture, BoundingBox* bounds);
 	SDL_Texture* GenerateText(std::string text, BoundingBox* bounds,int size);
 	void DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled);
@@ -15,7 +16,9 @@ public:
 	void LogicalToActualCoords(BoundingBox* bounds);
 	const int defaultFontSize=14;
 private:
+	SDL_Texture* loadTexture(std::string path);
 	SDLWindow* window;
+	std::map<std::string, SDL_Texture*> textureMap;
 
 };
 #endif

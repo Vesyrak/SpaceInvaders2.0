@@ -22,7 +22,7 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 				enemies.push_back(enemy);
 				x += 15;
 			}
-		else if (j < 4)
+		/*else if (j < 4)
 			for (int i = 0; i < columns; i++) {
 				Entity* enemy = factory->createBlaster(&enemyBullets,x, y, difficulty);
 				enemies.push_back(enemy);
@@ -33,7 +33,7 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 				Entity* enemy = factory->createBasher(&enemyBullets,x, y, difficulty);
 				enemies.push_back(enemy);
 				x += 15;
-			}
+			}*/
 		y += 15;
 	}
 	scoreText=factory->createText("Score: "+std::to_string(score), 5,185, 16);
@@ -50,6 +50,7 @@ Level::~Level() {
 	delete difficultyText;
 	delete scoreText;
 	delete livesText;
+	delete background;
 }
 
 void Level::Update() {
@@ -57,7 +58,7 @@ void Level::Update() {
 	playerShip->Update();
 	MoveEnemies();
 	for (Entity* n : enemies) {
-			n->Update();
+ww			n->Update();
 	}
 	for (Entity* n : enemyBullets) {
 		n->Update();

@@ -4,13 +4,11 @@ SDLBomber::SDLBomber(AbstractFactory* factory,
 		int difficulty) :
 		Bomber(factory, bulletVector, x, y, difficulty) {
 	this->context = context;
-	image = context->loadTexture("graphics/bomber.png");
-	chargeImage = context->loadTexture("graphics/bomberlaser.png");
+	image = context->getTexture("graphics/bomber.png");
+	chargeImage = context->getTexture("graphics/bomberlaser.png");
 	chargeBounds = new BoundingBox(x, y, 4, 4);
 }
 SDLBomber::~SDLBomber() {
-	SDL_DestroyTexture(image);
-	SDL_DestroyTexture(chargeImage);
 	delete chargeBounds;
 }
 

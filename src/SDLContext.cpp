@@ -4,7 +4,10 @@ SDLContext::SDLContext(SDLWindow* window) {
 	this->window = window;
 }
 SDLContext::~SDLContext() {
-
+	std::map<std::string, SDL_Texture*>::iterator itr = textureMap.begin();
+	while (itr != textureMap.end()) {
+	       itr = textureMap.erase(itr);
+	}
 }
 
 SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds,
@@ -58,6 +61,13 @@ void SDLContext::DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled) {
 	else
 		SDL_RenderDrawRect(window->renderer, &DestR);
 }
+SDL_Texture* SDLContext::getTexture(std::string path){
+	std::map<std::string,SDL_Texture*>::iterator it = textureMap.find(path);
+	if(it!=textureMap.end()){
+		return it->second;
+	}
+	else return loadTexture(path);
+}
 SDL_Texture* SDLContext::loadTexture(std::string path) {
 
 	//The final texture
@@ -70,8 +80,7 @@ SDL_Texture* SDLContext::loadTexture(std::string path) {
 		IMG_GetError());
 	} else {
 		//Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(window->renderer,
-				loadedSurface);
+		newTexture = SDL_CreateTextureFromSurface(window->renderer,loadedSurface);
 		if (newTexture == NULL) {
 			printf("Unable to create texture from %s! SDL Error: %s\n",
 					path.c_str(), SDL_GetError());
@@ -84,6 +93,7 @@ SDL_Texture* SDLContext::loadTexture(std::string path) {
 		printf("Unable to load image %s! SDL_image Error: %s\n", "p.png",
 		IMG_GetError());
 	}
+	textureMap.insert(std::pair<std::string,SDL_Texture*>(path, newTexture));
 	return newTexture;
 }
 void SDLContext::LogicalToActualCoords(BoundingBox* bounds) {

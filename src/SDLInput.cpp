@@ -14,15 +14,15 @@ std::vector<InputType> SDLInput::getInput(){
 	{
 		input.push_back(InputType::Up);
 	}
-	else if( currentKeyStates[ SDL_SCANCODE_S ] )
+	if( currentKeyStates[ SDL_SCANCODE_S ] )
 	{
 		input.push_back(InputType::Down);
 	}
-	else if( currentKeyStates[ SDL_SCANCODE_A ] )
+	if( currentKeyStates[ SDL_SCANCODE_A ] )
 	{
 		input.push_back(InputType::Left);
 	}
-	else if( currentKeyStates[ SDL_SCANCODE_D ] )
+	if( currentKeyStates[ SDL_SCANCODE_D ] )
 	{
 		input.push_back(InputType::Right);
 

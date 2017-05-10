@@ -1,10 +1,9 @@
 #include "SDLBlaster.h"
 SDLBlaster::SDLBlaster(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int difficulty):Blaster(factory, bulletVector,x, y, difficulty){
     this->context=context;
-    image=context->loadTexture("graphics/blaster.png");
+    image=context->getTexture("graphics/blaster.png");
 }
 SDLBlaster::~SDLBlaster(){
-    SDL_DestroyTexture(image);
 }
 
 void SDLBlaster::Visualise(){

@@ -8,7 +8,7 @@ SDLFactory::~SDLFactory(){
 	delete context;
 }
 PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed){
-    return new SDLPlayerShip(this, bulletVector, input, context, x,  y,  movementSpeed);
+return new SDLPlayerShip(this, bulletVector, input, context, x,  y,  movementSpeed);
 }
 Basher* SDLFactory::createBasher(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed){
     return new SDLBasher(this, bulletVector,context, x,y,movementSpeed);
