@@ -20,6 +20,7 @@ class Game{
         int difficulty;
         int lives;
         GameState state;
+        std::string username;
 };}
 #endif
 

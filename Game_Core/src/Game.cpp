@@ -12,6 +12,7 @@ Game::Game(AbstractFactory* factory) {
 	window->CreateWindow();
 	inputHandler = factory->createInputHandler();
 	state=Menu;
+	username="Fernando";
 }
 
 Game::~Game() {
@@ -65,6 +66,8 @@ void Game::Run() {
 						state=Menu;
 						break;
 					case 2:
+						FileWriter* writer=new FileWriter();
+							writer->updateScore(username, score);
 						state=Quit;
 						break;
 				}
