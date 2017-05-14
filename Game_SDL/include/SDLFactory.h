@@ -18,6 +18,7 @@
 #include "SDLLaserBomb.h"
 #include "SDLHealthbar.h"
 #include "SDLGameOverScreen.h"
+#include "SDLSettingsScreen.h"
 #include "SDLAudioEngine.h"
 using namespace Game_Core;
 
@@ -46,6 +47,7 @@ class SDLFactory : public AbstractFactory{
         Healthbar* createHealthbar(Entity* observed, int x, int y);
         Screen* createGameOverScreen(int score, Window* window);
         AudioEngine* getAudioEngine();
+        Screen* createSettingsScreen(Window* window);
     private:
         AudioEngine* audioEngine;
 };}

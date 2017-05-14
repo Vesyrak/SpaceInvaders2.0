@@ -11,6 +11,7 @@ class SDLInput: public Input{
     public:
         SDLInput();
         std::vector<InputType> getInput();
+        void getCharacterInput(std::string* text);
         ~SDLInput();
 
 };}

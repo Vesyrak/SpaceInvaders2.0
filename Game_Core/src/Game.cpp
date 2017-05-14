@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Game.h"
+#include "FileWriter.h"
 namespace Game_Core {
 
 Game::Game(AbstractFactory* factory) {
@@ -31,10 +32,21 @@ void Game::Run() {
 						state=Running;
 						break;
 					case 2:
-						state=Quit;//TODO
+						state=Settings;//TODO
 						break;
 					case 3:
 						state=Quit;
+						break;
+				}
+				delete menu;
+				break;
+			}
+			case Settings:
+			{
+				Screen* menu = factory->createSettingsScreen(window);
+				switch(menu->Run()){
+					case 1:
+						state=Menu;
 						break;
 				}
 				delete menu;

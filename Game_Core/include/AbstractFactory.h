@@ -37,6 +37,7 @@ class AbstractFactory {
 		virtual Healthbar* createHealthbar(Entity* observed, int x, int y)=0;
 		virtual Screen* createGameOverScreen(int score, Window* window)=0;
 		virtual AudioEngine* getAudioEngine()=0;
+		virtual Screen* createSettingsScreen(Window* window)=0;
 };
 }
 #endif

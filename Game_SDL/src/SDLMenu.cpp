@@ -6,7 +6,6 @@ SDLMenu::SDLMenu(SDLContext* context, AbstractFactory* factory, Window* window) 
 	buttons.push_back(new SDLButton(factory,context,"Settings", 70,90));
 	buttons.push_back(new SDLButton(factory,context,"Stop", 70,120));
 	background = factory->createBackground();
-
 }
 SDLMenu::~SDLMenu() {
 	delete background;
@@ -25,9 +24,7 @@ void SDLMenu::Update() {
 			if(buttons[i]->handleEvent(&e)){
 				returnValue=i+1;
 			}
-
 		}
-
 	}
 }
 void SDLMenu::Visualise() {

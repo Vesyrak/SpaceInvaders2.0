@@ -67,5 +67,8 @@ AudioEngine* SDLFactory::getAudioEngine(){
 	}
 	return audioEngine;
 }
+Screen* SDLFactory::createSettingsScreen(Window* window){
+	return new SDLSettingsScreen(this,context, window);
+}
 
 }

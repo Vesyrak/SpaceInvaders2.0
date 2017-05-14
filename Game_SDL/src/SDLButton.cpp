@@ -91,7 +91,7 @@ int SDLButton::handleEvent(SDL_Event* e) {
 	return 0;
 }
 void SDLButton::Visualise() {
-	//Show current button sprite
+	//Show current bnameutton sprite
 	context->DrawRect(&buttonColors[mCurrentSprite*2], borderBounds, true);
 	context->DrawRect(&buttonColors[mCurrentSprite*2+1], buttonBounds, true);
 	text->Visualise();
