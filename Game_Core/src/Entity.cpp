@@ -33,5 +33,7 @@ void Entity::Move(InputType dir){
 void Entity::Damage(int damage){
 	hp=hp-damage;
 }
-
+BoundingBox* Entity::getBounds(){
+	return bounds;
+}
 }

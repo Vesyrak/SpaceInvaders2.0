@@ -8,7 +8,6 @@ enum InputType{None, Left, Right, Up, Down, A, B, X, Y };
 class Input{
     public:
         virtual std::vector<InputType> getInput()=0;
-        virtual void getCharacterInput(std::string* text)=0;
         virtual ~Input(){}
 };}
 #endif

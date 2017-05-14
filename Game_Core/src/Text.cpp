@@ -8,8 +8,12 @@ Text::Text( std::string message, int x, int y, int size){
 }
 
 Text::~Text(){
+	delete bounds;
 }
 void Text::Update(std::string message){
 	this->message=message;
+}
+BoundingBox* Text::getBounds(){
+	return bounds;
 }
 }

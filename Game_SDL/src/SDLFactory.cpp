@@ -5,12 +5,15 @@ namespace Game_SDL {
 SDLFactory::SDLFactory(){
 	audioEngine=NULL;
 	context=NULL;
+	inputHandler=NULL;
 }
 SDLFactory::~SDLFactory(){
 	delete context;
+	delete audioEngine;
+	delete inputHandler;
 }
-PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed){
-return new SDLPlayerShip(this, bulletVector, input, context, x,  y,  movementSpeed);
+PlayerShip* SDLFactory::createPlayerShip(std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed){
+return new SDLPlayerShip(this, bulletVector, context, lives, x,  y,  movementSpeed);
 }
 Basher* SDLFactory::createBasher(std::vector<Entity*>* bulletVector,int x, int y, int movementSpeed){
     return new SDLBasher(this, bulletVector,context, x,y,movementSpeed);
@@ -22,17 +25,17 @@ Bomber* SDLFactory::createBomber(std::vector<Entity*>* bulletVector,int x, int y
     return new SDLBomber(this, bulletVector,context, x,y,movementSpeed);
 }
 
-Boss* SDLFactory::createBoss(int x, int y, int movementSpeed){
-    return new SDLBoss(context, x, y,movementSpeed);
-}
+
 Window* SDLFactory::createWindow(int screen_width, int screen_height){
     SDLWindow* window= new SDLWindow( screen_width, screen_height);
     this->context=new SDLContext(window);
     return window;
 }
-Input* SDLFactory::createInputHandler(){
-    return new SDLInput();
-}
+Input* SDLFactory::getInputHandler(){
+	if(inputHandler==NULL){
+		inputHandler=new SDLInput();
+	}
+	return inputHandler;}
 Background* SDLFactory::createBackground(){
     return new SDLBackground(context);
 }
@@ -58,8 +61,8 @@ LaserBomb* SDLFactory::createLaserBomb( int x, int y, int movementSpeed, InputTy
 Healthbar* SDLFactory::createHealthbar(Entity* observed, int x, int y){
 	return new SDLHealthbar(this, context, observed, x,y);
 }
-Screen* SDLFactory::createGameOverScreen(int score, Window* window){
-	return new SDLGameOverScreen(score, context,this, window);
+Screen* SDLFactory::createGameOverScreen(std::string username,int score, Window* window){
+	return new SDLGameOverScreen(username,score, context,this, window);
 }
 AudioEngine* SDLFactory::getAudioEngine(){
 	if(audioEngine==NULL){
@@ -67,8 +70,8 @@ AudioEngine* SDLFactory::getAudioEngine(){
 	}
 	return audioEngine;
 }
-Screen* SDLFactory::createSettingsScreen(Window* window){
-	return new SDLSettingsScreen(this,context, window);
+Screen* SDLFactory::createSettingsScreen(Window* window, std::string* username){
+	return new SDLSettingsScreen(this,context, window, username);
 }
 
 }

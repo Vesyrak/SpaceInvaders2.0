@@ -14,23 +14,26 @@ SDLAudioEngine::SDLAudioEngine(){
         return;
     }
     backgroundSound= Mix_LoadMUS( "audio/test.wav" );
-    shootSound=Mix_LoadWAV("audio/test.wav");
-    damagedSound=Mix_LoadWAV("audio/wilhelm.wav");
+    shootSound=Mix_LoadWAV("audio/pew.wav");
+    damagedSound=Mix_LoadWAV("audio/explosion.wav");
     deathSound=Mix_LoadWAV("audio/wilhelm.wav");
 }
 
 SDLAudioEngine::~SDLAudioEngine(){
 	Mix_FreeMusic(backgroundSound);
+	Mix_FreeChunk(shootSound);
+	Mix_FreeChunk(damagedSound);
+	Mix_FreeChunk(deathSound);
     Mix_Quit();
 }
 
 void SDLAudioEngine::PlaySound(SoundType sound){
     switch(sound){
         case Shoot:
-            //Mix_PlayChannel( -1, shootSound, 0 );
+            Mix_PlayChannel( -1, shootSound, 0 );
             break;
         case Damaged:
-            //Mix_PlayChannel( -1, damagedSound, 0 );
+            Mix_PlayChannel( -1, damagedSound, 0 );
             break;
         case Death:
             Mix_PlayChannel( -1, deathSound, 0 );

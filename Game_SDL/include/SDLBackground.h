@@ -9,12 +9,12 @@ class SDLBackground: public Background{
         SDL_Texture* image;
         SDLContext* context;
         int scrollingOffset;
+        BoundingBox* scrollBounds;
     public:
 	SDLBackground(SDLContext* context);
         ~SDLBackground();
         void Visualise() override;
         void Update() override;
-        BoundingBox* scrollBounds;
 };}
 #endif
 

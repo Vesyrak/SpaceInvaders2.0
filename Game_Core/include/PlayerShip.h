@@ -12,15 +12,15 @@ class AbstractFactory;
 class PlayerShip: public Entity {
 
     public:
-        PlayerShip(AbstractFactory* factory,std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed);
+        PlayerShip(AbstractFactory* factory,std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed);
         virtual ~PlayerShip();
-        void Move(InputType dir);
         void Update();
         void Shoot();
         int getLives();
-        void Revive();
         void Damage(int damage) override;
     protected:
+        void Revive();
+
         int lives;
         Input* inputHandler;
         std::vector<Entity*>* bulletVector;

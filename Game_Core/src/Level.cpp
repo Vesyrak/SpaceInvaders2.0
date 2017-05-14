@@ -4,10 +4,10 @@
 #include <iostream>
 namespace Game_Core {
 
-Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives, int difficulty) :
+Level::Level(AbstractFactory* factory, Window* window, int score, int lives, int difficulty) :
 		Screen(factory, window) {
 	this->score = scoreHistory = score;
-	playerShip = factory->createPlayerShip(&playerShipBullets, input, 180, 180, 1);
+	playerShip = factory->createPlayerShip(&playerShipBullets,lives,  100, 180, 1);
 	lifeHistory = lives;
 	background = factory->createBackground();
 	this->factory = factory;
@@ -24,7 +24,7 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 				enemies.push_back(factory->createBomber(&enemyBullets, x, y, difficulty));
 				x += 15;
 			}
-		/*else if (j < 4)
+		else if (j < 5)
 		 for (int i = 0; i < columns; i++) {
 		 Entity* enemy = factory->createBlaster(&enemyBullets,x, y, difficulty);
 		 enemies.push_back(enemy);
@@ -35,7 +35,7 @@ Level::Level(AbstractFactory* factory, Window* window, Input* input, int score, 
 		 Entity* enemy = factory->createBasher(&enemyBullets,x, y, difficulty);
 		 enemies.push_back(enemy);
 		 x += 15;
-		 }*/
+		 }
 		y += 15;
 	}
 	scoreText = factory->createText("Score: " + std::to_string(score), 5, 185, 16);
@@ -78,22 +78,15 @@ void Level::Update() {
 		n->Update();
 	}
 	CheckCollisions(&enemyBullets, playerShip);
-	if (playerShip->getHP() <= 0) {
-		audioEngine->PlaySound(Death);
-		if (playerShip->getLives() < 0)
-			returnValue = 1;
-		else
-			playerShip->Revive();
-	}
 	CheckCollisions(&playerShipBullets, &enemies);
-	if (playerShip->bounds->collidesWith(window->rightBounds))
-		playerShip->bounds->setX(window->rightBounds->getX() - playerShip->bounds->getWidth());
-	if (playerShip->bounds->collidesWith(window->leftBounds))
-		playerShip->bounds->setX(window->leftBounds->getX());
+	if (playerShip->getBounds()->collidesWith(window->getRightBounds()))
+		playerShip->getBounds()->setX(window->getRightBounds()->getX() - playerShip->getBounds()->getWidth());
+	if (playerShip->getBounds()->collidesWith(window->getLeftBounds()))
+		playerShip->getBounds()->setX(window->getLeftBounds()->getX()+window->getLeftBounds()->getWidth());
 	std::vector<Entity*>::iterator j = playerShipBullets.begin();
 	while (j < playerShipBullets.end()) {
 
-		if ((*j)->bounds->collidesWith(window->topBounds)) {
+		if ((*j)->getBounds()->collidesWith(window->getTopBounds())) {
 			delete (*j);
 			playerShipBullets.erase(j++);
 		}
@@ -117,13 +110,15 @@ void Level::Update() {
 			audioEngine->PlaySound(Death);
 			enemies.erase(j++);
 			score += 50 + 50 * difficulty;
-			;
 		}
 		else
 			j++;
 	}
 	if (enemies.size() == 0)
 		returnValue = 2;
+	CheckIfTargetReached();
+	if (playerShip->getLives() < 0)
+		returnValue = 1;
 }
 void Level::CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities) {
 	std::vector<Entity*>::iterator i = entities->begin();
@@ -131,7 +126,7 @@ void Level::CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>*
 		bool hit = false;
 		std::vector<Entity*>::iterator j = bullets->begin();
 		while (j < bullets->end()) {
-			if ((*i)->bounds->collidesWith((*j)->bounds)) {
+			if ((*i)->getBounds()->collidesWith((*j)->getBounds())) {
 				(*i)->Damage((*j)->getHP());
 				delete (*j);
 				bullets->erase(j++);
@@ -149,7 +144,7 @@ void Level::CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>*
 void Level::CheckCollisions(std::vector<Entity*>* bullets, Entity* entity) {
 	std::vector<Entity*>::iterator j = bullets->begin();
 	while (j < bullets->end()) {
-		if (entity->bounds->collidesWith((*j)->bounds)) {
+		if (entity->getBounds()->collidesWith((*j)->getBounds())) {
 			entity->Damage((*j)->getHP());
 			delete (*j);
 			bullets->erase(j++);
@@ -187,7 +182,7 @@ void Level::MoveEnemies() {
 		movementCounter = 0;
 		if (right) {
 			for (Entity* e : enemies) {
-				if (e->bounds->collidesWith(window->rightBounds)) {
+				if (e->getBounds()->collidesWith(window->getRightBounds())) {
 					right = false;
 					for (Entity* enemy : enemies) {
 						enemy->Move(Down);
@@ -205,7 +200,7 @@ void Level::MoveEnemies() {
 		}
 		else {
 			for (Entity* e : enemies) {
-				if (e->bounds->collidesWith(window->leftBounds)) {
+				if (e->getBounds()->collidesWith(window->getLeftBounds())) {
 					right = true;
 					for (Entity* enemy : enemies) {
 						enemy->Move(Down);
@@ -224,6 +219,15 @@ void Level::MoveEnemies() {
 	}
 	else
 		movementCounter++;
+}
+void Level::CheckIfTargetReached(){
+	for(Entity* enemy : enemies){
+		if(enemy->getBounds()->getY()+enemy->getBounds()->getHeight()>170){
+			playerShip->Damage(100);
+			returnValue=3;
+			return;
+		}
+	}
 }
 int Level::getScore() {
 	return score;

@@ -7,29 +7,10 @@ SDLInput::SDLInput() {
 SDLInput::~SDLInput() {
 
 }
-void SDLInput::getCharacterInput(std::string* text) {
-    SDL_StartTextInput();
-	//Handle events on queue
-	SDL_Event e;
-	//Handle events on queue
-	while (SDL_PollEvent(&e) != 0) {
-		if (e.type == SDL_KEYDOWN) {
-			//Handle backspace
-			if (e.key.keysym.sym == SDLK_BACKSPACE && text->length() > 0) {
-				//lop off character
-				text->pop_back();
-			}
-		}
-		if (e.type == SDL_TEXTINPUT) {
-			//Append character
-			text->append( e.text.text);
-		}
-	}
-    SDL_StopTextInput();
-}
 
 std::vector<InputType> SDLInput::getInput() {
 	std::vector<InputType> input;
+    SDL_Event event;
 	SDL_PollEvent(&event);
 	const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL);
 

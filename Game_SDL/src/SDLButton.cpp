@@ -26,18 +26,7 @@ SDLButton::~SDLButton() {
 	delete actualButtonBounds;
 	delete text;
 }
-int SDLButton::Update() {
-	SDL_Event e;
-	//Handle events on queue
-	while (SDL_PollEvent(&e) != 0) {
-		//User requests quit
-		if (e.type == SDL_QUIT) {
-		}
-		return handleEvent(&e);
 
-	}
-	return 0;
-}
 int SDLButton::handleEvent(SDL_Event* e) {
 	//If mouse event happened
 	if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN
@@ -91,7 +80,6 @@ int SDLButton::handleEvent(SDL_Event* e) {
 	return 0;
 }
 void SDLButton::Visualise() {
-	//Show current bnameutton sprite
 	context->DrawRect(&buttonColors[mCurrentSprite*2], borderBounds, true);
 	context->DrawRect(&buttonColors[mCurrentSprite*2+1], buttonBounds, true);
 	text->Visualise();

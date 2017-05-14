@@ -8,7 +8,7 @@
 namespace Game_Core {
 class Level: public Screen {
 	public:
-		Level(AbstractFactory* factory, Window* window, Input* input, int score, int lives, int difficulty);
+		Level(AbstractFactory* factory, Window* window,  int score, int lives, int difficulty);
 		~Level();
 		int getScore();
 		int getRemainingLives();
@@ -17,6 +17,7 @@ class Level: public Screen {
 		void Update();
 		void Visualise();
 		void MoveEnemies();
+		void CheckIfTargetReached();
 		std::vector<Entity*> enemyBullets;
 		std::vector<Entity*> playerShipBullets;
 		std::vector<Entity*> enemies;
@@ -36,7 +37,6 @@ class Level: public Screen {
 		Text* scoreText;
 		Text* livesText;
 		Text* difficultyText;
-		//void CheckBounds();
 		void CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities);
 		void CheckCollisions(std::vector<Entity*>* bullets, Entity* entity);
 };}

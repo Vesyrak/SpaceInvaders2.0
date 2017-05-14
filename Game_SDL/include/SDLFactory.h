@@ -5,7 +5,6 @@
 #include "SDLBasher.h"
 #include "SDLBlaster.h"
 #include "SDLBomber.h"
-#include "SDLBoss.h"
 #include "SDLWindow.h"
 #include "SDLInput.h"
 #include "SDLContext.h"
@@ -30,13 +29,12 @@ class SDLFactory : public AbstractFactory{
 		SDLFactory();
 		~SDLFactory();
     	SDLContext* context;
-        PlayerShip* createPlayerShip(std::vector<Entity*>* bulletVector,Input* input, int x, int y, int movementSpeed);
+        PlayerShip* createPlayerShip(std::vector<Entity*>* bulletVector,int lives, int x, int y, int movementSpeed);
         Basher* createBasher(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
         Blaster* createBlaster(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
         Bomber* createBomber(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
-        Boss* createBoss(int x, int y, int movementSpeed);
         Window* createWindow(int screen_width, int screen_height);
-        Input* createInputHandler();
+        Input* getInputHandler();
         Background* createBackground();
         Laser* createLaser( int x, int y, int movementSpeed, InputType direction, int damage);
         Screen* createMenu(Window* window);
@@ -45,10 +43,11 @@ class SDLFactory : public AbstractFactory{
         Text* createText(std::string message, int x, int y, int size);
         LaserBomb* createLaserBomb( int x, int y, int movementSpeed, InputType direction, int damage);
         Healthbar* createHealthbar(Entity* observed, int x, int y);
-        Screen* createGameOverScreen(int score, Window* window);
+        Screen* createGameOverScreen(std::string username, int score, Window* window);
         AudioEngine* getAudioEngine();
-        Screen* createSettingsScreen(Window* window);
+        Screen* createSettingsScreen(Window* window, std::string* username);
     private:
+        Input* inputHandler;
         AudioEngine* audioEngine;
 };}
 #endif

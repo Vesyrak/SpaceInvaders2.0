@@ -7,14 +7,13 @@ using namespace Game_Core;
 namespace Game_SDL{
 class SDLSettingsScreen:public Screen{
 	public:
-		SDLSettingsScreen(AbstractFactory* factory,SDLContext* context, Window* window);
+		SDLSettingsScreen(AbstractFactory* factory,SDLContext* context, Window* window,std::string* username);
 		~SDLSettingsScreen();
 	protected:
 		void Update() override;
 		void Visualise() override;
-		std::vector<SDLButton*> buttons;
+		SDLButton* backButton;
 		Background* background;
-		std::string username;
 		SDLTextBox* textBox;
 
 };

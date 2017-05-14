@@ -6,6 +6,7 @@ SDLContext::SDLContext(SDLWindow* window) {
 	this->window = window;
 }
 SDLContext::~SDLContext() {
+
 	std::map<std::string, SDL_Texture*>::iterator itr = textureMap.begin();
 	while (itr != textureMap.end()) {
 	       itr = textureMap.erase(itr);
@@ -34,13 +35,13 @@ SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds,
 void SDLContext::Draw(SDL_Texture* texture, BoundingBox* bounds) {
 	SDL_Rect DestR;
 
-	DestR.x = window->screen_width / (double) window->logical_width
+	DestR.x = window->screen_width / (double) window->LOGICAL_WIDTH
 			* bounds->getX();
-	DestR.y = window->screen_height / (double) window->logical_height
+	DestR.y = window->screen_height / (double) window->LOGICAL_HEIGHT
 			* bounds->getY();
-	DestR.w = window->screen_width / (double) window->logical_width
+	DestR.w = window->screen_width / (double) window->LOGICAL_WIDTH
 			* bounds->getWidth();
-	DestR.h = window->screen_height / (double) window->logical_width
+	DestR.h = window->screen_height / (double) window->LOGICAL_HEIGHT
 			* bounds->getHeight();
 	SDL_RenderCopy(window->renderer, texture, NULL, &DestR);
 }
@@ -50,13 +51,13 @@ void SDLContext::DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled) {
 	//SDL_RenderClear(window->renderer );
 	SDL_Rect DestR;
 
-	DestR.x = window->screen_width / (double) window->logical_width
+	DestR.x = window->screen_width / (double) window->LOGICAL_WIDTH
 			* bounds->getX();
-	DestR.y = window->screen_height / (double) window->logical_height
+	DestR.y = window->screen_height / (double) window->LOGICAL_HEIGHT
 			* bounds->getY();
-	DestR.w = window->screen_width / (double) window->logical_width
+	DestR.w = window->screen_width / (double) window->LOGICAL_WIDTH
 			* bounds->getWidth();
-	DestR.h = window->screen_height / (double) window->logical_width
+	DestR.h = window->screen_height / (double) window->LOGICAL_HEIGHT
 			* bounds->getHeight();
 	if (filled)
 		SDL_RenderFillRect(window->renderer, &DestR);
@@ -100,16 +101,16 @@ SDL_Texture* SDLContext::loadTexture(std::string path) {
 }
 void SDLContext::LogicalToActualCoords(BoundingBox* bounds) {
 	bounds->setX(
-			window->screen_width / (double) window->logical_width
+			window->screen_width / (double) window->LOGICAL_WIDTH
 					* bounds->getX());
 	bounds->setY(
-			window->screen_height / (double) window->logical_height
+			window->screen_height / (double) window->LOGICAL_HEIGHT
 					* bounds->getY());
 	bounds->setWidth(
-			window->screen_width / (double) window->logical_width
+			window->screen_width / (double) window->LOGICAL_WIDTH
 					* bounds->getWidth());
 	bounds->setHeight(
-			window->screen_height / (double) window->logical_width
+			window->screen_height / (double) window->LOGICAL_HEIGHT
 					* bounds->getHeight());
 }
 }

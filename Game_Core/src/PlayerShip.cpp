@@ -4,11 +4,11 @@
 namespace Game_Core {
 
 PlayerShip::PlayerShip(AbstractFactory* factory,
-		std::vector<Entity*>* bulletVector, Input* input, int x, int y,
+		std::vector<Entity*>* bulletVector, int lives, int x, int y,
 		int movementSpeed) :
 		Entity(x, y, 8, 8, movementSpeed) {
-	inputHandler = input;
-	lives = 3;
+	inputHandler = factory->getInputHandler();
+	this->lives = lives;
 	this->bulletVector = bulletVector;
 	this->factory = factory;
 	shootingTimer = factory->createTimer();
@@ -18,12 +18,10 @@ PlayerShip::PlayerShip(AbstractFactory* factory,
 	this->audioEngine = factory->getAudioEngine();
 }
 PlayerShip::~PlayerShip() {
-	delete bounds;
 	delete shootingTimer;
+	delete invincible;
 }
-void PlayerShip::Move(InputType dir) {
 
-}
 void PlayerShip::Update() {
 	std::vector<InputType> input = inputHandler->getInput();
 	for (InputType dir : input) {
@@ -59,6 +57,11 @@ void PlayerShip::Damage(int damage) {
 
 	if (!invincible->isRunning()) {
 		Entity::Damage(damage);
+	}
+	if(hp<=0){
+		audioEngine->PlaySound(Death);
+		if( lives>0)
+			Revive();
 	}
 }
 }

@@ -7,16 +7,18 @@ using namespace Game_Core;
 namespace Game_SDL{
 class SDLTextBox{
 	public:
-		SDLTextBox(AbstractFactory* factory,SDLContext* context, int x, int y);
+		SDLTextBox(AbstractFactory* factory,SDLContext* context, std::string* text,int x, int y);
 		~SDLTextBox();
         void Visualise();
-void Update();
+        void handleEvent(SDL_Event* e);
+
 	private:
-        std::string username;
+        void getCharacterInput(SDL_Event* e);
+        std::string* content;
+        std::string historyContent;
         Text* inputText;
         SDLContext* context;
         BoundingBox* borderBounds;
-        Input* input;
         SDL_Color bordercolor;
 };
 }

@@ -10,6 +10,8 @@ class FileWriter {
 		FileWriter();
 		~FileWriter();
 		void readScore();
+		std::vector<std::string> getUsers();
+		std::vector<int> getScores();
 		void updateScore(std::string name, int score);
 	private:
 		void writeScore();

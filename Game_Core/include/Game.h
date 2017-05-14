@@ -15,7 +15,6 @@ class Game{
     private:
         AbstractFactory* factory;
         Window* window;
-        Input* inputHandler;
         int score;
         int difficulty;
         int lives;

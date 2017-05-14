@@ -8,6 +8,7 @@ class Entity{
     protected:
         int movementSpeed;
         int hp;
+        BoundingBox* bounds;
     public:
         Entity(int x, int y, int width, int height,int movementSpeed);
         virtual ~Entity();
@@ -16,7 +17,7 @@ class Entity{
         virtual void Update()=0;
         int getHP();
         virtual void Damage(int damage);
-        BoundingBox* bounds;
+        BoundingBox* getBounds();
 };}
 #endif
 

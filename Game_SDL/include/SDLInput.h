@@ -6,12 +6,9 @@ using namespace Game_Core;
 namespace Game_SDL {
 
 class SDLInput: public Input{
-    private:
-        SDL_Event event;
     public:
         SDLInput();
         std::vector<InputType> getInput();
-        void getCharacterInput(std::string* text);
         ~SDLInput();
 
 };}

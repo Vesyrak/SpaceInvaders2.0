@@ -13,6 +13,7 @@ Bomber::Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int
 	this->audioEngine = factory->getAudioEngine();
 }
 Bomber::~Bomber() {
+	delete timer;
 }
 void Bomber::Update() {
 	if (charging && timer->getTicks() > 2000) {

@@ -17,21 +17,15 @@ enum ButtonState
 class SDLButton
 {
     public:
-        //Initializes internal variables
         SDLButton(AbstractFactory* factory,SDLContext* context,std::string text, int x, int y);
         ~SDLButton();
 
-        //Handles mouse event
         int handleEvent( SDL_Event* e );
-        //Shows button sprite
         void Visualise();
-        int Update();
     private:
         void CenterText();
-        //Top left position
         Text* text;
         SDLContext* context;
-        //Currently used global sprite
         ButtonState mCurrentSprite;
         BoundingBox* borderBounds;
         BoundingBox* buttonBounds;
