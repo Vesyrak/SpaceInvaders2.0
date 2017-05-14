@@ -53,7 +53,7 @@ int SDLWindow::CreateWindow(){
 				//Initialize SDL_ttf
 				if( TTF_Init() == -1 )
 				{
-					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+					std::cout << "SDL_ttf could not initialize! SDL_ttf Error: "<<TTF_GetError() <<std::endl;
 					return 1;
 				}
 
