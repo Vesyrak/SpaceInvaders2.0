@@ -11,6 +11,8 @@ public:
 	virtual void Visualise()=0;
 	virtual void Update(std::string message);
 	virtual void CenterText(BoundingBox* outerBounds)=0;
+	virtual void HorizontalCenterText(int x,int width)=0;
+	virtual void VerticalCenterText(int y,int height)=0;
 	BoundingBox* getBounds();
 protected:
 	BoundingBox* bounds;

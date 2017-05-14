@@ -6,7 +6,7 @@
 #include "Level.h"
 namespace Game_Core {
 
-enum GameState{ Menu,Settings, Running, Paused, GameOver, Quit };
+enum GameState{ Menu,NextLevel, Settings, Running, Paused, GameOver, Quit };
 class Game{
     public:
         Game(AbstractFactory* factory);

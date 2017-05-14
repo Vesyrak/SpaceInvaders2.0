@@ -5,7 +5,7 @@ SDLBackground::SDLBackground(SDLContext* context):Background(){
     this->context=context;
     image=context->getTexture("graphics/background.png");
     scrollingOffset=0;
-    scrollBounds=new BoundingBox(0,0,200,200);//todo
+    scrollBounds=new BoundingBox(0,0,200,200);
 }
 SDLBackground::~SDLBackground(){
 	delete scrollBounds;

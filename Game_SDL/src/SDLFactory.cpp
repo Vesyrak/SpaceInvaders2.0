@@ -73,5 +73,8 @@ AudioEngine* SDLFactory::getAudioEngine(){
 Screen* SDLFactory::createSettingsScreen(Window* window, std::string* username){
 	return new SDLSettingsScreen(this,context, window, username);
 }
+ Screen* SDLFactory::createNextLevelScreen(int difficulty,Window* window){
+	 return new SDLNextLevelScreen(difficulty, this, window);
+ }
 
 }

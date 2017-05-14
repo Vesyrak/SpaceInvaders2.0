@@ -36,6 +36,7 @@ class AbstractFactory {
 		virtual Screen* createGameOverScreen(std::string username,int score, Window* window)=0;
 		virtual AudioEngine* getAudioEngine()=0;
 		virtual Screen* createSettingsScreen(Window* window,std::string* username)=0;
+		virtual Screen* createNextLevelScreen(int difficulty,Window* window)=0;
 };
 }
 #endif

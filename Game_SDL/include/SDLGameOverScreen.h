@@ -2,7 +2,6 @@
 #define SDLGAMEOVERSCREEN_H
 #include "AbstractFactory.h"
 #include "SDLButton.h"
-#include "Screen.h"
 #include "SDLContext.h"
 using namespace Game_Core;
 

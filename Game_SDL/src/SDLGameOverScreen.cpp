@@ -16,6 +16,7 @@ SDLGameOverScreen::SDLGameOverScreen(std::string username, int score, SDLContext
 	youDiedTimer->start();
 	std::string scorestring = "Score  " + std::to_string(score);
 	scoreText = factory->createText(scorestring, 75, 140);
+	scoreText->HorizontalCenterText(0,200);
 	blinker = -1;
 	GenerateScores(factory, username, score);
 }

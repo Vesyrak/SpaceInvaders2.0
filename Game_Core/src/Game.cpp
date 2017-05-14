@@ -26,7 +26,7 @@ void Game::Run() {
 				Screen* menu = factory->createMenu(window);
 				switch (menu->Run()) {
 					case 1:
-						state = Running;
+						state = NextLevel;
 						break;
 					case 2:
 						state = Settings;
@@ -48,6 +48,16 @@ void Game::Run() {
 				delete menu;
 				break;
 			}
+			case NextLevel:{
+				Screen* screen=factory->createNextLevelScreen(difficulty, window);
+				switch(screen->Run()){
+					case 1:
+						state=Running;
+						break;
+				}
+				delete screen;
+				break;
+			}
 			case Running: {
 				Level* level = new Level(factory, window, score, lives, difficulty);
 				switch (level->Run()) {
@@ -59,7 +69,7 @@ void Game::Run() {
 						lives = level->getRemainingLives();
 						score = level->getScore();
 						difficulty++;
-						state = Running;
+						state = NextLevel;
 						break;
 					case 3:
 						lives = level->getRemainingLives();

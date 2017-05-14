@@ -19,6 +19,7 @@
 #include "SDLGameOverScreen.h"
 #include "SDLSettingsScreen.h"
 #include "SDLAudioEngine.h"
+#include "SDLNextLevelScreen.h"
 using namespace Game_Core;
 
 namespace Game_SDL {
@@ -46,6 +47,8 @@ class SDLFactory : public AbstractFactory{
         Screen* createGameOverScreen(std::string username, int score, Window* window);
         AudioEngine* getAudioEngine();
         Screen* createSettingsScreen(Window* window, std::string* username);
+		Screen* createNextLevelScreen(int difficulty,Window* window);
+
     private:
         Input* inputHandler;
         AudioEngine* audioEngine;

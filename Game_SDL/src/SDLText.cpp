@@ -26,4 +26,11 @@ void SDLText::CenterText(BoundingBox* outerBounds){
 		bounds->setX(outerBounds->getX()+(outerBounds->getWidth()-bounds->getWidth())/2);
 		bounds->setY(outerBounds->getY()+(outerBounds->getHeight()-bounds->getHeight())/2);
 }
+void SDLText::HorizontalCenterText(int x,int width){
+	bounds->setX(x+(width-bounds->getWidth())/2);
+}
+void SDLText::VerticalCenterText(int y,int height){
+	bounds->setY(y+(height-bounds->getHeight())/2);
+
+}
 }

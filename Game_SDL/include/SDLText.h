@@ -14,6 +14,8 @@ public:
 	void Visualise();
 	void Update(std::string message);
 	void CenterText(BoundingBox* outerBounds);
+	void HorizontalCenterText(int x,int width);
+    void VerticalCenterText(int y,int height);
 private:
 	SDLContext* context;
 	SDL_Texture* texture;

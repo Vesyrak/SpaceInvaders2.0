@@ -35,7 +35,7 @@ void PlayerShip::Update() {
 }
 
 void PlayerShip::Shoot() {
-	if (shootingTimer->getTicks() > 500) {
+	if (shootingTimer->getTicks() > 400) {
 		shootingTimer->start();
 		audioEngine->PlaySound(SoundType::Shoot);
 		bulletVector->push_back(
@@ -49,7 +49,6 @@ int PlayerShip::getLives() {
 void PlayerShip::Revive() {
 	hp = 100;
 	bounds->setX(100);
-	lives--;
 	invincible->start();
 }
 void PlayerShip::Damage(int damage) {
@@ -60,6 +59,7 @@ void PlayerShip::Damage(int damage) {
 	}
 	if(hp<=0){
 		audioEngine->PlaySound(Death);
+		lives--;
 		if( lives>0)
 			Revive();
 	}
