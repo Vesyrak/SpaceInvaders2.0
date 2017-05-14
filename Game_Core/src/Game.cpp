@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Game.h"
+#include "FileWriter.h"
 namespace Game_Core {
 
 Game::Game(AbstractFactory* factory) {
