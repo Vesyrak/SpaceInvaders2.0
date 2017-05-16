@@ -4,20 +4,21 @@
 #include "Input.h"
 #include "BoundingBox.h"
 namespace Game_Core {
-class Entity{
-    protected:
-        int movementSpeed;
-        int hp;
-        BoundingBox* bounds;
-    public:
-        Entity(int x, int y, int width, int height,int movementSpeed);
-        virtual ~Entity();
-        virtual void Move(InputType dir);
-        virtual void Visualise()=0;
-        virtual void Update()=0;
-        int getHP();
-        virtual void Damage(int damage);
-        BoundingBox* getBounds();
-};}
+	class Entity {
+		public:
+			Entity(int x, int y, int width, int height, int movementSpeed);
+			virtual ~Entity();
+			virtual void Update()=0;
+			virtual void Visualise()=0;
+			virtual void Move(InputType dir);
+			virtual void Damage(int damage);
+			int GetHP();
+			BoundingBox* GetBounds();
+		protected:
+			int movementSpeed;
+			int hp;
+			BoundingBox* bounds;
+	};
+}
 #endif
 

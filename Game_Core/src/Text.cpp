@@ -13,7 +13,7 @@ Text::~Text(){
 void Text::Update(std::string message){
 	this->message=message;
 }
-BoundingBox* Text::getBounds(){
+BoundingBox* Text::GetBounds(){
 	return bounds;
 }
 }

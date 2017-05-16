@@ -2,19 +2,16 @@
 #include "SDLPlayerShip.h"
 namespace Game_SDL {
 
-SDLPlayerShip::SDLPlayerShip(AbstractFactory* factory,
-		std::vector<Entity*>* bulletVector, SDLContext* context,
-		int lives, int x, int y, int movementSpeed) :
-		PlayerShip(factory, bulletVector, lives, x, y, movementSpeed) {
-	this->context = context;
-	image = context->getTexture("graphics/player_ship.png");
-}
-SDLPlayerShip::~SDLPlayerShip() {
-}
+	SDLPlayerShip::SDLPlayerShip(SDLContext* context, AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed) :PlayerShip(factory, bulletVector, lives, x, y, movementSpeed) {
+		this->context = context;
+		image = context->GetTexture("graphics/player_ship.png");
+	}
+	SDLPlayerShip::~SDLPlayerShip() {
+	}
 
-void SDLPlayerShip::Visualise() {
-	if (!invincible->isRunning()||(invincible->getTicks() / 250) % 2 == 1)
+	void SDLPlayerShip::Visualise() {
+		if (!invincible->IsRunning() || (invincible->GetTicks() / 250) % 2 == 1)
 			context->Draw(image, bounds);
 
-}
+	}
 }

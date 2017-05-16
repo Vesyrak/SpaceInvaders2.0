@@ -5,20 +5,20 @@ namespace Game_Core {
 
 class Window{
     public:
-        const int LOGICAL_WIDTH=200;
-        const int LOGICAL_HEIGHT=200;
-        int screen_width;
-        int screen_height;
         Window();
         Window(int screen_width, int screen_height);
         virtual ~Window();
         virtual int CreateWindow()=0;
         virtual void PrepareRender()=0;
         virtual void PresentRender()=0;
-        BoundingBox* getTopBounds();
-        BoundingBox* getBottomBounds();
-        BoundingBox* getLeftBounds();
-        BoundingBox* getRightBounds();
+        BoundingBox* GetTopBounds();
+        BoundingBox* GetBottomBounds();
+        BoundingBox* GetLeftBounds();
+        BoundingBox* GetRightBounds();
+        const int LOGICAL_WIDTH=200;
+        const int LOGICAL_HEIGHT=200;
+        int screen_width;
+        int screen_height;
     protected:
         BoundingBox* topBounds;
         BoundingBox* bottomBounds;

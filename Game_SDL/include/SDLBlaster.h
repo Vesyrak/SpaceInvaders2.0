@@ -5,14 +5,15 @@
 using namespace Game_Core;
 namespace Game_SDL {
 
-class SDLBlaster: public Blaster{
-    private:
-        SDL_Texture* image;
-        SDLContext* context;
-    public:
-        SDLBlaster(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int difficulty);
-        ~SDLBlaster();
-        void Visualise() override;
-};}
+	class SDLBlaster: public Blaster {
+		public:
+			SDLBlaster(SDLContext* context, AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty);
+			~SDLBlaster();
+			void Visualise() override;
+		private:
+			SDL_Texture* image;
+			SDLContext* context;
+	};
+}
 
 #endif

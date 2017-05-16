@@ -7,22 +7,23 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
-class SDLGameOverScreen: public Screen {
-public:
-	SDLGameOverScreen(std::string username,int score,SDLContext* context,AbstractFactory* factory,Window* window);
-	~SDLGameOverScreen();
-protected:
-	void GenerateScores(AbstractFactory* factory,std::string username,int score);
-	void Update() override;
-	void Visualise() override;
-	std::vector<SDLButton*> buttons;
-	std::vector<Text*> scores;
-	Background* background;
-	Text* you;
-	Text* died;
-	Text* scoreText;
-	Timer* youDiedTimer;
-	int blinker;
-};}
+	class SDLGameOverScreen: public Screen {
+		public:
+			SDLGameOverScreen(SDLContext* context, AbstractFactory* factory,std::string username, int score, Window* window);
+			~SDLGameOverScreen();
+		protected:
+			void Update() override;
+			void Visualise() override;
+			void GenerateScores(AbstractFactory* factory, std::string username, int score);
+			std::vector<SDLButton*> buttons;
+			std::vector<Text*> scores;
+			Background* background;
+			Text* you;
+			Text* died;
+			Text* scoreText;
+			Timer* youDiedTimer;
+			int blinker;
+	};
+}
 #endif
 

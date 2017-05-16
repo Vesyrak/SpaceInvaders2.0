@@ -1,16 +1,16 @@
 #include "SDLButton.h"
 namespace Game_SDL {
 
-SDLButton::SDLButton(AbstractFactory* factory, SDLContext* context,
+SDLButton::SDLButton(SDLContext* context, AbstractFactory* factory,
 		std::string text, int x, int y) {
 	borderBounds = new BoundingBox(x, y, 60, 20);
-	buttonBounds = new BoundingBox(borderBounds->getX() + 1,
-			borderBounds->getY() + 1, borderBounds->getWidth() - 2,
-			borderBounds->getHeight() - 2);
+	buttonBounds = new BoundingBox(borderBounds->GetX() + 1,
+			borderBounds->GetY() + 1, borderBounds->GetWidth() - 2,
+			borderBounds->GetHeight() - 2);
 	actualButtonBounds = new BoundingBox(x, y, 60, 20);
 	context->LogicalToActualCoords(actualButtonBounds);
 	mCurrentSprite = BUTTON_MOUSE_OUT;
-	this->text = factory->createText(text, x + 1, y + 1);
+	this->text = factory->CreateText(text, x + 1, y + 1);
 	this->text->CenterText(buttonBounds);
 	this->context = context;
 	buttonColors[BUTTON_MOUSE_OUT*2]= {196,196,196,255};
@@ -27,7 +27,7 @@ SDLButton::~SDLButton() {
 	delete text;
 }
 
-int SDLButton::handleEvent(SDL_Event* e) {
+int SDLButton::HandleEvent(SDL_Event* e) {
 	//If mouse event happened
 	if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN
 			|| e->type == SDL_MOUSEBUTTONUP) {
@@ -38,22 +38,22 @@ int SDLButton::handleEvent(SDL_Event* e) {
 		bool inside = true;
 
 		//Mouse is left of the button
-		if (x < actualButtonBounds->getX()) {
+		if (x < actualButtonBounds->GetX()) {
 			inside = false;
 		}
 		//Mouse is right of the button
 		else if (x
-				> actualButtonBounds->getX() + actualButtonBounds->getWidth()) {
+				> actualButtonBounds->GetX() + actualButtonBounds->GetWidth()) {
 			inside = false;
 		}
 		//Mouse above the button
-		else if (y < actualButtonBounds->getY()) {
+		else if (y < actualButtonBounds->GetY()) {
 			inside = false;
 		}
 		//Mouse below the button
 		else if (y
-				> actualButtonBounds->getY()
-						+ actualButtonBounds->getHeight()) {
+				> actualButtonBounds->GetY()
+						+ actualButtonBounds->GetHeight()) {
 			inside = false;
 		}
 		//Mouse is outside button

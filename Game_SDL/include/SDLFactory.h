@@ -23,35 +23,33 @@
 using namespace Game_Core;
 
 namespace Game_SDL {
-
-class SDLFactory : public AbstractFactory{
-    private:
-    public:
-		SDLFactory();
-		~SDLFactory();
-    	SDLContext* context;
-        PlayerShip* createPlayerShip(std::vector<Entity*>* bulletVector,int lives, int x, int y, int movementSpeed);
-        Basher* createBasher(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
-        Blaster* createBlaster(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
-        Bomber* createBomber(std::vector<Entity*>* bulletVector,int x, int y, int difficulty);
-        Window* createWindow(int screen_width, int screen_height);
-        Input* getInputHandler();
-        Background* createBackground();
-        Laser* createLaser( int x, int y, int movementSpeed, InputType direction, int damage);
-        Screen* createMenu(Window* window);
-        Timer* createTimer();
-        Text* createText(std::string message, int x, int y);
-        Text* createText(std::string message, int x, int y, int size);
-        LaserBomb* createLaserBomb( int x, int y, int movementSpeed, InputType direction, int damage);
-        Healthbar* createHealthbar(Entity* observed, int x, int y);
-        Screen* createGameOverScreen(std::string username, int score, Window* window);
-        AudioEngine* getAudioEngine();
-        Screen* createSettingsScreen(Window* window, std::string* username);
-		Screen* createNextLevelScreen(int difficulty,Window* window);
-
-    private:
-        Input* inputHandler;
-        AudioEngine* audioEngine;
-};}
+	class SDLFactory: public AbstractFactory {
+		public:
+			SDLFactory();
+			~SDLFactory() override;
+			Basher* CreateBasher(std::vector<Entity*>* bulletVector, int x, int y, int difficulty) override;
+			Blaster* CreateBlaster(std::vector<Entity*>* bulletVector, int x, int y, int difficulty) override;
+			Bomber* CreateBomber(std::vector<Entity*>* bulletVector, int x, int y, int difficulty) override;
+			PlayerShip* CreatePlayerShip(std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed) override;
+			Laser* CreateLaser(int x, int y, int movementSpeed, InputType direction, int damage) override;
+			LaserBomb* CreateLaserBomb(int x, int y, int movementSpeed, InputType direction, int damage) override;
+			AudioEngine* GetAudioEngine() override;
+			Input* GetInputHandler() override;
+			Timer* CreateTimer() override;
+			Background* CreateBackground() override;
+			Healthbar* CreateHealthbar(Entity* observed, int x, int y) override;
+			Text* CreateText(std::string message, int x, int y) override;
+			Text* CreateText(std::string message, int x, int y, int size) override;
+			Screen* CreateMenu(Window* window) override;
+			Screen* CreateSettingsScreen(Window* window, std::string* username) override;
+			Screen* CreateNextLevelScreen(int difficulty, Window* window) override;
+			Screen* CreateGameOverScreen(std::string username, int score, Window* window) override;
+			Window* CreateWindow(int screen_width, int screen_height) override;
+		private:
+			AudioEngine* audioEngine;
+			Input* inputHandler;
+			SDLContext* context;
+	};
+}
 #endif
 

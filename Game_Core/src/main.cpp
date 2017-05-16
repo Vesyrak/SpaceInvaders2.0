@@ -6,7 +6,6 @@ using namespace Game_Core;
 
 int main( int argc, char* argv[] )
 {
-
     AbstractFactory* factory =new SDLFactory();
     Game* game=new Game(factory);
     game->Run();

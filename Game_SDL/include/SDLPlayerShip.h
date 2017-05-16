@@ -7,15 +7,17 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
-class SDLPlayerShip: public PlayerShip {
-    private:
-        SDL_Texture* image;
-        SDLContext* context;
+	class SDLPlayerShip: public PlayerShip {
 
-    public:
-        SDLPlayerShip(AbstractFactory* factory,std::vector<Entity*>* bulletVector, SDLContext* context,int lives, int x, int y, int movementSpeed);
-        ~SDLPlayerShip();
-        void Visualise() override;
-};}
+		public:
+			SDLPlayerShip(SDLContext* context, AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed);
+			~SDLPlayerShip();
+			void Visualise() override;
+		private:
+			SDL_Texture* image;
+			SDLContext* context;
+
+	};
+}
 #endif
 

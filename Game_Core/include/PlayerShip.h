@@ -8,27 +8,29 @@
 #include "AudioEngine.h"
 using namespace std;
 namespace Game_Core {
-class AbstractFactory;
-class PlayerShip: public Entity {
+	class AbstractFactory;
+	class PlayerShip: public Entity {
 
-    public:
-        PlayerShip(AbstractFactory* factory,std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed);
-        virtual ~PlayerShip();
-        void Update();
-        void Shoot();
-        int getLives();
-        void Damage(int damage) override;
-    protected:
-        void Revive();
+		public:
+			PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed);
+			virtual ~PlayerShip();
+			void Update();
+			void Shoot();
+			void Damage(int damage) override;
+			int GetLives();
+		protected:
+			Timer* invincible;
+		private:
+			void Revive();
+			AbstractFactory* factory;
+			AudioEngine* audioEngine;
+			Input* inputHandler;
+			Timer* shootingTimer;
+			std::vector<Entity*>* bulletVector;
+			int lives;
 
-        int lives;
-        Input* inputHandler;
-        std::vector<Entity*>* bulletVector;
-        AbstractFactory* factory;
-        Timer* shootingTimer;
-        Timer* invincible;
-        AudioEngine* audioEngine;
-};}
+	};
+}
 
 #endif
 

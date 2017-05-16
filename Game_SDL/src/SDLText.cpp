@@ -1,36 +1,38 @@
 #include "SDLText.h"
 namespace Game_SDL {
 
-SDLText::SDLText(SDLContext* context, std::string message, int x, int y, int size):Text(message, x,y, size){
-	this->context=context;
-	this->texture=this->context->GenerateText(message, bounds, size);
-}
-SDLText::SDLText(SDLContext* context, std::string message, int x, int y):Text(message, x,y, context->defaultFontSize){
-	this->context=context;
-	this->texture=this->context->GenerateText(message, bounds, size);
-}
-SDLText::~SDLText(){
-	SDL_DestroyTexture(texture);
-}
-void SDLText::Update(std::string message){
-	SDL_DestroyTexture( texture);
-	this->texture=this->context->GenerateText(message, bounds, size);
+	SDLText::SDLText(SDLContext* context, std::string message, int x, int y, int size) :
+			Text(message, x, y, size) {
+		this->context = context;
+		this->texture = this->context->GenerateText(message, bounds, size);
+	}
+	SDLText::SDLText(SDLContext* context, std::string message, int x, int y) :
+			Text(message, x, y, context->defaultFontSize) {
+		this->context = context;
+		this->texture = this->context->GenerateText(message, bounds, size);
+	}
+	SDLText::~SDLText() {
+		SDL_DestroyTexture(texture);
+	}
+	void SDLText::Update(std::string message) {
+		SDL_DestroyTexture(texture);
+		this->texture = this->context->GenerateText(message, bounds, size);
 
-}
-void SDLText::Visualise(){
-	context->Draw(texture, bounds);
-}
+	}
+	void SDLText::Visualise() {
+		context->Draw(texture, bounds);
+	}
 
-void SDLText::CenterText(BoundingBox* outerBounds){
+	void SDLText::CenterText(BoundingBox* outerBounds) {
 
-		bounds->setX(outerBounds->getX()+(outerBounds->getWidth()-bounds->getWidth())/2);
-		bounds->setY(outerBounds->getY()+(outerBounds->getHeight()-bounds->getHeight())/2);
-}
-void SDLText::HorizontalCenterText(int x,int width){
-	bounds->setX(x+(width-bounds->getWidth())/2);
-}
-void SDLText::VerticalCenterText(int y,int height){
-	bounds->setY(y+(height-bounds->getHeight())/2);
+		bounds->SetX(outerBounds->GetX() + (outerBounds->GetWidth() - bounds->GetWidth()) / 2);
+		bounds->SetY(outerBounds->GetY() + (outerBounds->GetHeight() - bounds->GetHeight()) / 2);
+	}
+	void SDLText::HorizontalCenterText(int x, int width) {
+		bounds->SetX(x + (width - bounds->GetWidth()) / 2);
+	}
+	void SDLText::VerticalCenterText(int y, int height) {
+		bounds->SetY(y + (height - bounds->GetHeight()) / 2);
 
-}
+	}
 }

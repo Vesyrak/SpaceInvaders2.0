@@ -1,9 +1,9 @@
 #include "SDLBasher.h"
 namespace Game_SDL {
 
-SDLBasher::SDLBasher(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int difficulty):Basher(factory, bulletVector,x,y,difficulty){
+SDLBasher::SDLBasher(SDLContext* context, AbstractFactory* factory,std::vector<Entity*>* bulletVector,int x, int y, int difficulty):Basher(factory, bulletVector,x,y,difficulty){
     this->context=context;
-    image=context->getTexture("graphics/basher.png");
+    image=context->GetTexture("graphics/basher.png");
 }
 SDLBasher::~SDLBasher(){
 }

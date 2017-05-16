@@ -10,10 +10,10 @@ class SDLTimer: public Timer{
 public:
 	SDLTimer();
 	~SDLTimer();
-	void delay(int duration) override;
+	void Delay(int duration) override;
 
 protected:
-	long getLocalTicks() override;
+	long GetLocalTicks() override;
 
 };}
 #endif

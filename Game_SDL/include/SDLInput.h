@@ -8,8 +8,8 @@ namespace Game_SDL {
 class SDLInput: public Input{
     public:
         SDLInput();
-        std::vector<InputType> getInput();
         ~SDLInput();
+        std::vector<InputType> GetInput() override;
 
 };}
 #endif

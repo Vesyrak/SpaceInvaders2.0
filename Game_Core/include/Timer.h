@@ -6,28 +6,26 @@ class Timer{
 public:
 	Timer();
 	virtual ~Timer();
-	void start();
-	void stop();
-	void pause();
-	void unpause();
-	virtual void delay(int duration)=0;
-
-    //Gets the timer's time
-    long getTicks();
+	void Start();
+	void Stop();
+	void Pause();
+	void UnPause();
+	virtual void Delay(int duration)=0;
+    long GetTicks();
 
     //Checks the status of the timer
-    bool isRunning();
-    bool isPaused();
+    bool IsRunning();
+    bool IsPaused();
 
 protected:
-    long mStartTicks;
+    virtual long GetLocalTicks()=0;
+
+    long startTicks;
 
     //The ticks stored when the timer was paused
-    long mPausedTicks;
-
+    long pausedTicks;
     //The timer status
-    bool mPaused;
-    bool mStarted;
-    virtual long getLocalTicks()=0;
+    bool paused;
+    bool started;
 };}
 #endif

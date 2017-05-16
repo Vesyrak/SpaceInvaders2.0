@@ -9,7 +9,7 @@ Game::Game(AbstractFactory* factory) {
 	lives = 3;
 	difficulty = 1;
 	this->factory = factory;
-	window = factory->createWindow(800, 600);
+	window = factory->CreateWindow(800, 600);
 	window->CreateWindow();
 	state = Menu;
 	username = "Fernando";
@@ -23,7 +23,7 @@ void Game::Run() {
 	while (state != Quit) {
 		switch (state) {
 			case Menu: {
-				Screen* menu = factory->createMenu(window);
+				Screen* menu = factory->CreateMenu(window);
 				switch (menu->Run()) {
 					case 1:
 						state = NextLevel;
@@ -39,7 +39,7 @@ void Game::Run() {
 				break;
 			}
 			case Settings: {
-				Screen* menu = factory->createSettingsScreen(window, &username);
+				Screen* menu = factory->CreateSettingsScreen(window, &username);
 				switch (menu->Run()) {
 					case 1:
 						state = Menu;
@@ -49,7 +49,7 @@ void Game::Run() {
 				break;
 			}
 			case NextLevel:{
-				Screen* screen=factory->createNextLevelScreen(difficulty, window);
+				Screen* screen=factory->CreateNextLevelScreen(difficulty, window);
 				switch(screen->Run()){
 					case 1:
 						state=Running;
@@ -62,18 +62,18 @@ void Game::Run() {
 				Level* level = new Level(factory, window, score, lives, difficulty);
 				switch (level->Run()) {
 					case 1:
-						score = level->getScore();
+						score = level->GetScore();
 						state = GameOver;
 						break;
 					case 2:
-						lives = level->getRemainingLives();
-						score = level->getScore();
+						lives = level->GetRemainingLives();
+						score = level->GetScore();
 						difficulty++;
 						state = NextLevel;
 						break;
 					case 3:
-						lives = level->getRemainingLives();
-						score = level->getScore();
+						lives = level->GetRemainingLives();
+						score = level->GetScore();
 						state = Running;
 						break;
 				}
@@ -82,8 +82,8 @@ void Game::Run() {
 			}
 			case GameOver: {
 				FileWriter writer;
-				writer.updateScore(username, score);
-				Screen* screen = factory->createGameOverScreen(username, score, window);
+				writer.UpdateScore(username, score);
+				Screen* screen = factory->CreateGameOverScreen(username, score, window);
 				score = 0;
 				difficulty = 1;
 				lives = 3;

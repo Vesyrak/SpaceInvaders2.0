@@ -1,9 +1,9 @@
 #include "SDLBlaster.h"
 namespace Game_SDL {
 
-SDLBlaster::SDLBlaster(AbstractFactory* factory,std::vector<Entity*>* bulletVector,SDLContext* context, int x, int y, int difficulty):Blaster(factory, bulletVector,x, y, difficulty){
+SDLBlaster::SDLBlaster(SDLContext* context, AbstractFactory* factory,std::vector<Entity*>* bulletVector, int x, int y, int difficulty):Blaster(factory, bulletVector,x, y, difficulty){
     this->context=context;
-    image=context->getTexture("graphics/blaster.png");
+    image=context->GetTexture("graphics/blaster.png");
 }
 SDLBlaster::~SDLBlaster(){
 }

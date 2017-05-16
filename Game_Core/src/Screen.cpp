@@ -5,9 +5,9 @@ namespace Game_Core {
 Screen::Screen(AbstractFactory* factory, Window* window) {
 	this->window = window;
 	countedFrames=returnValue = 0;
-	frameTimer = factory->createTimer();
-	capTimer = factory->createTimer();
-	frameTimer->start();
+	frameTimer = factory->CreateTimer();
+	capTimer = factory->CreateTimer();
+	frameTimer->Start();
 
 }
 Screen::~Screen() {
@@ -17,17 +17,17 @@ Screen::~Screen() {
 }
 int Screen::Run() {
 	while (returnValue == 0) {
-		capTimer->start();
-		float avgFPS = countedFrames / (frameTimer->getTicks() / 1000.f);
+		capTimer->Start();
+		float avgFPS = countedFrames / (frameTimer->GetTicks() / 1000.f);
 		if (avgFPS > 2000000) {
 			avgFPS = 0;
 		}
 		Update();
 		Visualise();
-		int frameTicks = capTimer->getTicks();
+		int frameTicks = capTimer->GetTicks();
 		if (frameTicks < 1000 / 60) {
 			//Wait remaining time
-			frameTimer->delay(1000 / 60 - frameTicks);
+			frameTimer->Delay(1000 / 60 - frameTicks);
 		}
 	}
 	return returnValue;

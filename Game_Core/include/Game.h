@@ -5,21 +5,23 @@
 #include "Input.h"
 #include "Level.h"
 namespace Game_Core {
-
-enum GameState{ Menu,NextLevel, Settings, Running, Paused, GameOver, Quit };
-class Game{
-    public:
-        Game(AbstractFactory* factory);
-        void Run();
-        ~Game();
-    private:
-        AbstractFactory* factory;
-        Window* window;
-        int score;
-        int difficulty;
-        int lives;
-        GameState state;
-        std::string username;
-};}
+	enum GameState {
+		Menu, NextLevel, Settings, Running, Paused, GameOver, Quit
+	};
+	class Game {
+		public:
+			Game(AbstractFactory* factory);
+			~Game();
+			void Run();
+		private:
+			AbstractFactory* factory;
+			Window* window;
+			GameState state;
+			std::string username;
+			int score;
+			int difficulty;
+			int lives;
+	};
+}
 #endif
 

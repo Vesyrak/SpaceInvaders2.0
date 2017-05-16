@@ -1,11 +1,11 @@
 #include "SDLTextBox.h"
 namespace Game_SDL {
-SDLTextBox::SDLTextBox(AbstractFactory* factory, SDLContext* context,std::string* text, int x, int y) {
+SDLTextBox::SDLTextBox(SDLContext* context,AbstractFactory* factory, std::string* text, int x, int y) {
 	content = text;
 	historyContent=*text;
 	this->context = context;
 	borderBounds = new BoundingBox(x, y, 60, 20);
-	inputText = factory->createText(*content, x, y);
+	inputText = factory->CreateText(*content, x, y);
 	inputText->CenterText(borderBounds);
 	bordercolor= {196,196,196,255};
 }
@@ -13,8 +13,8 @@ SDLTextBox::~SDLTextBox() {
 	delete inputText;
 	delete borderBounds;
 }
-void SDLTextBox::handleEvent(SDL_Event *e) {
-	getCharacterInput(e);
+void SDLTextBox::HandleEvent(SDL_Event *e) {
+	GetCharacterInput(e);
 	if (*content != historyContent) {
 		historyContent = *content;
 		if (content->size() > 8)
@@ -26,7 +26,7 @@ void SDLTextBox::handleEvent(SDL_Event *e) {
 	}
 
 }
-void SDLTextBox::getCharacterInput(SDL_Event* e) {
+void SDLTextBox::GetCharacterInput(SDL_Event* e) {
 
 		if (e->type == SDL_KEYDOWN) {
 			//Handle backspace

@@ -4,9 +4,9 @@ namespace Game_Core {
 
 Healthbar::Healthbar(AbstractFactory* factory, Entity* observed, int x, int y){
 	this->observed=observed;
-	hpText=factory->createText("HP: ",x, y, 16 );
-	backBounds=new BoundingBox(x+hpText->getBounds()->getWidth(),y, 40, 10);
-	foreBounds=new BoundingBox(backBounds->getX()+1,backBounds->getY()+1,backBounds->getWidth()-2,backBounds->getHeight()-2);
+	hpText=factory->CreateText("HP: ",x, y, 16 );
+	backBounds=new BoundingBox(x+hpText->GetBounds()->GetWidth(),y, 40, 10);
+	foreBounds=new BoundingBox(backBounds->GetX()+1,backBounds->GetY()+1,backBounds->GetWidth()-2,backBounds->GetHeight()-2);
 }
 Healthbar::~Healthbar(){
 	delete hpText;

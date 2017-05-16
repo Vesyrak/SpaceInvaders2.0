@@ -8,7 +8,7 @@ namespace Game_SDL {
 
 class SDLNextLevelScreen: public Screen {
     public:
-		SDLNextLevelScreen(int difficulty,AbstractFactory* factory,Window* window);
+		SDLNextLevelScreen(AbstractFactory* factory,int difficulty,Window* window);
         ~SDLNextLevelScreen();
 
     protected:
