@@ -26,39 +26,33 @@ namespace Game_SDL {
 	}
 
 	// Handles mouse location for the button handling
-	int SDLButton::HandleEvent(SDL_Event* e) {
+	int SDLButton::HandleEvent(BaseInput* input) {
 		//If there's a mouse event
-		if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
-			//Get state
-			int x, y;
-			SDL_GetMouseState(&x, &y);
+		if (input->mouseX != -1) {
 			bool inside = true;
 			//Compare with button's bounds
-			if (x < actualButtonBounds->GetX()) {
+			if (input->mouseX < actualButtonBounds->GetX()) {
 				inside = false;
 			}
-			else if (x > actualButtonBounds->GetX() + actualButtonBounds->GetWidth()) {
+			else if (input->mouseX > actualButtonBounds->GetX() + actualButtonBounds->GetWidth()) {
 				inside = false;
 			}
-			else if (y < actualButtonBounds->GetY()) {
+			else if (input->mouseY < actualButtonBounds->GetY()) {
 				inside = false;
 			}
-			else if (y > actualButtonBounds->GetY() + actualButtonBounds->GetHeight()) {
+			else if (input->mouseY > actualButtonBounds->GetY() + actualButtonBounds->GetHeight()) {
 				inside = false;
 			}
 			if (!inside) {
 				mCurrentSprite = BUTTON_MOUSE_OUT;
 			}
-			else {
-				switch (e->type) {
-					case SDL_MOUSEMOTION:
-						mCurrentSprite = BUTTON_MOUSE_OVER_MOTION;
-						break;
-					case SDL_MOUSEBUTTONDOWN:
-						return 1;
-						break;
-				}
+			else if (input->mousepress) {
+				return 1;
 			}
+			else {
+				mCurrentSprite = BUTTON_MOUSE_OVER_MOTION;
+			}
+
 		}
 		return 0;
 	}

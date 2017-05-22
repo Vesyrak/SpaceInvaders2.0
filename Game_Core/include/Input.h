@@ -1,16 +1,15 @@
 #ifndef INPUT_H
 #define INPUT_H
 #include <vector>
+#include <string>
+#include "BaseInput.h"
 namespace Game_Core {
 
-	enum InputType {
-		None, Left, Right, Up, Down, A, B, X, Y
-	};
 	class Input {
 		public:
-			virtual ~Input() {
-			}
-			virtual std::vector<InputType> GetInput()=0;
+			virtual ~Input() {}
+			virtual BaseInput* GetInput()=0;
+			virtual BaseInput* GetInput(std::string* string)=0;
 	};
 }
 #endif

@@ -16,8 +16,7 @@ namespace Game_SDL {
 	}
 
 	//Compares content to previous content, and updates accordingly.
-	void SDLTextBox::HandleEvent(SDL_Event *e) {
-		GetCharacterInput(e);
+	void SDLTextBox::HandleEvent(BaseInput* input) {
 		if (*content != historyContent) {
 			historyContent = *content;
 			if (content->size() > 8)
@@ -28,22 +27,6 @@ namespace Game_SDL {
 			}
 		}
 
-	}
-
-	//Get character input from SDL
-	void SDLTextBox::GetCharacterInput(SDL_Event* e) {
-
-		if (e->type == SDL_KEYDOWN) {
-			//Handle backspace
-			if (e->key.keysym.sym == SDLK_BACKSPACE && content->length() > 0) {
-				//lop off character
-				content->pop_back();
-			}
-		}
-		if (e->type == SDL_TEXTINPUT) {
-			//Append character
-			content->append(e->text.text);
-		}
 	}
 
 	void SDLTextBox::Visualise() {

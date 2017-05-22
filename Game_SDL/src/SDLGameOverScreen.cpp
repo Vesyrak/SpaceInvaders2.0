@@ -4,9 +4,8 @@
 #include "FileWriter.h"
 namespace Game_SDL {
 
-	SDLGameOverScreen::SDLGameOverScreen(SDLContext* context, AbstractFactory* factory,std::string username, int score,  Window* window) :
+	SDLGameOverScreen::SDLGameOverScreen(SDLContext* context, AbstractFactory* factory, std::string username, int score, Window* window) :
 			Screen(factory, window) {
-		returnValue = 0;
 		blinker = -1;
 		std::string scorestring = "Score  " + std::to_string(score);
 
@@ -39,17 +38,10 @@ namespace Game_SDL {
 
 	//Updates Screen for button handling
 	void SDLGameOverScreen::Update() {
-		SDL_Event e;
 		//Handle events on queue
-		while (SDL_PollEvent(&e) != 0) {
-			//User requests quit
-			if (e.type == SDL_QUIT) {
-			}
-			for (unsigned int i = 0; i < buttons.size(); i++) {
-				if (buttons[i]->HandleEvent(&e)) {
-					returnValue = i + 1;
-				}
-
+		for (unsigned int i = 0; i < buttons.size(); i++) {
+			if (buttons[i]->HandleEvent(input)) {
+				returnValue = i + 1;
 			}
 
 		}

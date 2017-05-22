@@ -3,6 +3,7 @@
 #include "AbstractFactory.h"
 #include "SDLContext.h"
 #include "Text.h"
+#include "BaseInput.h"
 using namespace Game_Core;
 namespace Game_SDL {
 	enum ButtonState {
@@ -14,7 +15,7 @@ namespace Game_SDL {
 			SDLButton(SDLContext* context, AbstractFactory* factory, std::string text, int x, int y);
 			~SDLButton();
 			void Visualise();
-			int HandleEvent(SDL_Event* e);
+			int HandleEvent(BaseInput* input);
 
 		private:
 			void CenterText();

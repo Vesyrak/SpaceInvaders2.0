@@ -3,6 +3,7 @@
 #include "Text.h"
 #include "AbstractFactory.h"
 #include "SDLContext.h"
+#include "BaseInput.h"
 using namespace Game_Core;
 namespace Game_SDL {
 	class SDLTextBox {
@@ -10,11 +11,10 @@ namespace Game_SDL {
 			SDLTextBox(SDLContext* context, AbstractFactory* factory, std::string* text, int x, int y);
 			~SDLTextBox();
 			void Visualise();
-			void HandleEvent(SDL_Event* e);
-
+			void HandleEvent(BaseInput* input);
+			std::string* content;
 		private:
 			void GetCharacterInput(SDL_Event* e);
-			std::string* content;
 			std::string historyContent;
 			Text* inputText;
 			SDLContext* context;

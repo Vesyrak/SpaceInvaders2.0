@@ -19,25 +19,20 @@ namespace Game_SDL {
 	//Updates Buttons
 	void SDLMenu::Update() {
 		background->Update();
-		SDL_Event e;
-		//Handle events on queue
-		while (SDL_PollEvent(&e) != 0) {
-			//User requests quit
-			if (e.type == SDL_QUIT) {
-			}
-			for (unsigned int i = 0; i < buttons.size(); i++) {
-				if (buttons[i]->HandleEvent(&e)) {
+
+		for (unsigned int i = 0; i < buttons.size(); i++) {
+			if (buttons[i]->HandleEvent(input)) {
 					returnValue = i + 1;
 				}
+
 			}
 		}
-	}
-	void SDLMenu::Visualise() {
-		window->PrepareRender();
-		background->Visualise();
-		for (SDLButton* button : buttons) {
-			button->Visualise();
+		void SDLMenu::Visualise() {
+			window->PrepareRender();
+			background->Visualise();
+			for (SDLButton* button : buttons) {
+				button->Visualise();
+			}
+			window->PresentRender();
 		}
-		window->PresentRender();
 	}
-}

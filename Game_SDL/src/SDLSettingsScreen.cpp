@@ -5,6 +5,7 @@ namespace Game_SDL {
 		background = factory->CreateBackground();
 		textBox = new SDLTextBox(context,factory, username, 70, 75);
 		backButton = new SDLButton(context, factory, "Back", 70, 105);
+		alterString=textBox->content;
 		SDL_StartTextInput();
 
 	}
@@ -19,16 +20,11 @@ namespace Game_SDL {
 	//Updates background & buttons
 	void SDLSettingsScreen::Update() {
 		background->Update();
-		SDL_Event e;
-		//Handle events on queue
-		while (SDL_PollEvent(&e) != 0) {
-			//User requests quit
-			if (e.type == SDL_QUIT) {
-			}
-			textBox->HandleEvent(&e);
-			if (backButton->HandleEvent(&e)) {
+
+			textBox->HandleEvent(input);
+			if (backButton->HandleEvent(input)) {
 				returnValue = 1;
-			}
+
 
 		}
 	}

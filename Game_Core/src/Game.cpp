@@ -20,7 +20,7 @@ Game::~Game() {
 }
 
 void Game::Run() {
-	while (state != Quit) {
+	while (state != QuitGame) {
 		switch (state) {
 			case Menu: {
 				Screen* menu = factory->CreateMenu(window);
@@ -32,7 +32,7 @@ void Game::Run() {
 						state = Settings;
 						break;
 					case 3:
-						state = Quit;
+						state = QuitGame;
 						break;
 				}
 				delete menu;
@@ -93,7 +93,7 @@ void Game::Run() {
 						break;
 					case 2:
 
-						state = Quit;
+						state = QuitGame;
 						break;
 				}
 				delete screen;

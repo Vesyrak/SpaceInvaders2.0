@@ -8,42 +8,100 @@ namespace Game_SDL {
 
 	}
 
-	std::vector<InputType> SDLInput::GetInput() {
-		std::vector<InputType> input;
+	BaseInput* SDLInput::GetInput() {
+		BaseInput* input = new BaseInput();
 		SDL_Event event;
 		SDL_PollEvent(&event);
 		const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL);
 
 		if (currentKeyStates[SDL_SCANCODE_W]) {
-			input.push_back(InputType::Up);
+			input->inputVector.push_back(InputType::Up);
 		}
 		if (currentKeyStates[SDL_SCANCODE_S]) {
-			input.push_back(InputType::Down);
+			input->inputVector.push_back(InputType::Down);
 		}
 		if (currentKeyStates[SDL_SCANCODE_A]) {
-			input.push_back(InputType::Left);
+			input->inputVector.push_back(InputType::Left);
 		}
 		if (currentKeyStates[SDL_SCANCODE_D]) {
-			input.push_back(InputType::Right);
+			input->inputVector.push_back(InputType::Right);
 
 		}
 		if (currentKeyStates[SDL_SCANCODE_SPACE]) {
-			input.push_back(InputType::A);
+			input->inputVector.push_back(InputType::A);
 
 		}
 		if (currentKeyStates[SDL_SCANCODE_J]) {
-			input.push_back(InputType::B);
+			input->inputVector.push_back(InputType::B);
 
 		}
 		if (currentKeyStates[SDL_SCANCODE_K]) {
-			input.push_back(InputType::X);
+			input->inputVector.push_back(InputType::X);
 
 		}
 		if (currentKeyStates[SDL_SCANCODE_L]) {
-			input.push_back(InputType::Y);
+			input->inputVector.push_back(InputType::Y);
 
 		}
-
+		if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP) {
+			SDL_GetMouseState(&input->mouseX, &input->mouseY);
+			if (event.type == SDL_MOUSEBUTTONDOWN)
+				input->mousepress = true;
+		}
 		return input;
 	}
+	BaseInput* SDLInput::GetInput(std::string* string) {
+		BaseInput* input = new BaseInput();
+		SDL_Event event;
+		SDL_PollEvent(&event);
+		const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL);
+
+		if (currentKeyStates[SDL_SCANCODE_W]) {
+			input->inputVector.push_back(InputType::Up);
+		}
+		if (currentKeyStates[SDL_SCANCODE_S]) {
+			input->inputVector.push_back(InputType::Down);
+		}
+		if (currentKeyStates[SDL_SCANCODE_A]) {
+			input->inputVector.push_back(InputType::Left);
+		}
+		if (currentKeyStates[SDL_SCANCODE_D]) {
+			input->inputVector.push_back(InputType::Right);
+
+		}
+		if (currentKeyStates[SDL_SCANCODE_SPACE]) {
+			input->inputVector.push_back(InputType::A);
+
+		}
+		if (currentKeyStates[SDL_SCANCODE_J]) {
+			input->inputVector.push_back(InputType::B);
+
+		}
+		if (currentKeyStates[SDL_SCANCODE_K]) {
+			input->inputVector.push_back(InputType::X);
+
+		}
+		if (currentKeyStates[SDL_SCANCODE_L]) {
+			input->inputVector.push_back(InputType::Y);
+
+		}
+		if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP) {
+			SDL_GetMouseState(&input->mouseX, &input->mouseY);
+			if (event.type == SDL_MOUSEBUTTONDOWN)
+				input->mousepress = true;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			//Handle backspace
+			if (event.key.keysym.sym == SDLK_BACKSPACE && string->length() > 0) {
+				//lop off character
+				string->pop_back();
+			}
+		}
+		if (event.type == SDL_TEXTINPUT) {
+			//Append character
+			string->append(event.text.text);
+		}
+		return input;
+	}
+
 }

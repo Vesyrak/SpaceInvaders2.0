@@ -22,8 +22,8 @@ namespace Game_Core {
 
 	//Updates according to inputhandler, also checks invincibility timer.
 	void PlayerShip::Update() {
-		std::vector<InputType> input = inputHandler->GetInput();
-		for (InputType dir : input) {
+		BaseInput* input = inputHandler->GetInput();
+		for (InputType dir : input->inputVector) {
 			if (dir == InputType::Left || dir == InputType::Right)
 				Entity::Move(dir);
 			if (dir == InputType::Up)

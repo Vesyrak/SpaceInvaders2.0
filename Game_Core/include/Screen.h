@@ -2,6 +2,7 @@
 #define SCREEN_H
 #include "Window.h"
 #include "Timer.h"
+#include "Input.h"
 namespace Game_Core {
 
 	class AbstractFactory;
@@ -13,10 +14,14 @@ namespace Game_Core {
 		protected:
 			virtual void Update()=0;
 			virtual void Visualise()=0;
+			BaseInput* input;
+			int returnValue;
+			Window* window;
+			std::string* alterString;
+		private:
 			Timer* frameTimer;
 			Timer* capTimer;
-			Window* window;
-			int returnValue;
+			Input* inputHandler;
 			int countedFrames;
 	};
 }
