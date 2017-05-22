@@ -9,7 +9,10 @@ namespace Game_SDL {
 	}
 	SDLHealthbar::~SDLHealthbar() {
 	}
+
+	//Updates the healthbar
 	void SDLHealthbar::Update() {
+		//If the object it observes' hp has changed, update
 		if (observed->GetHP() != prevhp) {
 			prevhp = observed->GetHP();
 			if (observed->GetHP() / (double) starthp * 100 > 65)

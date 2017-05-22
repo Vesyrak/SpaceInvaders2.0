@@ -16,6 +16,7 @@ namespace Game_SDL {
 		buttons.clear();
 	}
 
+	//Updates Buttons
 	void SDLMenu::Update() {
 		background->Update();
 		SDL_Event e;

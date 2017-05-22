@@ -16,6 +16,7 @@ namespace Game_SDL {
 
 	}
 
+	//Updates background & buttons
 	void SDLSettingsScreen::Update() {
 		background->Update();
 		SDL_Event e;

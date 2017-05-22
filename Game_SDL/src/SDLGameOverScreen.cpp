@@ -6,18 +6,19 @@ namespace Game_SDL {
 
 	SDLGameOverScreen::SDLGameOverScreen(SDLContext* context, AbstractFactory* factory,std::string username, int score,  Window* window) :
 			Screen(factory, window) {
+		returnValue = 0;
+		blinker = -1;
+		std::string scorestring = "Score  " + std::to_string(score);
+
 		buttons.push_back(new SDLButton(context, factory, "Menu", 30, 150));
 		buttons.push_back(new SDLButton(context, factory, "Quit", 110, 150));
 		background = factory->CreateBackground();
 		you = factory->CreateText("YOU", 40, 60, 24);
 		died = factory->CreateText("DIED", 36, 100, 24);
-		returnValue = 0;
 		youDiedTimer = factory->CreateTimer();
-		youDiedTimer->Start();
-		std::string scorestring = "Score  " + std::to_string(score);
 		scoreText = factory->CreateText(scorestring, 75, 140);
 		scoreText->HorizontalCenterText(0, 200);
-		blinker = -1;
+		youDiedTimer->Start();
 		GenerateScores(factory, username, score);
 	}
 	SDLGameOverScreen::~SDLGameOverScreen() {
@@ -36,6 +37,7 @@ namespace Game_SDL {
 		scores.clear();
 	}
 
+	//Updates Screen for button handling
 	void SDLGameOverScreen::Update() {
 		SDL_Event e;
 		//Handle events on queue
@@ -52,6 +54,9 @@ namespace Game_SDL {
 
 		}
 	}
+
+	//First it lets the "YOU DIED" blink, after 5000 ticks it generates the rest of the UI
+	//In the score part, it lets your name blink if you're high enough.
 	void SDLGameOverScreen::Visualise() {
 		window->PrepareRender();
 		background->Visualise();
@@ -67,7 +72,7 @@ namespace Game_SDL {
 			for (SDLButton* button : buttons) {
 				button->Visualise();
 			}
-			for (int i = 0; i < scores.size(); i++) {
+			for (unsigned int i = 0; i < scores.size(); i++) {
 				if (i != blinker || (youDiedTimer->GetTicks() / 250) % 2 == 1)
 					scores[i]->Visualise();
 
@@ -76,6 +81,8 @@ namespace Game_SDL {
 
 		window->PresentRender();
 	}
+
+	//Generate the scores for displaying
 	void SDLGameOverScreen::GenerateScores(AbstractFactory* factory, std::string username, int score) {
 		FileWriter writer;
 		writer.ReadScore();

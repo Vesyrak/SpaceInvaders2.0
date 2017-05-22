@@ -8,10 +8,12 @@ namespace Game_SDL {
 		scrollingOffset = 0;
 		scrollBounds = new BoundingBox(0, 0, 200, 200);
 	}
+
 	SDLBackground::~SDLBackground() {
 		delete scrollBounds;
 	}
 
+	//Scrolls the background (optional)
 	void SDLBackground::Update() {
 		int offset = bounds->GetY();
 		bounds->SetY((double) ++offset);

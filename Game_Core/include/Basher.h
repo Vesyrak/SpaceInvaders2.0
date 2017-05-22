@@ -4,6 +4,7 @@
 #include "AudioEngine.h"
 namespace Game_Core {
 class AbstractFactory;
+//Abstract class for the "Basher" enemy, has no attacks but high HP.
 class Basher: public Entity{
     public:
         Basher(AbstractFactory* factory, std::vector<Entity*>* bulletVector,int x, int y, int difficulty);

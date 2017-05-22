@@ -219,6 +219,7 @@ namespace Game_Core {
 		else
 			movementCounter++;
 	}
+
 	void Level::CheckIfTargetReached() {
 		for (Entity* enemy : enemies) {
 			if (enemy->GetBounds()->GetY() + enemy->GetBounds()->GetHeight() > 170) {
@@ -228,9 +229,11 @@ namespace Game_Core {
 			}
 		}
 	}
+
 	int Level::GetScore() {
 		return score;
 	}
+
 	int Level::GetRemainingLives() {
 		return playerShip->GetLives();
 	}

@@ -5,22 +5,19 @@ namespace Game_SDL {
 	SDLContext::SDLContext(SDLWindow* window) {
 		this->window = window;
 	}
-	SDLContext::~SDLContext() {
 
+	SDLContext::~SDLContext() {
 		std::map<std::string, SDL_Texture*>::iterator itr = textureMap.begin();
 		while (itr != textureMap.end()) {
 			itr = textureMap.erase(itr);
 		}
 	}
 
+	//Generates text texture
 	SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds, int size) {
-
 		TTF_Font* font = TTF_OpenFont("graphics/bitbold.ttf", size);
-
-		SDL_Color White = { 255, 255, 255 }; // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
-
-		SDL_Surface* surfaceMessage = TTF_RenderUTF8_Solid(font, text.c_str(), White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-
+		SDL_Color White = { 255, 255, 255 };
+		SDL_Surface* surfaceMessage = TTF_RenderUTF8_Solid(font, text.c_str(), White);
 		bounds->SetWidth(surfaceMessage->w / 2);
 		bounds->SetHeight(surfaceMessage->h / 2);
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(window->renderer, surfaceMessage);
@@ -29,6 +26,7 @@ namespace Game_SDL {
 		return texture;
 	}
 
+	//Draws (resized) texture to screen
 	void SDLContext::Draw(SDL_Texture* texture, BoundingBox* bounds) {
 		SDL_Rect DestR;
 
@@ -38,6 +36,8 @@ namespace Game_SDL {
 		DestR.h = window->screen_height / (double) window->LOGICAL_HEIGHT * bounds->GetHeight();
 		SDL_RenderCopy(window->renderer, texture, NULL, &DestR);
 	}
+
+	//Draws (resized) rectangle to screen
 	void SDLContext::DrawRect(SDL_Color* color, BoundingBox* bounds, bool filled) {
 		SDL_SetRenderDrawColor(window->renderer, color->r, color->g, color->b, color->a);
 		//SDL_RenderClear(window->renderer );
@@ -52,6 +52,8 @@ namespace Game_SDL {
 		else
 			SDL_RenderDrawRect(window->renderer, &DestR);
 	}
+
+	//Get texture from texture map, or load it if it isn't in the map
 	SDL_Texture* SDLContext::GetTexture(std::string path) {
 		std::map<std::string, SDL_Texture*>::iterator it = textureMap.find(path);
 		if (it != textureMap.end()) {
@@ -60,6 +62,8 @@ namespace Game_SDL {
 		else
 			return loadTexture(path);
 	}
+
+	//Load texture from path
 	SDL_Texture* SDLContext::loadTexture(std::string path) {
 
 		//The final texture
@@ -88,6 +92,8 @@ namespace Game_SDL {
 		textureMap.insert(std::pair<std::string, SDL_Texture*>(path, newTexture));
 		return newTexture;
 	}
+
+	//Converts logical bounds to actual bounds
 	void SDLContext::LogicalToActualCoords(BoundingBox* bounds) {
 		bounds->SetX(window->screen_width / (double) window->LOGICAL_WIDTH * bounds->GetX());
 		bounds->SetY(window->screen_height / (double) window->LOGICAL_HEIGHT * bounds->GetY());

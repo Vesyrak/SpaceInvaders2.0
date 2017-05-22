@@ -15,6 +15,8 @@ namespace Game_SDL {
 		delete background;
 		delete flashTimer;
 	}
+
+	//Updates bg and flashes difficulty
 	void SDLNextLevelScreen::Update() {
 		background->Update();
 		if (flashTimer->GetTicks() > 2500) {

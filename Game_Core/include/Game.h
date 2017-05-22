@@ -6,7 +6,7 @@
 #include "Level.h"
 namespace Game_Core {
 	enum GameState {
-		Menu, NextLevel, Settings, Running, Paused, GameOver, Quit
+		Menu, NextLevel, Settings, Running, GameOver, Quit
 	};
 	class Game {
 		public:

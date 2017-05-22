@@ -7,10 +7,13 @@ namespace Game_SDL {
 		chargeImage = context->GetTexture("graphics/bomberlaser.png");
 		chargeBounds = new BoundingBox(x, y, 4, 4);
 	}
+
 	SDLBomber::~SDLBomber() {
 		delete chargeBounds;
 	}
 
+	//Draws the bomber. If it is charging it bullet, it will slowly enlarge and
+	// shrink it.
 	void SDLBomber::Visualise() {
 		context->Draw(image, bounds);
 		if (charging) {

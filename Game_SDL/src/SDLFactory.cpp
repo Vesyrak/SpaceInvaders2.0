@@ -1,12 +1,13 @@
 #include "SDLFactory.h"
 using namespace std;
 namespace Game_SDL {
-
+	//Creates variables for local getters
 	SDLFactory::SDLFactory() {
 		audioEngine = NULL;
 		context = NULL;
 		inputHandler = NULL;
 	}
+
 	SDLFactory::~SDLFactory() {
 		delete context;
 		delete audioEngine;

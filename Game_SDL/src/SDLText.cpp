@@ -14,6 +14,8 @@ namespace Game_SDL {
 	SDLText::~SDLText() {
 		SDL_DestroyTexture(texture);
 	}
+
+	//Regenerates text with new message
 	void SDLText::Update(std::string message) {
 		SDL_DestroyTexture(texture);
 		this->texture = this->context->GenerateText(message, bounds, size);

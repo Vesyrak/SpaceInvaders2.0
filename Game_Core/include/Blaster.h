@@ -4,6 +4,7 @@
 #include "AudioEngine.h"
 namespace Game_Core {
 	class AbstractFactory;
+	//Abstract class for the "Blaster" enemy, Medium HP but increasingly higher attack speed
 	class Blaster: public Entity {
 		public:
 			Blaster(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty);

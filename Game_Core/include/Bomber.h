@@ -5,6 +5,7 @@
 #include "AudioEngine.h"
 namespace Game_Core {
 	class AbstractFactory;
+	//Abstract class for the "Bomber" enemy, Low HP, needs to charge, but increasingly high .
 	class Bomber: public Entity {
 		public:
 			Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty);
