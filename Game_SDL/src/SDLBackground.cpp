@@ -4,7 +4,7 @@ namespace Game_SDL {
 	SDLBackground::SDLBackground(SDLContext* context) :
 			Background() {
 		this->context = context;
-		image = context->GetTexture("graphics/background.png");
+		image = context->GetTexture("graphics/background2.png");
 		scrollingOffset = 0;
 		scrollBounds = new BoundingBox(0, 0, 200, 200);
 	}
@@ -15,8 +15,7 @@ namespace Game_SDL {
 
 	//Scrolls the background (optional)
 	void SDLBackground::Update() {
-		int offset = bounds->GetY();
-		bounds->SetY((double) ++offset);
+		bounds->SetY(bounds->GetY()+0.5);
 		scrollBounds->SetY((double) (bounds->GetY() - bounds->GetHeight()));
 		if (bounds->GetY() > bounds->GetHeight()) {
 			bounds->SetY(0);

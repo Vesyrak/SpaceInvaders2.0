@@ -3,7 +3,7 @@ namespace Game_SDL {
 
 	SDLBomber::SDLBomber(SDLContext* context, AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty) :Bomber(factory, bulletVector, x, y, difficulty) {
 		this->context = context;
-		image = context->GetTexture("graphics/bomber.png");
+		image = context->GetTexture("graphics/bomber2.png");
 		chargeImage = context->GetTexture("graphics/bomberlaser.png");
 		chargeBounds = new BoundingBox(x, y, 4, 4);
 	}

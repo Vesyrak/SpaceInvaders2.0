@@ -18,7 +18,6 @@ namespace Game_SDL {
 			int HandleEvent(BaseInput* input);
 
 		private:
-			void CenterText();
 			Text* text;
 			SDLContext* context;
 			ButtonState mCurrentSprite;

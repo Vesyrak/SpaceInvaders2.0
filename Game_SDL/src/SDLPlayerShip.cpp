@@ -4,7 +4,7 @@ namespace Game_SDL {
 
 	SDLPlayerShip::SDLPlayerShip(SDLContext* context, AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed) :PlayerShip(factory, bulletVector, lives, x, y, movementSpeed) {
 		this->context = context;
-		image = context->GetTexture("graphics/ship.png");
+		image = context->GetTexture("graphics/playership2.png");
 	}
 	SDLPlayerShip::~SDLPlayerShip() {
 	}

@@ -38,6 +38,10 @@ namespace Game_SDL {
 		return new SDLLaserBomb(context, x, y, movementSpeed, direction, damage);
 	}
 
+    LifePowerUp* SDLFactory::CreateLifePowerUp(PlayerShip* playerShip, int x, int y){
+    	return new SDLLifePowerUp(context, playerShip, x, y);
+    }
+
 	AudioEngine* SDLFactory::GetAudioEngine() {
 		if (audioEngine == NULL) {
 			audioEngine = new SDLAudioEngine();

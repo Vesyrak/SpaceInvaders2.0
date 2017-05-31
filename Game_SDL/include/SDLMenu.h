@@ -13,6 +13,8 @@ namespace Game_SDL {
 		protected:
 			void Update() override;
 			void Visualise() override;
+			Text* header;
+			Text* version;
 			std::vector<SDLButton*> buttons;
 			Background* background;
 	};

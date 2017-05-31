@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "BoundingBox.h"
 namespace Game_Core {
+	enum PowerUps{LifeUp=2};
 	class Entity {
 		public:
 			Entity(int x, int y, int width, int height, int movementSpeed);

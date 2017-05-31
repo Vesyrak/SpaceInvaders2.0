@@ -20,6 +20,7 @@
 #include "SDLSettingsScreen.h"
 #include "SDLAudioEngine.h"
 #include "SDLNextLevelScreen.h"
+#include "SDLLifePowerUp.h"
 using namespace Game_Core;
 
 namespace Game_SDL {
@@ -33,6 +34,7 @@ namespace Game_SDL {
 			PlayerShip* CreatePlayerShip(std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed) override;
 			Laser* CreateLaser(int x, int y, int movementSpeed, InputType direction, int damage) override;
 			LaserBomb* CreateLaserBomb(int x, int y, int movementSpeed, InputType direction, int damage) override;
+	        LifePowerUp* CreateLifePowerUp(PlayerShip* playerShip, int x, int y);
 			AudioEngine* GetAudioEngine() override;
 			Input* GetInputHandler() override;
 			Timer* CreateTimer() override;

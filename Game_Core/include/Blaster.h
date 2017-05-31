@@ -11,6 +11,8 @@ namespace Game_Core {
 			~Blaster();
 			void Update();
 			void Attack();
+	        void Move(InputType dir);
+
 			void Damage(int damage);
 		private:
 			AbstractFactory* factory;

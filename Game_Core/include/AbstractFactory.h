@@ -15,6 +15,7 @@
 #include "LaserBomb.h"
 #include "Screen.h"
 #include "AudioEngine.h"
+#include "LifePowerUp.h"
 
 namespace Game_Core {
     //Abstract class for initializing most important base classes
@@ -28,6 +29,7 @@ namespace Game_Core {
         virtual PlayerShip *CreatePlayerShip(std::vector<Entity *> *bulletVector, int lives, int x, int y, int movementSpeed)=0;
         virtual Laser *CreateLaser(int x, int y, int movementSpeed, InputType direction, int damage)=0;
         virtual LaserBomb *CreateLaserBomb(int x, int y, int movementSpeed, InputType direction, int damage)=0;
+        virtual LifePowerUp* CreateLifePowerUp(PlayerShip* playerShip, int x, int y)=0;
         virtual AudioEngine *GetAudioEngine()=0;
         virtual Input *GetInputHandler()=0;
         virtual Timer *CreateTimer()=0;

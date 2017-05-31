@@ -11,8 +11,10 @@ class Basher: public Entity{
         ~Basher();
         void Update();
         void Attack();
+        void Move(InputType dir);
         void Damage(int damage);
     private:
+        int difficulty;
         AudioEngine* audioEngine;
 };
 }

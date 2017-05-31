@@ -17,6 +17,7 @@ namespace Game_Core {
 			void Update();
 			void Shoot();
 			void Damage(int damage) override;
+			void PowerUp(PowerUps up);
 			int GetLives();
 		protected:
 			Timer* invincible;

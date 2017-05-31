@@ -21,19 +21,19 @@ namespace Game_Core {
 			if (j < 2)
 				for (int i = 0; i < columns; i++) {
 					enemies.push_back(factory->CreateBomber(&enemyBullets, x, y, difficulty));
-					x += 15;
+					x += 16;
 				}
 			else if (j < 5)
 				for (int i = 0; i < columns; i++) {
 					Entity* enemy = factory->CreateBlaster(&enemyBullets, x, y, difficulty);
 					enemies.push_back(enemy);
-					x += 15;
+					x += 16;
 				}
 			else
 				for (int i = 0; i < columns; i++) {
 					Entity* enemy = factory->CreateBasher(&enemyBullets, x, y, difficulty);
 					enemies.push_back(enemy);
-					x += 15;
+					x += 16;
 				}
 			y += 15;
 		}
@@ -42,6 +42,7 @@ namespace Game_Core {
 		healthbar = factory->CreateHealthbar(playerShip, 5, 5);
 		difficultyText = factory->CreateText("Difficulty: " + std::to_string(difficulty), 120, 185, 16);
 	}
+
 	Level::~Level() {
 		for (std::vector<Entity*>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
 			delete (*it);
@@ -55,6 +56,10 @@ namespace Game_Core {
 			delete (*it);
 		}
 		playerShipBullets.clear();
+		for (std::vector<Entity*>::iterator it = powerups.begin(); it != powerups.end(); ++it) {
+			delete (*it);
+		}
+		powerups.clear();
 		delete playerShip;
 		delete healthbar;
 		delete difficultyText;
@@ -76,15 +81,19 @@ namespace Game_Core {
 		for (Entity* n : playerShipBullets) {
 			n->Update();
 		}
-		CheckCollisions(&enemyBullets, playerShip);
-		CheckCollisions(&playerShipBullets, &enemies);
+		for (Entity* n : powerups) {
+			n->Update();
+		}
+		CheckBulletCollisions(&enemyBullets, playerShip);
+		CheckPowerUpCollisions(&powerups, playerShip);
+		CheckBulletCollisions(&playerShipBullets, &enemies);
 		if (playerShip->GetBounds()->CollidesWith(window->GetRightBounds()))
 			playerShip->GetBounds()->SetX(window->GetRightBounds()->GetX() - playerShip->GetBounds()->GetWidth());
 		if (playerShip->GetBounds()->CollidesWith(window->GetLeftBounds()))
 			playerShip->GetBounds()->SetX(window->GetLeftBounds()->GetX() + window->GetLeftBounds()->GetWidth());
+
 		std::vector<Entity*>::iterator j = playerShipBullets.begin();
 		while (j < playerShipBullets.end()) {
-
 			if ((*j)->GetBounds()->CollidesWith(window->GetTopBounds())) {
 				delete (*j);
 				playerShipBullets.erase(j++);
@@ -92,6 +101,7 @@ namespace Game_Core {
 			else
 				j++;
 		}
+
 		healthbar->Update();
 		if (score != scoreHistory) {
 			scoreHistory = score;
@@ -105,6 +115,9 @@ namespace Game_Core {
 		j = enemies.begin();
 		while (j < enemies.end()) {
 			if ((*j)->GetHP() <= 0) {
+				if (rand() % 25 == 0) {
+					powerups.push_back(factory->CreateLifePowerUp(playerShip, (*j)->GetBounds()->GetX(),(*j)->GetBounds()->GetY()));
+				}
 				delete (*j);
 				audioEngine->PlaySound(Death);
 				enemies.erase(j++);
@@ -119,7 +132,8 @@ namespace Game_Core {
 		if (playerShip->GetLives() < 0)
 			returnValue = 1;
 	}
-	void Level::CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities) {
+
+	void Level::CheckBulletCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities) {
 		std::vector<Entity*>::iterator i = entities->begin();
 		while (i < entities->end()) {
 			bool hit = false;
@@ -140,7 +154,8 @@ namespace Game_Core {
 		}
 
 	}
-	void Level::CheckCollisions(std::vector<Entity*>* bullets, Entity* entity) {
+
+	void Level::CheckBulletCollisions(std::vector<Entity*>* bullets, Entity* entity) {
 		std::vector<Entity*>::iterator j = bullets->begin();
 		while (j < bullets->end()) {
 			if (entity->GetBounds()->CollidesWith((*j)->GetBounds())) {
@@ -154,7 +169,20 @@ namespace Game_Core {
 		}
 
 	}
+	void Level::CheckPowerUpCollisions(std::vector<Entity*>* powerUps, PlayerShip* entity) {
+		std::vector<Entity*>::iterator j = powerUps->begin();
+		while (j < powerUps->end()) {
+			if (entity->GetBounds()->CollidesWith((*j)->GetBounds())) {
+				entity->PowerUp(static_cast<PowerUps>((*j)->GetHP()));
+				delete (*j);
+				powerUps->erase(j++);
+				break;
+			}
+			else
+				++j;
+		}
 
+	}
 	void Level::Visualise() {
 		window->PrepareRender();
 		background->Visualise();
@@ -169,6 +197,9 @@ namespace Game_Core {
 		for (Entity* n : playerShipBullets) {
 			n->Visualise();
 		}
+		for (Entity* n : powerups) {
+			n->Visualise();
+		}
 		scoreText->Visualise();
 		livesText->Visualise();
 		healthbar->Visualise();
@@ -177,8 +208,7 @@ namespace Game_Core {
 	}
 
 	void Level::MoveEnemies() {
-		if (movementCounter == (10 - difficulty / 4)) {
-			movementCounter = 0;
+
 			if (right) {
 				for (Entity* e : enemies) {
 					if (e->GetBounds()->CollidesWith(window->GetRightBounds())) {
@@ -215,9 +245,7 @@ namespace Game_Core {
 					return;
 				}
 			}
-		}
-		else
-			movementCounter++;
+
 	}
 
 	void Level::CheckIfTargetReached() {

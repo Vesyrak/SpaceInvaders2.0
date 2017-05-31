@@ -12,6 +12,7 @@ namespace Game_Core {
 			~Bomber();
 			void Update();
 			void Attack();
+	        void Move(InputType dir);
 			void Damage(int damage);
 		protected:
 			bool charging;

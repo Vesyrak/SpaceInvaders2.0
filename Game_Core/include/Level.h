@@ -18,8 +18,10 @@ namespace Game_Core {
 			void Visualise();
 			void MoveEnemies();
 			void CheckIfTargetReached();
-			void CheckCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities);
-			void CheckCollisions(std::vector<Entity*>* bullets, Entity* entity);
+			void CheckBulletCollisions(std::vector<Entity*>* bullets, std::vector<Entity*>* entities);
+			void CheckBulletCollisions(std::vector<Entity*>* bullets, Entity* entity);
+			void CheckPowerUpCollisions(std::vector<Entity*>* bullets, PlayerShip* entity);
+
 			AbstractFactory* factory;
 			PlayerShip* playerShip;
 			AudioEngine* audioEngine;
@@ -31,10 +33,11 @@ namespace Game_Core {
 			std::vector<Entity*> enemyBullets;
 			std::vector<Entity*> playerShipBullets;
 			std::vector<Entity*> enemies;
+			std::vector<Entity*> powerups;
 
 			int movementCounter;
 			int rows = 6;
-			int columns = 10;
+			int columns = 9;
 			int difficulty;
 			bool right;
 			int score;

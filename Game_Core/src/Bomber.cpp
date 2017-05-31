@@ -2,7 +2,7 @@
 #include "AbstractFactory.h"
 namespace Game_Core {
 
-	Bomber::Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty): Entity(x, y, 8, 8, 2) {
+	Bomber::Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty): Entity(x, y, 12, 12, 2) {
 		hp = 20;
 		this->bulletVector = bulletVector;
 		this->factory = factory;
@@ -24,6 +24,25 @@ namespace Game_Core {
 			charging = true;
 			timer->Start();
 		}
+	}
+    void Bomber::Move(InputType dir) {
+		switch (dir) {
+			case Left:
+				bounds->SetX(bounds->GetX() - std::min(0.1+(double)difficulty/50, (double)0.26)*movementSpeed);
+				break;
+			case Right:
+				bounds->SetX(bounds->GetX() + std::min(0.1+(double)difficulty/50, (double)0.26)*movementSpeed);
+				break;
+			case Up:
+				bounds->SetY(bounds->GetY() - movementSpeed);
+				break;
+			case Down:
+				bounds->SetY(bounds->GetY() + movementSpeed);
+				break;
+			default:
+				return;
+		}
+
 	}
 	void Bomber::Damage(int damage) {
 		audioEngine->PlaySound(Damaged);

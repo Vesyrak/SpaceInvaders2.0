@@ -4,7 +4,7 @@
 namespace Game_Core {
 
 	PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed) :
-			Entity(x, y, 8, 8, movementSpeed) {
+			Entity(x, y, 12, 12, movementSpeed) {
 		inputHandler = factory->GetInputHandler();
 		this->lives = lives;
 		this->bulletVector = bulletVector;
@@ -67,4 +67,12 @@ namespace Game_Core {
 				Revive();
 		}
 	}
+	void PlayerShip::PowerUp(PowerUps up){
+		switch(up){
+			case LifeUp:
+				lives++;
+				break;
+		}
+	}
+
 }
