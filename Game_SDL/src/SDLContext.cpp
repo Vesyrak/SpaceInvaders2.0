@@ -15,7 +15,7 @@ namespace Game_SDL {
 
 	//Generates text texture
 	SDL_Texture* SDLContext::GenerateText(std::string text, BoundingBox* bounds, int size) {
-		TTF_Font* font = TTF_OpenFont("graphics/bitbold.ttf", size);
+		TTF_Font* font = TTF_OpenFont("graphics/Kenney Rocket Square.ttf", size);
 		SDL_Color White = { 255, 255, 255 };
 		SDL_Surface* surfaceMessage = TTF_RenderUTF8_Solid(font, text.c_str(), White);
 		bounds->SetWidth(surfaceMessage->w / 2);

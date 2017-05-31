@@ -37,10 +37,10 @@ namespace Game_Core {
 				}
 			y += 15;
 		}
-		scoreText = factory->CreateText("Score: " + std::to_string(score), 5, 185, 16);
+		scoreText = factory->CreateText("Score: " + std::to_string(score), 5, 190, 16);
 		livesText = factory->CreateText("Lives: " + std::to_string(lives), 150, 5, 16);
 		healthbar = factory->CreateHealthbar(playerShip, 5, 5);
-		difficultyText = factory->CreateText("Difficulty: " + std::to_string(difficulty), 120, 185, 16);
+		difficultyText = factory->CreateText("Difficulty: " + std::to_string(difficulty), 110, 190, 16);
 	}
 
 	Level::~Level() {
