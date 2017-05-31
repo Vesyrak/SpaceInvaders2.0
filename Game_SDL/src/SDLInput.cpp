@@ -13,7 +13,9 @@ namespace Game_SDL {
 		SDL_Event event;
 		SDL_PollEvent(&event);
 		const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL);
-
+		if(currentKeyStates[SDL_SCANCODE_ESCAPE]){
+			input->inputVector.push_back(InputType::Quit);
+		}
 		if (currentKeyStates[SDL_SCANCODE_W]) {
 			input->inputVector.push_back(InputType::Up);
 		}
@@ -55,7 +57,9 @@ namespace Game_SDL {
 		SDL_Event event;
 		SDL_PollEvent(&event);
 		const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL);
-
+		if(currentKeyStates[SDL_SCANCODE_ESCAPE]){
+			input->inputVector.push_back(InputType::Quit);
+		}
 		if (currentKeyStates[SDL_SCANCODE_W]) {
 			input->inputVector.push_back(InputType::Up);
 		}

@@ -28,7 +28,7 @@ namespace Game_Core {
 			else
 				input = inputHandler->GetInput();
 
-			if (std::find(input->inputVector.begin(), input->inputVector.end(), Quit) != input->inputVector.end())
+			if (std::find(input->inputVector.begin(), input->inputVector.end(), InputType::Quit) != input->inputVector.end())
 				returnValue = 0;
 			capTimer->Start();
 			float avgFPS = countedFrames / (frameTimer->GetTicks() / 1000.f);
