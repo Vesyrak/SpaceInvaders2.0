@@ -13,7 +13,7 @@ namespace Game_Core {
 		lives = 3;
 		difficulty = 1;
 		this->factory = factory;
-		window = factory->CreateWindow(1366, 726);
+		window = factory->CreateWindow(1366, 768);
 		window->CreateWindow();
 		state = Menu;
 		username = "Fernando";
