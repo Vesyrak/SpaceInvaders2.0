@@ -15,7 +15,6 @@ namespace Game_Core {
 		audioEngine = factory->GetAudioEngine();
 		this->factory = factory;
 		this->difficulty = difficulty;
-		audioEngine->PlayBackground();
 		right = true;
 		int y = 15;
 		for (int j = 0; j < rows; j++) {

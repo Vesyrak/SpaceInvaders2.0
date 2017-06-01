@@ -25,6 +25,9 @@ namespace Game_Core {
 
 	//Core game loop, keeps running until the state is set on "QuitGame"
 	void Game::Run() {
+		AudioEngine* engine=factory->GetAudioEngine();
+		engine->PlayBackground();
+
 		while (state != QuitGame) {
 			switch (state) {
 				//Main menu screen.

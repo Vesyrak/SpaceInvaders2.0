@@ -40,7 +40,7 @@ namespace Game_SDL {
 	//Updates Screen for button handling
 	void SDLGameOverScreen::Update() {
 		//Handle events on queue
-		if (buttons[1]->HandleEvent(input)) {
+		if (buttons[0]->HandleEvent(input)) {
 			returnValue = Menu;
 		}
 		if (buttons[1]->HandleEvent(input)) {

@@ -67,7 +67,7 @@ namespace Game_Core {
 		if (hp <= 0) {
 			audioEngine->PlaySound(Death);
 			lives--;
-			if (lives > 0)
+			if (lives >=0)
 				Revive();
 		}
 	}

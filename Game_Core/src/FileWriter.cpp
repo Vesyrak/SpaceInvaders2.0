@@ -44,7 +44,6 @@ namespace Game_Core {
 			lines = 10;
 		infile.clear();
 		infile.seekg(0, std::ios::beg);
-		std::cout << "----" << std::endl;
 		for (int i = 0; i < lines / 2; i++) {
 			infile >> name;
 			users.push_back(name);
