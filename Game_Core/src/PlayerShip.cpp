@@ -1,8 +1,10 @@
 #include "PlayerShip.h"
 #include "AbstractFactory.h"
 #include <iostream>
+
 namespace Game_Core {
 
+	//Constructor sets required parameters
 	PlayerShip::PlayerShip(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed) :
 			Entity(x, y, 12, 12, movementSpeed) {
 		inputHandler = factory->GetInputHandler();
@@ -15,20 +17,22 @@ namespace Game_Core {
 		invincible = factory->CreateTimer();
 		this->audioEngine = factory->GetAudioEngine();
 	}
+
 	PlayerShip::~PlayerShip() {
 		delete shootingTimer;
 		delete invincible;
 	}
 
-	//Updates according to inputhandler, also checks invincibility timer.
-	void PlayerShip::Update() {
-		BaseInput* input = inputHandler->GetInput();
-		for (InputType dir : input->inputVector) {
+	//Updates according to inputhandler,
+	void PlayerShip::Move(InputType dir) {
 			if (dir == InputType::Left || dir == InputType::Right)
 				Entity::Move(dir);
 			if (dir == InputType::Up)
 				Shoot();
-		}
+
+	}
+	//checks invincibility timer.
+	void PlayerShip::Update() {
 		if (invincible->IsRunning() && invincible->GetTicks() > 4000)
 			invincible->Stop();
 	}
@@ -67,6 +71,8 @@ namespace Game_Core {
 				Revive();
 		}
 	}
+
+	//Activates powerup
 	void PlayerShip::PowerUp(PowerUps up){
 		switch(up){
 			case LifeUp:

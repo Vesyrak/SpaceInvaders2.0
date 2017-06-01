@@ -1,5 +1,7 @@
 #include "SDLNextLevelScreen.h"
+
 namespace Game_SDL {
+
 	SDLNextLevelScreen::SDLNextLevelScreen(AbstractFactory* factory, int difficulty, Window* window) :Screen(factory, window) {
 		this->difficulty = factory->CreateText("Difficulty:", 40, 70, 30);
 		this->difficulty->HorizontalCenterText(0, 200);
@@ -9,6 +11,7 @@ namespace Game_SDL {
 		flashTimer = factory->CreateTimer();
 		flashTimer->Start();
 	}
+
 	SDLNextLevelScreen::~SDLNextLevelScreen() {
 		delete difficulty;
 		delete number;
@@ -20,9 +23,10 @@ namespace Game_SDL {
 	void SDLNextLevelScreen::Update() {
 		background->Update();
 		if (flashTimer->GetTicks() > 2500) {
-			returnValue = 1;
+			returnValue = Running;
 		}
 	}
+
 	void SDLNextLevelScreen::Visualise() {
 		window->PrepareRender();
 		background->Visualise();

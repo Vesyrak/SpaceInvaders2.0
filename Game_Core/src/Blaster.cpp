@@ -2,6 +2,7 @@
 #include "AbstractFactory.h"
 namespace Game_Core {
 
+	//Constructor sets required parameters
 	Blaster::Blaster(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty): Entity(x, y, 12, 12, 2) {
 		hp = 30 + 2 * difficulty;
 		this->bulletVector = bulletVector;
@@ -9,14 +10,19 @@ namespace Game_Core {
 		this->difficulty = difficulty;
 		this->audioEngine = factory->GetAudioEngine();
 	}
+
 	Blaster::~Blaster() {
 	}
+
+	//Shoots based on a randomizer, which increases odds with increasing difficulty
 	void Blaster::Update() {
 		if (rand() % (1000 - difficulty * 50) == 1) {
 			audioEngine->PlaySound(Shoot);
 			bulletVector->push_back(factory->CreateLaser(bounds->GetX() + bounds->GetWidth() / 2, bounds->GetY(), 2, Down, 15));
 		}
 	}
+
+	//Moves the enemy faster sideways depending on difficulty, with a max speed. Moving down (or up) is always at the same speed.
     void Blaster::Move(InputType dir) {
 		switch (dir) {
 			case Left:
@@ -36,6 +42,7 @@ namespace Game_Core {
 		}
 
 	}
+
 	void Blaster::Damage(int damage) {
 		audioEngine->PlaySound(Damaged);
 		Entity::Damage(damage);

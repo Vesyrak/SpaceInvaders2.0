@@ -3,7 +3,10 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+
 namespace Game_Core {
+
+	// IO implementation for reading and writing the score file.
 	class FileWriter {
 		public:
 			FileWriter();

@@ -1,102 +1,72 @@
 #include "Timer.h"
+
 namespace Game_Core {
 
-Timer::Timer()
-{
-    //Initialize the variables
-    startTicks = 0;
-    pausedTicks = 0;
+	//Constructor sets required parameters
+	Timer::Timer() {
+		startTicks = 0;
+		pausedTicks = 0;
+		paused = false;
+		started = false;
+	}
 
-    paused = false;
-    started = false;
-}
-Timer::~Timer(){
+	Timer::~Timer() {
 
-}
-void Timer::Start()
-{
-    //Start the timer
-    started = true;
+	}
 
-    //Unpause the timer
-    paused = false;
+	//Starts the timer and sets the corresponding variables
+	void Timer::Start() {
+		started = true;
+		paused = false;
+		startTicks = GetLocalTicks();
+		pausedTicks = 0;
+	}
 
-    //Get the current clock time
-    startTicks = GetLocalTicks();
-    pausedTicks = 0;
-}
-void Timer::Stop()
-{
-    //Stop the timer
-    started = false;
+	//Stops the timer
+	void Timer::Stop() {
+		started = false;
+		paused = false;
+		startTicks = 0;
+		pausedTicks = 0;
+	}
 
-    //Unpause the timer
-    paused = false;
+	//Pauses the timer
+	void Timer::Pause() {
+		if (started && !paused) {
+			paused = true;
+			pausedTicks = GetLocalTicks() - startTicks;
+			startTicks = 0;
+		}
+	}
 
-    //Clear tick variables
-    startTicks = 0;
-    pausedTicks = 0;
-}
-void Timer::Pause()
-{
-    //If the timer is running and isn't already paused
-    if( started && !paused )
-    {
-        //Pause the timer
-        paused = true;
+	//And unpauses
+	void Timer::UnPause() {
+		if (started && paused) {
+			paused = false;
+			startTicks = GetLocalTicks() - pausedTicks;
+			pausedTicks = 0;
+		}
+	}
 
-        //Calculate the paused ticks
-        pausedTicks = GetLocalTicks() - startTicks;
-        startTicks = 0;
-    }
-}
-void Timer::UnPause()
-{
-    //If the timer is running and paused
-    if( started && paused )
-    {
-        //Unpause the timer
-        paused = false;
+	//Get the ticks passed
+	long Timer::GetTicks() {
+		long time = 0;
+		if (started) {
+			if (paused) {
+				time = pausedTicks;
+			}
+			else {
+				time = GetLocalTicks() - startTicks;
+			}
+		}
+		return time;
+	}
 
-        //Reset the starting ticks
-        startTicks = GetLocalTicks() - pausedTicks;
+	bool Timer::IsRunning() {
+		return started && !paused;
+	}
 
-        //Reset the paused ticks
-        pausedTicks = 0;
-    }
-}
-long Timer::GetTicks()
-{
-    //The actual timer time
-	long time = 0;
-
-    //If the timer is running
-    if( started )
-    {
-        //If the timer is paused
-        if( paused )
-        {
-            //Return the number of ticks when the timer was paused
-            time = pausedTicks;
-        }
-        else
-        {
-            //Return the current time minus the start time
-            time = GetLocalTicks() - startTicks;
-        }
-    }
-
-    return time;
-}
-bool Timer::IsRunning()
-{
-    //Timer is running and paused or unpaused
-    return started && !paused;
-}
-
-bool Timer::IsPaused()
-{
-    //Timer is running and paused
-    return paused && started;
-}
+	bool Timer::IsPaused() {
+		return paused && started;
+	}
 }

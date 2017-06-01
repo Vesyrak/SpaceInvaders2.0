@@ -3,7 +3,10 @@
 #include "Background.h"
 #include "SDLContext.h"
 using namespace Game_Core;
+
 namespace Game_SDL {
+
+	//SDL Background implementation
 	class SDLBackground: public Background {
 		public:
 			SDLBackground(SDLContext* context);

@@ -3,9 +3,11 @@
 #include "LifePowerUp.h"
 #include "SDLContext.h"
 using namespace Game_Core;
-namespace Game_SDL {
-	class SDLLifePowerUp: public LifePowerUp {
 
+namespace Game_SDL {
+
+	//SDL implementation of the LifePowerUp
+	class SDLLifePowerUp: public LifePowerUp {
 		public:
 			SDLLifePowerUp(SDLContext* context, PlayerShip* playerShip, int x, int y);
 			~SDLLifePowerUp();

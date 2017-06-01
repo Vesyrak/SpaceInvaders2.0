@@ -6,6 +6,7 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//SDL implementation of the Laser
 	class SDLLaser: public Laser {
 		public:
 			SDLLaser(SDLContext* context, double x, double y, int movementSpeed, InputType direction, int damage);

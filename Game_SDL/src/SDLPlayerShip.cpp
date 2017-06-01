@@ -6,6 +6,7 @@ namespace Game_SDL {
 		this->context = context;
 		image = context->GetTexture("graphics/playership2.png");
 	}
+
 	SDLPlayerShip::~SDLPlayerShip() {
 	}
 

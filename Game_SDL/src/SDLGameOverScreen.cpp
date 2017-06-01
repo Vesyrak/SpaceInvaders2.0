@@ -20,6 +20,7 @@ namespace Game_SDL {
 		youDiedTimer->Start();
 		GenerateScores(factory, username, score);
 	}
+
 	SDLGameOverScreen::~SDLGameOverScreen() {
 		delete you;
 		delete died;
@@ -39,11 +40,11 @@ namespace Game_SDL {
 	//Updates Screen for button handling
 	void SDLGameOverScreen::Update() {
 		//Handle events on queue
-		for (unsigned int i = 0; i < buttons.size(); i++) {
-			if (buttons[i]->HandleEvent(input)) {
-				returnValue = i + 1;
-			}
-
+		if (buttons[1]->HandleEvent(input)) {
+			returnValue = Menu;
+		}
+		if (buttons[1]->HandleEvent(input)) {
+			returnValue = QuitGame;
 		}
 	}
 

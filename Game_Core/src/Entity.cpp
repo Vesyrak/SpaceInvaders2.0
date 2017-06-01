@@ -1,14 +1,19 @@
 #include "Entity.h"
 using namespace std;
 namespace Game_Core {
+
+	//Constructor sets required parameters
 	Entity::Entity(int x, int y, int width, int height, int movementSpeed) {
 		this->movementSpeed = movementSpeed;
 		hp = 1;
 		bounds = new BoundingBox(x, y, width, height);
 	}
+
 	Entity::~Entity() {
 		delete bounds;
 	}
+
+	//Moves entity depending on input
 	void Entity::Move(InputType dir) {
 		switch (dir) {
 			case Left:
@@ -27,12 +32,15 @@ namespace Game_Core {
 				return;
 		}
 	}
+
 	void Entity::Damage(int damage) {
 		hp = hp - damage;
 	}
+
 	BoundingBox* Entity::GetBounds() {
 		return bounds;
 	}
+
 	int Entity::GetHP() {
 		return hp;
 	}

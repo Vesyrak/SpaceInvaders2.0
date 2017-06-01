@@ -2,14 +2,18 @@
 #include <algorithm>
 namespace Game_Core {
 
+	//Constructor sets required parameters
 	BoundingBox::BoundingBox(double x, double y, double width, double height) {
 		this->x = x;
 		this->y = y;
 		this->width = width;
 		this->height = height;
 	}
+
 	BoundingBox::~BoundingBox() {
 	}
+
+	//Getters & Setters
 	double BoundingBox::GetWidth() {
 		return width;
 	}
@@ -34,6 +38,8 @@ namespace Game_Core {
 	void BoundingBox::SetHeight(double value) {
 		height = value;
 	}
+
+	//Checks collision with another bounding box
 	bool BoundingBox::CollidesWith(BoundingBox* bounds) {
 		if ((std::max(x, bounds->GetX()) < std::min(x + width, bounds->GetX() + bounds->GetWidth())) && (std::max(y, bounds->GetY()) < std::min(y + height, bounds->GetY() + bounds->GetHeight())))
 			return true;

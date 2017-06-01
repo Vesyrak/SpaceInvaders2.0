@@ -1,4 +1,5 @@
 #include "SDLLaserBomb.h"
+
 namespace Game_SDL {
 
 	SDLLaserBomb::SDLLaserBomb(SDLContext* context, double x, double y, int movementSpeed, InputType direction, int damage) :
@@ -6,6 +7,7 @@ namespace Game_SDL {
 		this->context = context;
 		image = context->GetTexture("graphics/bomberlaser.png");
 	}
+
 	SDLLaserBomb::~SDLLaserBomb() {
 	}
 

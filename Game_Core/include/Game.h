@@ -1,13 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
-#include "AbstractFactory.h"
-#include "PlayerShip.h"
-#include "Input.h"
-#include "Level.h"
+#include <string>
+#include "Window.h"
+
 namespace Game_Core {
+
+	//Enum of possible game states.
 	enum GameState {
-		Menu, NextLevel, Settings, Running, GameOver, QuitGame
+		Menu, NextLevel, Settings, Running, GameOver, QuitGame, NoState
 	};
+
+	class AbstractFactory;
+
+	//State machine keeping & switching the game states.
 	class Game {
 		public:
 			Game(AbstractFactory* factory);

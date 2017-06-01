@@ -2,8 +2,12 @@
 #define HEALTHBAR_H
 #include "Entity.h"
 #include "Text.h"
+
 namespace Game_Core {
+
 	class AbstractFactory;
+
+	//Base implementation of a health bar to visualise
 	class Healthbar {
 		public:
 			Healthbar(AbstractFactory* factory, Entity* observed, int x, int y);

@@ -1,5 +1,7 @@
 #include "SDLTextBox.h"
+
 namespace Game_SDL {
+
 	SDLTextBox::SDLTextBox(SDLContext* context, AbstractFactory* factory, std::string* text, int x, int y) {
 		content = text;
 		historyContent = *text;
@@ -10,6 +12,7 @@ namespace Game_SDL {
 		inputText = factory->CreateText(*content, x, y);
 		inputText->CenterText(borderBounds);
 	}
+
 	SDLTextBox::~SDLTextBox() {
 		delete inputText;
 		delete borderBounds;

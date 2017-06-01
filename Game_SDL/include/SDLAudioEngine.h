@@ -4,7 +4,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 using namespace Game_Core;
+
 namespace Game_SDL {
+
+	//SDL Audio Implementation
 	class SDLAudioEngine: public AudioEngine {
 		public:
 			SDLAudioEngine();
@@ -16,7 +19,6 @@ namespace Game_SDL {
 			Mix_Chunk* shootSound;
 			Mix_Chunk* damagedSound;
 			Mix_Chunk* deathSound;
-
 	};
 }
 #endif

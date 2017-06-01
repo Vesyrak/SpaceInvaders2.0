@@ -7,6 +7,8 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//Screen used after the player dies.
+	//Visualises scores.
 	class SDLGameOverScreen: public Screen {
 		public:
 			SDLGameOverScreen(SDLContext* context, AbstractFactory* factory,std::string username, int score, Window* window);

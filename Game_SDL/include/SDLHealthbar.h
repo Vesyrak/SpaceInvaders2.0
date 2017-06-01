@@ -6,6 +6,7 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//SDL implementation of the healthbar
 	class SDLHealthbar: public Healthbar {
 		public:
 			SDLHealthbar(SDLContext* context, AbstractFactory* factory, Entity* observed, int x, int y);

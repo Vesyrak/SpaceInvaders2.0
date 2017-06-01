@@ -7,8 +7,8 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//SDL implementation of the playership
 	class SDLPlayerShip: public PlayerShip {
-
 		public:
 			SDLPlayerShip(SDLContext* context, AbstractFactory* factory, std::vector<Entity*>* bulletVector, int lives, int x, int y, int movementSpeed);
 			~SDLPlayerShip();

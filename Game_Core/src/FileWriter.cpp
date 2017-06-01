@@ -1,32 +1,37 @@
 #include "FileWriter.h"
 #include <algorithm>
 #include <iostream>
+
 namespace Game_Core {
+
 	FileWriter::FileWriter() {
-
 	}
+
 	FileWriter::~FileWriter() {
-
 	}
+
+	//Gets users of score list. Should only be run after a ReadScore operation so the most recent is returned
 	std::vector<std::string> FileWriter::GetUsers() {
 		return users;
 	}
+
+	//Gets scores of score list. Should only be run after a ReadScore operation so the most recent is returned
 	std::vector<int> FileWriter::GetScores() {
 		return scores;
 	}
+
+	//Writes scores out to the file
 	void FileWriter::WriteScore() {
 		std::ofstream outfile;
 		outfile.open(savefile);
-		std::cout << "yo" << std::endl;
 		for (unsigned int i = 0; i < users.size(); i++) {
 			outfile << users[i] << std::endl;
 			outfile << scores[i] << std::endl;
-			std::cout << users[i] << std::endl;
-			std::cout << scores[i] << std::endl;
-
 		}
 		outfile.close();
 	}
+
+	//Reads scores from file
 	void FileWriter::ReadScore() {
 		users.clear();
 		scores.clear();
@@ -45,12 +50,12 @@ namespace Game_Core {
 			users.push_back(name);
 			infile >> score;
 			scores.push_back(score);
-			std::cout << scores[i] << std::endl;
-			std::cout << scores[i] << std::endl;
 		}
 		infile.close();
 
 	}
+
+	//Updates scores with a new entry
 	void FileWriter::UpdateScore(std::string name, int score) {
 		ReadScore();
 		std::vector<std::string>::iterator userIt = users.begin();

@@ -9,9 +9,10 @@ namespace Game_SDL {
 		version->HorizontalCenterText(0, 200);
 		buttons.push_back(new SDLButton(context, factory, "Start", 70, 80));
 		buttons.push_back(new SDLButton(context, factory, "Settings", 70, 110));
-		buttons.push_back(new SDLButton(context, factory, "Stop", 70, 140));
+		buttons.push_back(new SDLButton(context, factory, "Quit", 70, 140));
 		background = factory->CreateBackground();
 	}
+
 	SDLMenu::~SDLMenu() {
 		delete header;
 		delete version;
@@ -26,12 +27,16 @@ namespace Game_SDL {
 	//Updates Buttons
 	void SDLMenu::Update() {
 		background->Update();
-
-		for (unsigned int i = 0; i < buttons.size(); i++) {
-			if (buttons[i]->HandleEvent(input)) {
-				returnValue = i + 1;
-			}
+		if (buttons[0]->HandleEvent(input)) {
+			returnValue = NextLevel;
 		}
+		if (buttons[1]->HandleEvent(input)) {
+			returnValue = Settings;
+		}
+		if (buttons[2]->HandleEvent(input)) {
+			returnValue = QuitGame;
+		}
+
 	}
 
 	void SDLMenu::Visualise() {

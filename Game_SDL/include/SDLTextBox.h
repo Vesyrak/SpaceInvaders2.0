@@ -6,6 +6,8 @@
 #include "BaseInput.h"
 using namespace Game_Core;
 namespace Game_SDL {
+
+	//SDL Text Box
 	class SDLTextBox {
 		public:
 			SDLTextBox(SDLContext* context, AbstractFactory* factory, std::string* text, int x, int y);

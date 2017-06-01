@@ -2,8 +2,12 @@
 #include <iostream>
 #include "Game.h"
 #include "FileWriter.h"
+#include "Level.h"
+#include "AbstractFactory.h"
+
 namespace Game_Core {
 
+	//Constructor sets required parameters, state and default name
 	Game::Game(AbstractFactory* factory) {
 		score = 0;
 		lives = 3;
@@ -19,23 +23,22 @@ namespace Game_Core {
 		delete window;
 	}
 
+	//Core game loop, keeps running until the state is set on "QuitGame"
 	void Game::Run() {
 		while (state != QuitGame) {
 			switch (state) {
+				//Main menu screen.
 				case Menu: {
 					Screen* menu = factory->CreateMenu(window);
 					switch (menu->Run()) {
-						case 0:
+						case QuitGame:
 							state = QuitGame;
 							break;
-						case 1:
+						case NextLevel:
 							state = NextLevel;
 							break;
-						case 2:
+						case Settings:
 							state = Settings;
-							break;
-						case 3:
-							state = QuitGame;
 							break;
 					}
 					delete menu;
@@ -44,10 +47,10 @@ namespace Game_Core {
 				case Settings: {
 					Screen* menu = factory->CreateSettingsScreen(window, &username);
 					switch (menu->Run()) {
-						case 0:
+						case QuitGame:
 							state = QuitGame;
 							break;
-						case 1:
+						case Menu:
 							state = Menu;
 							break;
 					}
@@ -57,10 +60,10 @@ namespace Game_Core {
 				case NextLevel: {
 					Screen* screen = factory->CreateNextLevelScreen(difficulty, window);
 					switch (screen->Run()) {
-						case 0:
+						case QuitGame:
 							state = QuitGame;
 							break;
-						case 1:
+						case Running:
 							state = Running;
 							break;
 					}
@@ -70,20 +73,20 @@ namespace Game_Core {
 				case Running: {
 					Level* level = new Level(factory, window, score, lives, difficulty);
 					switch (level->Run()) {
-						case 0:
+						case QuitGame:
 							state = QuitGame;
 							break;
-						case 1:
+						case GameOver:
 							score = level->GetScore();
 							state = GameOver;
 							break;
-						case 2:
+						case NextLevel:
 							lives = level->GetRemainingLives();
 							score = level->GetScore();
 							difficulty++;
 							state = NextLevel;
 							break;
-						case 3:
+						case Running:
 							lives = level->GetRemainingLives();
 							score = level->GetScore();
 							state = Running;
@@ -100,15 +103,11 @@ namespace Game_Core {
 					difficulty = 1;
 					lives = 3;
 					switch (screen->Run()) {
-						case 0:
+						case QuitGame:
 							state = QuitGame;
 							break;
-						case 1:
+						case Menu:
 							state = Menu;
-							break;
-						case 2:
-
-							state = QuitGame;
 							break;
 					}
 					delete screen;

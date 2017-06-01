@@ -6,6 +6,7 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//SDL implementation of the LaserBomb
 	class SDLLaserBomb: public LaserBomb {
 		public:
 			SDLLaserBomb(SDLContext* context, double x, double y, int movementSpeed, InputType direction, int damage);

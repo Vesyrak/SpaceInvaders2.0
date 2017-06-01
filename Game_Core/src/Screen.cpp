@@ -1,11 +1,14 @@
 #include <algorithm>
 #include "Screen.h"
 #include "AbstractFactory.h"
+
 namespace Game_Core {
 
+	//Constructor sets required parameters
 	Screen::Screen(AbstractFactory* factory, Window* window) {
 		this->window = window;
-		countedFrames = returnValue = -1;
+		countedFrames = -1;
+		returnValue = NoState;
 		frameTimer = factory->CreateTimer();
 		capTimer = factory->CreateTimer();
 		inputHandler = factory->GetInputHandler();
@@ -20,16 +23,17 @@ namespace Game_Core {
 
 	}
 
-	//Maintains FPS for all screens
-	int Screen::Run() {
-		while (returnValue == -1) {
+	//Maintains FPS for all screens, checks if escape is pressed to quit.
+	GameState Screen::Run() {
+		while (returnValue == NoState) {
 			if (alterString != NULL)
 				input = inputHandler->GetInput(alterString);
 			else
 				input = inputHandler->GetInput();
 
 			if (std::find(input->inputVector.begin(), input->inputVector.end(), InputType::Quit) != input->inputVector.end())
-				returnValue = 0;
+				returnValue = QuitGame;
+
 			capTimer->Start();
 			float avgFPS = countedFrames / (frameTimer->GetTicks() / 1000.f);
 			if (avgFPS > 2000000) {

@@ -4,7 +4,10 @@
 #include "SDLButton.h"
 #include "SDLTextBox.h"
 using namespace Game_Core;
+
 namespace Game_SDL {
+
+	//Screen showing the settings, here only the name editing.
 	class SDLSettingsScreen: public Screen {
 		public:
 			SDLSettingsScreen( SDLContext* context,AbstractFactory* factory, Window* window, std::string* username);

@@ -6,8 +6,8 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//SDL Bomber implementation
 	class SDLBomber: public Bomber {
-
 		public:
 			SDLBomber(SDLContext* context,AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty);
 			~SDLBomber();

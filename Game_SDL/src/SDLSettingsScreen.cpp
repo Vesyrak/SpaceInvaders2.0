@@ -1,5 +1,7 @@
 #include "SDLSettingsScreen.h"
+
 namespace Game_SDL {
+
 	SDLSettingsScreen::SDLSettingsScreen(SDLContext* context, AbstractFactory* factory, Window* window, std::string* username) :
 			Screen(factory, window) {
 		background = factory->CreateBackground();
@@ -20,14 +22,12 @@ namespace Game_SDL {
 	//Updates background & buttons
 	void SDLSettingsScreen::Update() {
 		background->Update();
-
-			textBox->HandleEvent(input);
-			if (backButton->HandleEvent(input)) {
-				returnValue = 1;
-
-
+		textBox->HandleEvent(input);
+		if (backButton->HandleEvent(input)) {
+			returnValue = Menu;
 		}
 	}
+
 	void SDLSettingsScreen::Visualise() {
 		window->PrepareRender();
 		background->Visualise();

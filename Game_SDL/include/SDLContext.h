@@ -9,6 +9,7 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//Helper class to help with texture generation and drawing.
 	class SDLContext {
 		public:
 			SDLContext(SDLWindow* window);

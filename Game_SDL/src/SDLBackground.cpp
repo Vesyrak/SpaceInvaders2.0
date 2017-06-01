@@ -13,7 +13,7 @@ namespace Game_SDL {
 		delete scrollBounds;
 	}
 
-	//Scrolls the background (optional)
+	//Scrolls the background for a parallax effect (optional)
 	void SDLBackground::Update() {
 		bounds->SetY(bounds->GetY()+0.5);
 		scrollBounds->SetY((double) (bounds->GetY() - bounds->GetHeight()));

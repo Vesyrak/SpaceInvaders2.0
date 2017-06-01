@@ -3,6 +3,8 @@
 #include "PlayerShip.h"
 
 namespace Game_Core{
+
+	//Power up granting an extra life to the player.
 	class LifePowerUp: public Entity{
 		public:
 			LifePowerUp(PlayerShip* playerShip, int x, int y);

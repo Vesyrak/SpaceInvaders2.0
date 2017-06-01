@@ -2,7 +2,10 @@
 #define TEXT_H
 #include "BoundingBox.h"
 #include <string>
+
 namespace Game_Core {
+
+	//Base visualiser for text
 	class Text {
 		public:
 			Text(std::string message, int x, int y, int size);

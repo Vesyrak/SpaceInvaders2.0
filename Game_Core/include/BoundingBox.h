@@ -1,6 +1,9 @@
 #ifndef BOUNDINGBOX_H
 #define BOUNDINGBOX_H
+
 namespace Game_Core {
+
+	//Fundamental class defining the bounds/collision rectangles of just about everything
 	class BoundingBox {
 		public:
 			BoundingBox(double x, double y, double width, double height);

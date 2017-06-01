@@ -8,11 +8,13 @@ namespace Game_SDL {
 		window = NULL;
 		renderer = NULL;
 	}
+
 	SDLWindow::SDLWindow(int screen_width, int screen_height) :
 			Window(screen_width, screen_height) {
 		window = NULL;
 		renderer = NULL;
 	}
+
 	SDLWindow::~SDLWindow() {
 
 		SDL_DestroyWindow(window);
@@ -34,7 +36,7 @@ namespace Game_SDL {
 			if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
 				std::cout << "Warning: Linear texture filtering not enabled!" << std::endl;
 			}
-			window = SDL_CreateWindow("Yo Whadup", 100, 100, screen_width, screen_height, SDL_WINDOW_SHOWN);
+			window = SDL_CreateWindow("Space Invaders 2.0", 100, 100, screen_width, screen_height, SDL_WINDOW_SHOWN);
 			if (window == NULL) {
 				std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
 				SDL_Quit();

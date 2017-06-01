@@ -1,6 +1,7 @@
 #include "SDLButton.h"
 namespace Game_SDL {
 
+	//Constructor setting standard parameters, bounding boxes and colors for hovering
 	SDLButton::SDLButton(SDLContext* context, AbstractFactory* factory, std::string text, int x, int y) {
 		borderBounds = new BoundingBox(x, y, 60, 20);
 		buttonBounds = new BoundingBox(borderBounds->GetX() + 1, borderBounds->GetY() + 1, borderBounds->GetWidth() - 2, borderBounds->GetHeight() - 2);

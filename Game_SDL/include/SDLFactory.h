@@ -24,6 +24,8 @@
 using namespace Game_Core;
 
 namespace Game_SDL {
+
+	//SDL implementation of the factory
 	class SDLFactory: public AbstractFactory {
 		public:
 			SDLFactory();

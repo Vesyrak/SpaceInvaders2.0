@@ -18,6 +18,7 @@
 #include "LifePowerUp.h"
 
 namespace Game_Core {
+
     //Abstract class for initializing most important base classes
     class AbstractFactory {
     public:

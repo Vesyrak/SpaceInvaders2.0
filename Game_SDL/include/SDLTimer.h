@@ -6,14 +6,15 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
-class SDLTimer: public Timer{
-public:
-	SDLTimer();
-	~SDLTimer();
-	void Delay(int duration) override;
+	//SDL Implementation of the timer
+	class SDLTimer: public Timer {
+		public:
+			SDLTimer();
+			~SDLTimer();
+			void Delay(int duration) override;
+		protected:
+			long GetLocalTicks() override;
 
-protected:
-	long GetLocalTicks() override;
-
-};}
+	};
+}
 #endif

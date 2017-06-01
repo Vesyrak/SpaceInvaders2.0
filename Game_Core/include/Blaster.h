@@ -2,8 +2,11 @@
 #define BLASTER_H
 #include "Entity.h"
 #include "AudioEngine.h"
+
 namespace Game_Core {
+
 	class AbstractFactory;
+
 	//Abstract class for the "Blaster" enemy, Medium HP but increasingly higher attack speed
 	class Blaster: public Entity {
 		public:
@@ -12,7 +15,6 @@ namespace Game_Core {
 			void Update();
 			void Attack();
 	        void Move(InputType dir);
-
 			void Damage(int damage);
 		private:
 			AbstractFactory* factory;

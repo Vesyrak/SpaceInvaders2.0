@@ -6,6 +6,7 @@ using namespace Game_Core;
 
 namespace Game_SDL {
 
+	//Main menu screen
 	class SDLMenu: public Screen {
 		public:
 			SDLMenu(SDLContext* context, AbstractFactory* factory, Window* window);

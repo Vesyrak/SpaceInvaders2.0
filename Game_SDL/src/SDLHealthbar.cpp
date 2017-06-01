@@ -1,4 +1,5 @@
 #include "SDLHealthbar.h"
+
 namespace Game_SDL {
 
 	SDLHealthbar::SDLHealthbar(SDLContext* context, AbstractFactory* factory, Entity* observed, int x, int y) :Healthbar(factory, observed, x, y) {
@@ -7,6 +8,7 @@ namespace Game_SDL {
 		backColor= {255,255,255,255};
 		frontColor= {0,128,0,255};
 	}
+
 	SDLHealthbar::~SDLHealthbar() {
 	}
 
@@ -23,6 +25,7 @@ namespace Game_SDL {
 			foreBounds->SetWidth(observed->GetHP() / (double) starthp * (backBounds->GetWidth() - 2));
 		}
 	}
+
 	void SDLHealthbar::Visualise() {
 		hpText->Visualise();
 		context->DrawRect(&backColor, backBounds, false);

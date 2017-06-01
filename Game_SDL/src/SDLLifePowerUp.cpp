@@ -5,6 +5,7 @@ namespace Game_SDL {
 		this->context = context;
 		image = context->GetTexture("graphics/life2.png");
 	}
+
 	SDLLifePowerUp::~SDLLifePowerUp() {
 	}
 

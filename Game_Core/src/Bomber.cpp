@@ -2,6 +2,7 @@
 #include "AbstractFactory.h"
 namespace Game_Core {
 
+	//Constructor sets required parameters
 	Bomber::Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty): Entity(x, y, 12, 12, 2) {
 		hp = 20;
 		this->bulletVector = bulletVector;
@@ -11,9 +12,13 @@ namespace Game_Core {
 		this->timer = factory->CreateTimer();
 		this->audioEngine = factory->GetAudioEngine();
 	}
+
 	Bomber::~Bomber() {
 		delete timer;
 	}
+
+	//2-stage shooting started by randomizer. First starts "charging", which flashes a bullet on top of the entity, then shoots.
+	//Visualisation of the bullet is done by the visualisation layer
 	void Bomber::Update() {
 		if (charging && timer->GetTicks() > 2000) {
 			audioEngine->PlaySound(Shoot);
@@ -25,6 +30,8 @@ namespace Game_Core {
 			timer->Start();
 		}
 	}
+
+	//Moves the enemy faster sideways depending on difficulty, with a max speed. Moving down (or up) is always at the same speed.
     void Bomber::Move(InputType dir) {
 		switch (dir) {
 			case Left:
@@ -44,6 +51,7 @@ namespace Game_Core {
 		}
 
 	}
+
 	void Bomber::Damage(int damage) {
 		audioEngine->PlaySound(Damaged);
 		Entity::Damage(damage);

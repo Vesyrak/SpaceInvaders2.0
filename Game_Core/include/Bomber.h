@@ -3,9 +3,12 @@
 #include "Entity.h"
 #include "Timer.h"
 #include "AudioEngine.h"
+
 namespace Game_Core {
+
 	class AbstractFactory;
-	//Abstract class for the "Bomber" enemy, Low HP, needs to charge, but increasingly high .
+
+	//Abstract class for the "Bomber" enemy, Low HP, needs to charge, but increasingly high damage.
 	class Bomber: public Entity {
 		public:
 			Bomber(AbstractFactory* factory, std::vector<Entity*>* bulletVector, int x, int y, int difficulty);
