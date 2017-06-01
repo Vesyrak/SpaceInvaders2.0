@@ -1,4 +1,4 @@
-# Space Invaders 2.0
+# Space Invaders 2.0: Reinout Eyckerman
 
 ## How to install
 
@@ -27,3 +27,22 @@ usually requiring no extra configuration.
 * SDL_image
 
 Make sure to build for Linux, and not Windows. 
+
+## License
+Everything in here is public domain. This excludes the usage of the SDL
+libraries or the used C++ std libraries, which make an exception.
+
+## Used Resources
+Sound effects: 
+* Wilhelm Scream
+* Explosion and Shooting sfx, myself
+* Background tune, Wolfram Alpha Tones
+
+Graphics:
+* Space Ships, https://opengameart.org/content/modular-ships
+* Bullets, https://opengameart.org/content/bullet-collection-1-m484
+* Life Heart, https://opengameart.org/content/blue-life-heart
+* Background, http://www.publicdomainpictures.net/download-picture.php?id=125056&check=6f37ab30f317b3da1295603b82b2ba10
+* Kenney Rocket Square Font, www.1001fonts.com/kenney-rocket-font.html
+
+                
