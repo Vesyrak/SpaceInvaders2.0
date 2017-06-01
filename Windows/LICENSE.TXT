@@ -1,0 +1,8 @@
+To the extent possible under law, Reinout Eyckerman has waived all copyright and related or neighboring rights to Space Invaders 2.0.
+This work is published from: België.
+See following link for more information:
+https://creativecommons.org/publicdomain/zero/1.0
+
+This software includes third party open source software components:SDL2.
+Each of these software components have their own license.
+Please see ./SDL2LICENSE.TXT
