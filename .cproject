@@ -191,13 +191,14 @@
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Linux"/>
 		<configuration configurationName="Windows">
 			<resource resourceType="PROJECT" workspacePath="/SpaceInvaders2.0"/>
 		</configuration>
-		<configuration configurationName="Debug">
+		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/SpaceInvaders2.0"/>
 		</configuration>
-		<configuration configurationName="Release">
+		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/SpaceInvaders2.0"/>
 		</configuration>
 	</storageModule>

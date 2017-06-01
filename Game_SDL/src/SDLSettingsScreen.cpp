@@ -1,3 +1,4 @@
+#define __USE_MINGW_ANSI_STDIO 0
 #include "SDLSettingsScreen.h"
 
 namespace Game_SDL {
